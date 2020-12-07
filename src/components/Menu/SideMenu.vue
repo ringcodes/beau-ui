@@ -57,6 +57,9 @@ export default {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
     }
+  },
+  mounted() {
+    console.log(this.fixSiderbar)
   }
 }
 </script>

@@ -18,12 +18,12 @@ export const asyncRouterMap = [
         path: '/admin/topic',
         name: 'TopicList',
         component: () => import('@/views/topic/TopicList'),
-        meta: { title: '主题管理', keepAlive: true, icon:'' }
+        meta: { title: '主题管理', keepAlive: true, icon:'profile' }
       }, {
         path: '/admin/article',
         name: 'ArticleList',
         component: () => import('@/views/article/ArticleList'),
-        meta: { title: '文章管理', keepAlive: true, icon:'' }
+        meta: { title: '文章管理', keepAlive: true, icon:'read' }
       }, {
         path: '/admin/article/edit',
         name: 'ArticleEdit',
@@ -45,7 +45,7 @@ export const asyncRouterMap = [
         path: '/admin/slider',
         name: 'SliderList',
         component: () => import('@/views/slider/SliderList'),
-        meta: { title: '轮播管理', keepAlive: true, icon:'' }
+        meta: { title: '轮播管理', keepAlive: true, icon:'play-square' }
       },
       // account
       {
@@ -107,15 +107,28 @@ export const asyncRouterMap = [
       {
         path: '/admin/system/user',
         name: 'UserList',
-        component: PageView,
         component: () => import('@/views/user/UserList'),
         meta: { title: '用户列表', icon:'user', keepAlive: true }
       },
       {
         path: '/admin/system/config',
         name: 'ConfigList',
-        component: () => import('@/views/config/ConfigList'),
-        meta: { title: '配置列表', keepAlive: true, icon:'setting' }
+        component: RouteView,
+        meta: { title: '系统配置', keepAlive: true, icon:'setting' },
+        children: [
+          {
+            path: '/admin/webConfig',
+            name: 'WebConfig',
+            component: () => import('@/views/config/WebConfig'),
+            meta: { title: '网站配置', keepAlive: true }
+          },
+          {
+            path: '/admin/oauth',
+            name: 'OauthConfig',
+            component: () => import('@/views/config/OauthConfig'),
+            meta: { title: '第三方登录', keepAlive: true }
+          },
+        ]
       }
     ]
   }

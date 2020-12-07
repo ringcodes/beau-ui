@@ -54,16 +54,29 @@ export function saveConfig (parameter) {
     data: parameter
   })
 }
+export function saveOauth (parameter) {
+  return request({
+    url: '/config/saveOauth',
+    method: 'post',
+    data: parameter
+  })
+}
+export function getOauth (id) {
+  return request({
+    url: '/config/getOauth/' + id,
+    method: 'get'
+  })
+}
 export function delConfig (id) {
   return request({
     url: '/config/del/' + id,
     method: 'post'
   })
 }
-export function getConfigType () {
+export function getConfigType (type) {
   return request({
-    url: '/config/getBiz',
-    method: 'post'
+    url: '/config/getByBiz/' + type,
+    method: 'get'
   })
 }
 export function getById (id) {
