@@ -35,7 +35,7 @@ export const asyncRouterMap = [
         name: 'ArticleDetail',
         hidden: true,
         component: () => import('@/views/article/ArticleDetail'),
-        meta: { title: '文章编辑', keepAlive: true, icon:'' }
+        meta: { title: '文章编辑', keepAlive: false, icon:'' }
       }, {
         path: '/admin/tag',
         name: 'TagList',
@@ -111,25 +111,17 @@ export const asyncRouterMap = [
         meta: { title: '用户列表', icon:'user', keepAlive: true }
       },
       {
-        path: '/admin/system/config',
-        name: 'ConfigList',
-        component: RouteView,
-        meta: { title: '系统配置', keepAlive: true, icon:'setting' },
-        children: [
-          {
-            path: '/admin/webConfig',
-            name: 'WebConfig',
-            component: () => import('@/views/config/WebConfig'),
-            meta: { title: '网站配置', keepAlive: true }
-          },
-          {
-            path: '/admin/oauth',
-            name: 'OauthConfig',
-            component: () => import('@/views/config/OauthConfig'),
-            meta: { title: '第三方登录', keepAlive: true }
-          },
-        ]
-      }
+        path: '/admin/webConfig',
+        name: 'WebConfig',
+        component: () => import('@/views/config/WebConfig'),
+        meta: { title: '网站配置', keepAlive: true, icon:'setting'}
+      },
+      {
+        path: '/admin/oauth',
+        name: 'OauthConfig',
+        component: () => import('@/views/config/OauthConfig'),
+        meta: { title: '第三方登录配置', keepAlive: true, icon:'audit' }
+      },
     ]
   }
 ]

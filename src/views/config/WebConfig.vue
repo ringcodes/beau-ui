@@ -1,5 +1,5 @@
 <template>
-  <a-card>
+  <div class="table-wrapper">
     <a-tabs default-active-key="Base">
       <a-tab-pane key="Base" tab="基本配置">
         <BaseConfig />
@@ -11,7 +11,7 @@
         <OssConfig />
       </a-tab-pane>
     </a-tabs>
-  </a-card>
+  </div>
 </template>
 
 <script>

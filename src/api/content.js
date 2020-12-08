@@ -70,7 +70,7 @@ export function saveTag (parameter) {
   return request({
     url: '/tag/save',
     method: 'post',
-    params: parameter
+    data: parameter
   })
 }
 export function delTag (id) {

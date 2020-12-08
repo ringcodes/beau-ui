@@ -1,6 +1,6 @@
 <template>
-  <a-card title="登录设置">
-    <a-tabs default-active-key="1" @tabClick="callback" tabPosition="left">
+  <div class="table-wrapper">
+    <a-tabs default-active-key="OAUTH_GITHUB" @tabClick="callback">
       <a-tab-pane key="OAUTH_GITHUB" tab="github" force-render>
         <OauthConfigForm ref="OAUTH_GITHUB" biz="OAUTH_GITHUB"/>
       </a-tab-pane>
@@ -11,7 +11,7 @@
         <OauthConfigForm ref="OAUTH_DING" biz="OAUTH_DING"/>
       </a-tab-pane>
     </a-tabs>
-  </a-card>
+  </div>
 </template>
 
 <script>
@@ -27,12 +27,17 @@ export default {
     OauthConfigForm
   },
   data () {
-    return {}
+    return {
+
+    }
   },
   methods: {
     callback (key) {
       this.$refs[key].show()
     }
+  },
+  mounted () {
+    this.$refs['OAUTH_GITHUB'].show()
   }
 }
 </script>
