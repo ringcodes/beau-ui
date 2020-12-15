@@ -1,10 +1,11 @@
 # 基础镜像
 FROM node:15.4.0-alpine3.12
 
+WORKDIR /opt/app/beau_admin
+
 # 安装依赖
 COPY package.json /opt/app/beau_admin
-COPY package-lock.json /opt/app/beau_admin
-RUN npm install
+RUN yarn install
 
 # 复制代码
 COPY . /opt/app/beau_admin/
