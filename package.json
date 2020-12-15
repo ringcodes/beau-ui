@@ -6,10 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:preview": "vue-cli-service build --mode preview",
-    "lint": "vue-cli-service lint",
-    "lint:nofix": "vue-cli-service lint --no-fix",
-    "test:unit": "vue-cli-service test:unit",
-    "postinstall": "opencollective-postinstall"
+    "production": "node server/server.js",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.1",
