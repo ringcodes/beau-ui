@@ -1,7 +1,11 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
 export const asyncRouterMap = [
-
+  {
+    path: '/',
+    name: 'home',
+    redirect: '/admin'
+  },
   {
     path: '/admin',
     name: 'index',
@@ -12,40 +16,40 @@ export const asyncRouterMap = [
         path: '/admin/index',
         name: 'Workplace',
         component: () => import('@/views/dashboard/Workplace'),
-        meta: { title: '工作台', keepAlive: true ,icon:'home'}
+        meta: { title: '工作台', keepAlive: true, icon: 'home' }
       },
       {
         path: '/admin/topic',
         name: 'TopicList',
         component: () => import('@/views/topic/TopicList'),
-        meta: { title: '主题管理', keepAlive: true, icon:'profile' }
+        meta: { title: '主题管理', keepAlive: true, icon: 'profile' }
       }, {
         path: '/admin/article',
         name: 'ArticleList',
         component: () => import('@/views/article/ArticleList'),
-        meta: { title: '文章管理', keepAlive: true, icon:'read' }
+        meta: { title: '文章管理', keepAlive: true, icon: 'read' }
       }, {
         path: '/admin/article/edit',
         name: 'ArticleEdit',
         hidden: true,
         component: () => import('@/views/article/ArticleEdit'),
-        meta: { title: '文章编辑', keepAlive: true, icon:'' }
+        meta: { title: '文章编辑', keepAlive: true, icon: '' }
       }, {
         path: '/admin/article/detail',
         name: 'ArticleDetail',
         hidden: true,
         component: () => import('@/views/article/ArticleDetail'),
-        meta: { title: '文章编辑', keepAlive: false, icon:'' }
+        meta: { title: '文章编辑', keepAlive: false, icon: '' }
       }, {
         path: '/admin/tag',
         name: 'TagList',
         component: () => import('@/views/tag/TagList'),
-        meta: { title: '标签管理', keepAlive: true, icon:'tag' }
+        meta: { title: '标签管理', keepAlive: true, icon: 'tag' }
       }, {
         path: '/admin/slider',
         name: 'SliderList',
         component: () => import('@/views/slider/SliderList'),
-        meta: { title: '轮播管理', keepAlive: true, icon:'play-square' }
+        meta: { title: '轮播管理', keepAlive: true, icon: 'play-square' }
       },
       // account
       {
@@ -108,20 +112,20 @@ export const asyncRouterMap = [
         path: '/admin/system/user',
         name: 'UserList',
         component: () => import('@/views/user/UserList'),
-        meta: { title: '用户列表', icon:'user', keepAlive: true }
+        meta: { title: '用户列表', icon: 'user', keepAlive: true }
       },
       {
         path: '/admin/webConfig',
         name: 'WebConfig',
         component: () => import('@/views/config/WebConfig'),
-        meta: { title: '网站配置', keepAlive: true, icon:'setting'}
+        meta: { title: '网站配置', keepAlive: true, icon: 'setting' }
       },
       {
         path: '/admin/oauth',
         name: 'OauthConfig',
         component: () => import('@/views/config/OauthConfig'),
-        meta: { title: '第三方登录配置', keepAlive: true, icon:'audit' }
-      },
+        meta: { title: '第三方登录配置', keepAlive: true, icon: 'audit' }
+      }
     ]
   }
 ]
