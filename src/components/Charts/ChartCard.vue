@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import { Card} from 'ant-design-vue'
+import { Card } from 'ant-design-vue'
 export default {
   name: 'ChartCard',
   components: {

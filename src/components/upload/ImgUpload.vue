@@ -24,67 +24,68 @@
 </template>
 
 <script>
-  import Vue from "vue";
-  import {ACCESS_TOKEN} from "@/store/mutation-types";
-  import {Upload, Icon,Modal} from 'ant-design-vue'
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { Upload, Icon, Modal } from 'ant-design-vue'
 
-  function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-  const token = Vue.ls.get(ACCESS_TOKEN)
-  export default {
-    name: "ImgUpload",
-    components: {
-      AUpload: Upload,
-      AIcon: Icon,
-      AModal: Modal
+function getBase64 (file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
+const token = Vue.ls.get(ACCESS_TOKEN)
+export default {
+  name: 'ImgUpload',
+  components: {
+    AUpload: Upload,
+    AIcon: Icon,
+    AModal: Modal
+  },
+  props: {
+    code: {
+      type: [String, Number],
+      required: true
     },
-    props: {
-      code: {
-        type: [String, Number]
+    source: {
+      type: [String, Number],
+      required: true
+    },
+    fileMax: {
+      type: Number,
+      default: 1
+    }
+  },
+  data () {
+    return {
+      headers: {
+        'Sid': token
       },
-      source: {
-        type: [String, Number]
-      },
-      fileMax: {
-        type: Number,
-        default: 1
+      fileList: [],
+      previewVisible: false,
+      previewImage: ''
+    }
+  },
+  methods: {
+    handleCancel () {
+      this.previewVisible = false
+    },
+    handleChange ({ fileList }) {
+      this.fileList = fileList
+      this.$emit('change', fileList)
+    },
+    async handlePreview (file) {
+      if (!file.url && !file.preview) {
+        file.preview = await getBase64(file.originFileObj)
       }
-    },
-    data() {
-      return {
-        headers: {
-          "Sid": token
-        },
-        fileList: [],
-        previewVisible: false,
-        previewImage: ''
-      }
-    },
-    methods: {
-      handleCancel () {
-        this.previewVisible = false
-      },
-      handleChange ({fileList}) {
-        this.fileList = fileList
-        this.$emit("change", fileList)
-      },
-      async handlePreview(file) {
-        if (!file.url && !file.preview) {
-          file.preview = await getBase64(file.originFileObj);
-        }
-        this.previewImage = file.url || file.preview;
-        this.previewVisible = true;
-      },
+      this.previewImage = file.url || file.preview
+      this.previewVisible = true
     }
   }
+}
 </script>
 
 <style scoped>
-
 </style>

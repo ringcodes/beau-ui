@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import { Icon } from 'ant-design-vue'
+import { Icon } from 'ant-design-vue'
 export default {
   name: 'GlobalFooter',
   components: {

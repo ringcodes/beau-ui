@@ -1,24 +1,24 @@
 <template>
-    <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 14 }">
-      <a-form-item v-show="false">
-        <a-input v-decorator="['biz', {initialValue:biz}]"/>
-      </a-form-item>
-      <a-form-item v-show="false">
-        <a-input v-decorator="['id']"/>
-      </a-form-item>
-      <a-form-item label="APPID">
-        <a-input v-decorator="['clientId',{rules: [{required: true,message:'请输入名称'}]}]"/>
-      </a-form-item>
-      <a-form-item label="Secret">
-        <a-textarea v-decorator="['secret',{rules: [{required: true,message:'请输入内容'}]}]" rows="8"/>
-      </a-form-item>
-      <a-form-item label="回调地址">
-        <a-input  v-decorator="['callback',{rules: [{required: true,message:'请输入内容'}]}]"/>
-      </a-form-item>
-      <a-form-item :wrapperCol="{offset:3}">
-        <a-button type="primary" @click="handleSubmit">保存</a-button>
-      </a-form-item>
-    </a-form>
+  <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 14 }">
+    <a-form-item v-show="false">
+      <a-input v-decorator="['biz', {initialValue:biz}]"/>
+    </a-form-item>
+    <a-form-item v-show="false">
+      <a-input v-decorator="['id']"/>
+    </a-form-item>
+    <a-form-item label="APPID">
+      <a-input v-decorator="['clientId',{rules: [{required: true,message:'请输入名称'}]}]"/>
+    </a-form-item>
+    <a-form-item label="Secret">
+      <a-textarea v-decorator="['secret',{rules: [{required: true,message:'请输入内容'}]}]" rows="8"/>
+    </a-form-item>
+    <a-form-item label="回调地址">
+      <a-input v-decorator="['callback',{rules: [{required: true,message:'请输入内容'}]}]"/>
+    </a-form-item>
+    <a-form-item :wrapperCol="{offset:3}">
+      <a-button type="primary" @click="handleSubmit">保存</a-button>
+    </a-form-item>
+  </a-form>
 </template>
 
 <script>
@@ -36,9 +36,10 @@ export default {
       configType: []
     }
   },
-  props:{
+  props: {
     biz: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   components: {
@@ -53,8 +54,8 @@ export default {
   methods: {
     show () {
       this.$nextTick(() => {
-        getOauth(this.biz).then(result=>{
-          if(result.data){
+        getOauth(this.biz).then(result => {
+          if (result.data) {
             console.log(result.data.data.clientId)
             this.form.setFieldsValue({
               'id': result.data.id,
@@ -77,10 +78,9 @@ export default {
           })
         }
       })
-    },
+    }
   },
   mounted () {
-    
   }
 }
 </script>

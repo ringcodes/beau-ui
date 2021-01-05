@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import { Popover, Badge, Spin, Tabs, Icon } from 'ant-design-vue'
+import { Popover, Badge, Spin, Tabs, Icon } from 'ant-design-vue'
 export default {
   name: 'HeaderNotice',
   components: {

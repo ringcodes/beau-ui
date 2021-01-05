@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import PageHeader from '@/components/PageHeader'
 
 export default {

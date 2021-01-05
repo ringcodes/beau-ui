@@ -19,38 +19,39 @@
       </a-col>
     </a-row>
     <a-modal
-    :width="850"
-    :visible="visible"
-    @ok="save"
-    @cancel="handleCancel"
-    okText="保存"
-    cancelText="取消" force-render>
+      :width="850"
+      :visible="visible"
+      @ok="save"
+      @cancel="handleCancel"
+      okText="保存"
+      cancelText="取消"
+      force-render>
       <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
-          <a-form-item v-show="false">
-            <a-input v-decorator="['id']"/>
-          </a-form-item>
-          <a-form-item label="标题">
-            <a-input v-decorator="['title']"/>
-          </a-form-item>
-          <a-form-item label="图片">
-            <img :src="record.titlePic"/>
-          </a-form-item>
-          <a-form-item label="源地址">
-            <a-input v-decorator="['sourceUrl']"/>
-          </a-form-item>
-          <a-form-item label="描述">
-            <a-textarea v-decorator="['description']"/>
-          </a-form-item>
-          <a-form-item label="主题">
-            <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
-              <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
-            </a-select>
-          </a-form-item>
-          <a-form-item label="标签">
-            <a-select mode="multiple" v-decorator="['tagList']">
-              <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
-            </a-select>
-          </a-form-item>
+        <a-form-item v-show="false">
+          <a-input v-decorator="['id']"/>
+        </a-form-item>
+        <a-form-item label="标题">
+          <a-input v-decorator="['title']"/>
+        </a-form-item>
+        <a-form-item label="图片">
+          <img :src="record.titlePic"/>
+        </a-form-item>
+        <a-form-item label="源地址">
+          <a-input v-decorator="['sourceUrl']"/>
+        </a-form-item>
+        <a-form-item label="描述">
+          <a-textarea v-decorator="['description']"/>
+        </a-form-item>
+        <a-form-item label="主题">
+          <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
+            <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item label="标签">
+          <a-select mode="multiple" v-decorator="['tagList']">
+            <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
+          </a-select>
+        </a-form-item>
       </a-form>
     </a-modal>
     <a-back-top />
@@ -107,7 +108,7 @@ export default {
           'tagList': this.record.tagList,
           'title': this.record.title,
           'sourceUrl': this.record.sourceUrl,
-          'description': this.record.description,
+          'description': this.record.description
         })
       })
       this.visible = true

@@ -21,11 +21,11 @@
 import Logo from '@/components/tools/Logo'
 import SMenu from './index'
 import { mixin, mixinDevice } from '@/utils/mixin'
-import {Layout} from 'ant-design-vue'
+import { Layout } from 'ant-design-vue'
 
 export default {
   name: 'SideMenu',
-  components: { Logo, SMenu,ALayoutSider: Layout.Sider },
+  components: { Logo, SMenu, ALayoutSider: Layout.Sider },
   mixins: [mixin, mixinDevice],
   props: {
     mode: {
@@ -58,7 +58,7 @@ export default {
       this.$emit('menuSelect', obj)
     }
   },
-  mounted() {
+  mounted () {
     console.log(this.fixSiderbar)
   }
 }

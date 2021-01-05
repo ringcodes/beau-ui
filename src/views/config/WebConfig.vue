@@ -16,7 +16,7 @@
 
 <script>
 import { Tabs, Card } from 'ant-design-vue'
-import { saveConfig, getById, getConfigType } from '@/api/manage'
+import { saveConfig } from '@/api/manage'
 import BaseConfig from './form/BaseConfig'
 import LinkConfig from './form/LinkConfig'
 import OssConfig from './form/OssConfig'

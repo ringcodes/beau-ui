@@ -30,7 +30,7 @@
     <div v-for="item in data.list" :key="item.id">
       <a-row :gutter="4" style="padding:8px 0px;border-bottom: 1px solid #ebedf0;vertical-align: bottom">
         <a-col :span="4">
-          <img :src="item.pic" width=200 height=120/>
+          <img :src="item.pic" width="200" height="120"/>
         </a-col>
         <a-col :span="4">{{ item.name }}</a-col>
         <a-col :span="4">{{ item.positionName }}</a-col>

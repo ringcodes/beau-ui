@@ -5,15 +5,16 @@ WORKDIR /opt/app/beau_admin
 
 # 安装依赖
 COPY package.json /opt/app/beau_admin
-RUN yarn install
+COPY package-lock.json /opt/app/beau_admin
+COPY .npmrc /opt/app/beau_admin
+RUN npm install
 
-# 复制代码
+# 复制源代码
 COPY . /opt/app/beau_admin/
 
 # build
 RUN npm run build
-# 静态资源上传到cdn
-#RUN npm run cdn_upload
+
 # 暴露内部端口号
 EXPOSE 5000
 

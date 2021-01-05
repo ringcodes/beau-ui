@@ -56,7 +56,7 @@
       </a-row>
     </div>
     <div style="text-align: center;padding-top: 8px">
-      <a-pagination v-model="data.pageNumber" :total="data.totalRow" showLessItems  @change="onChange"/>
+      <a-pagination v-model="data.pageNumber" :total="data.totalRow" showLessItems @change="onChange"/>
     </div>
     <a-modal
       title="操作"
