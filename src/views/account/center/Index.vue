@@ -86,9 +86,6 @@
           :activeTabKey="noTitleKey"
           @tabChange="key => handleTabChange(key, 'noTitleKey')"
         >
-          <article-page v-if="noTitleKey === 'article'"></article-page>
-          <app-page v-else-if="noTitleKey === 'app'"></app-page>
-          <project-page v-else-if="noTitleKey === 'project'"></project-page>
         </a-card>
       </a-col>
     </a-row>
@@ -97,17 +94,13 @@
 
 <script>
 import { PageView, RouteView } from '@/layouts'
-import { AppPage, ArticlePage, ProjectPage } from './page'
 
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
     RouteView,
-    PageView,
-    AppPage,
-    ArticlePage,
-    ProjectPage
+    PageView
   },
   data () {
     return {

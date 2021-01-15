@@ -31,6 +31,7 @@ import { ChartCard } from '@/components'
 import { PageView } from '@/layouts'
 import { acount, chartData } from '@/api/content'
 import { Row, Col, Card, Tooltip, Icon } from 'ant-design-vue'
+import { Line } from '@antv/g2plot'
 
 export default {
   name: 'Workplace',
