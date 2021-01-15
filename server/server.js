@@ -9,7 +9,7 @@ var chalk = require('chalk')
 var spinner = ora('start serer ...')
 spinner.start()
 
-app.use(express.static(path.join(__dirname, '../dist/')))
+app.use(express.static(path.join(__dirname, './dist/')))
 
 app.get('/favicon.ico', function (req, res) {
     res.sendFile(path.join(__dirname, '../favicon.ico'))
