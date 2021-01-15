@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "@babel/preset-flow",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "12.12.0"
+        },
+        "corejs": "2", // 声明corejs版本
+        "useBuiltIns": "usage"
+      }
+    ]
+  ]
+}
