@@ -1,7 +1,6 @@
 FROM lsl200817-docker.pkg.coding.net/beaueau/base/node-nginx:1.0
 MAINTAINER xx
 WORKDIR /opt/app
-RUN mkdir /opt/app/logs
 COPY ./dist /opt/app/dist/
 
 EXPOSE 80
