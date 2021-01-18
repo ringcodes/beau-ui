@@ -8,7 +8,7 @@ import {
 
 // 创建 axios 实例
 const request = axios.create({
-  baseURL: '/api', // api base_url
+  baseURL: process.env.VUE_APP_BASE_API, // api base_url
   timeout: 6000 // 请求超时时间
 })
 

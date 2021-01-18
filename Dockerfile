@@ -1,14 +1,7 @@
-# 基础镜像
-FROM node:15.4.0-alpine3.12
+FROM lsl200817-docker.pkg.coding.net/beaueau/base/node-nginx:1.0
+MAINTAINER xx
+WORKDIR /opt/app
+COPY ./dist /opt/app/dist/
 
-WORKDIR /opt/app/beau_admin
-
-# 安装依赖
-COPY dist /opt/app/beau_admin
-COPY public /opt/app/beau_admin
-COPY server /opt/app/beau_admin
-
-# 起服务
-# ENTRYPOINT ["/opt/app/beau_admin/server/deploy.sh"]
-# 暴露内部端口号
-# EXPOSE 5000
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
