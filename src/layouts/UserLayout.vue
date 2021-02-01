@@ -4,7 +4,7 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <span class="title">统一用户登录</span>
+            <span class="title">用户登录</span>
           </a>
         </div>
       </div>
@@ -71,7 +71,7 @@ export default {
         .header {
           height: 44px;
           line-height: 44px;
-
+          margin-bottom: 26px;
           .badge {
             position: absolute;
             display: inline-block;

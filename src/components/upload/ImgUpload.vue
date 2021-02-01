@@ -3,7 +3,7 @@
     <a-upload
      name="file"
      :multiple="false"
-     action="/api/upload/file"
+     :action="action"
      :headers="headers"
      :data="{code:code,source:source}"
      @change="handleChange"
@@ -61,11 +61,12 @@ export default {
   data () {
     return {
       headers: {
-        'Sid': token
+        'Authorization': token
       },
       fileList: [],
       previewVisible: false,
-      previewImage: ''
+      previewImage: '',
+      action: process.env.VUE_APP_BASE_API + '/upload/file'
     }
   },
   methods: {

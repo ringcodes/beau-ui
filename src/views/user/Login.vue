@@ -12,7 +12,7 @@
           <a-input
             size="large"
             type="text"
-            placeholder="账户: admin"
+            placeholder="账号"
             v-decorator="[
               'username', {rules: [{ required: true, message: '请输入帐户名或邮箱地址' }], validateTrigger: 'change'}]"
           >
@@ -25,7 +25,7 @@
             size="large"
             type="password"
             autocomplete="false"
-            placeholder="密码: admin or ant.design"
+            placeholder="密码"
             v-decorator="[
               'password', {rules: [{ required: true, message: '请输入密码' }], validateTrigger: 'blur'}]"
           >
@@ -53,13 +53,6 @@
           >确定
           </a-button>
         </a-form-item>
-
-        <div class="user-login-other">
-          <span>其他登录方式</span>
-          <a>
-            <a-icon class="item-icon" type="alipay-circle"></a-icon>
-          </a>
-        </div>
       </div>
     </a-form>
   </div>
@@ -121,11 +114,7 @@ export default {
       this.$router.push({ path: '/admin' })
     },
     requestFailed (err) {
-      this.$notification['error']({
-        message: '错误',
-        description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
-        duration: 4
-      })
+      this.$message.error(err.msg || '请求出现错误，请稍后再试')
     }
   }
 }
