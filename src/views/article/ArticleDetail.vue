@@ -97,9 +97,7 @@ export default {
         }
       })
       getTagList({}).then(res => {
-        if (res.ok) {
-          this.tagList = res.data.list
-        }
+          this.tagList = res.data
       })
       this.$nextTick(() => {
         this.form.setFieldsValue({

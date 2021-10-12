@@ -119,12 +119,6 @@ export const asyncRouterMap = [
         name: 'WebConfig',
         component: () => import('@/views/config/WebConfig'),
         meta: { title: '网站配置', keepAlive: true, icon: 'setting' }
-      },
-      {
-        path: '/admin/oauth',
-        name: 'OauthConfig',
-        component: () => import('@/views/config/OauthConfig'),
-        meta: { title: '第三方登录配置', keepAlive: true, icon: 'audit' }
       }
     ]
   }

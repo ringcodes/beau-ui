@@ -120,9 +120,7 @@ export default {
       }
     })
     getTagList({}).then(res => {
-      if (res.ok) {
-        this.tagList = res.data.list
-      }
+        this.tagList = res.data
     })
     getArticle(id).then(result => {
       const res = result.data

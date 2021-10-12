@@ -92,16 +92,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="位置">
-          <a-select
-            v-decorator="['topicPosition', { initialValue:'1', rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option v-for="item in positionList" :value="item.value" :key="item.value">{{ item.name }}</a-select-option>
-          </a-select>
-        </a-form-item>
-        <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-          label="位置">
+          label="图片">
           <img :src="imageUrl" />
           <s-upload @change="handleChange" :code="uploadData.code" :source="2"/>
         </a-form-item>
@@ -162,11 +153,6 @@ export default {
   },
   mounted () {
     this.showLoadingMore()
-    listPosition().then(res => {
-      if (res.ok) {
-        this.positionList = res.data
-      }
-    })
   },
   methods: {
     handleAdd () {

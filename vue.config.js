@@ -104,7 +104,17 @@ module.exports = {
 
   devServer: {
     // development server port 8000
-    port: 9000
+    port: 9000,
+    proxy:{
+      '/proxy': {
+        target: 'http://localhost:7000',
+        secure: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/proxy': '/'
+        }
+      }
+    }
   },
   // disable source map in production
   productionSourceMap: false,

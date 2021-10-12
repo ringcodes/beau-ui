@@ -9,9 +9,9 @@ export function getTopicListType (parameter) {
 
 export function getTopicList (parameter) {
   return request({
-    url: '/topic/list',
-    method: 'get',
-    params: parameter
+    url: '/topic/page',
+    method: 'post',
+    data: parameter
   })
 }
 
@@ -33,8 +33,8 @@ export function delTopic (id) {
 export function getArticleList (parameter) {
   return request({
     url: '/article/list',
-    method: 'get',
-    params: parameter
+    method: 'post',
+    data: parameter
   })
 }
 export function saveArticle (parameter) {
@@ -54,7 +54,7 @@ export function delArticle (id) {
 
 export function getArticle (parameter) {
   return request({
-    url: '/article/' + parameter,
+    url: '/article/getById/' + parameter,
     method: 'get'
   })
 }
