@@ -8,15 +8,6 @@
           </a-form-item>
         </a-col>
         <a-col :md="8" :sm="24">
-          <a-form-item label="类型">
-            <a-select placeholder="请选择" default-value="">
-              <a-select-option value="">全部</a-select-option>
-              <a-select-option value="1">文章</a-select-option>
-              <a-select-option value="2">软件</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :md="8" :sm="24">
           <span class="table-page-search-submitButtons">
             <a-button type="primary" @click="refresh">查询</a-button>
           </span>
@@ -37,12 +28,12 @@
         <a @click="handleEdit(record)">编辑</a>
         <a-divider type="vertical" />
         <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
-          <a>删除</a>
+          <a class="btn-red">删除</a>
         </a-popconfirm>
       </span>
     </s-table>
     <a-modal
-      title="操作"
+      title="新增"
       style="top: 20px;"
       :width="600"
       v-model="visible"
@@ -67,7 +58,7 @@
 
 <script>
 import { STable } from '@/components'
-import { getTagList, saveTag, delTag } from '@/api/content'
+import { getTagPage, saveTag, delTag } from '@/api/content'
 import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider } from 'ant-design-vue'
 
 export default {
@@ -127,7 +118,7 @@ export default {
         }
       ],
       dataList: (parameter) => {
-        return getTagList(Object.assign(parameter, this.queryParam))
+        return getTagPage(Object.assign(parameter, this.queryParam))
       }
     }
   },

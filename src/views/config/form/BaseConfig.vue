@@ -17,7 +17,7 @@
 
 <script>
 import { Form, Input, Spin, Select } from 'ant-design-vue'
-import { saveOauth, getOauth } from '@/api/manage'
+import { saveConfig } from '@/api/manage'
 
 export default {
   name: 'BaseConfig',
@@ -65,10 +65,13 @@ export default {
       const { form: { validateFields } } = this
       validateFields((errors, values) => {
         if (!errors) {
-          saveOauth(values).then(res => {
-            if (res.ok) {
-              this.$message.info('保存成功')
-            }
+          saveConfig({
+            config_name: "网站配置",
+            config_type: "BASE",
+            config_key: "BASE",
+            config_content: values.webName
+          }).then(() => {
+            this.$message.info('保存成功')
           })
         }
       })

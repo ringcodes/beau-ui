@@ -2,15 +2,15 @@
   <div>
     <a-upload
      name="file"
-     :multiple="false"
      :action="action"
      :headers="headers"
      :data="{code:code,source:source}"
-     @change="handleChange"
      list-type="picture-card"
+     :file-list="fileListData"
+     @change="handleChange"
      @preview="handlePreview"
     >
-      <div v-if="fileList.length < fileMax">
+      <div v-if="fileListData.length < fileMax">
         <a-icon type="plus"/>
         <div class="ant-upload-text">
           Upload
@@ -46,8 +46,8 @@ export default {
   },
   props: {
     code: {
-      type: [String, Number],
-      required: true
+      type: String,
+      default: ""
     },
     source: {
       type: [String, Number],
@@ -63,18 +63,21 @@ export default {
       headers: {
         'Authorization': token
       },
-      fileList: [],
       previewVisible: false,
       previewImage: '',
-      action: process.env.VUE_APP_BASE_API + '/upload/file'
+      action: process.env.VUE_APP_BASE_API + '/file/upload',
+      fileListData: []
     }
   },
   methods: {
+    setImg(filelist){
+      this.fileListData = filelist;
+    },
     handleCancel () {
       this.previewVisible = false
     },
     handleChange ({ fileList }) {
-      this.fileList = fileList
+      this.fileListData = fileList
       this.$emit('change', fileList)
     },
     async handlePreview (file) {
@@ -84,9 +87,9 @@ export default {
       this.previewImage = file.url || file.preview
       this.previewVisible = true
     }
+  },
+  mounted(){
+    console.log(this.fileList)
   }
 }
 </script>
-
-<style scoped>
-</style>

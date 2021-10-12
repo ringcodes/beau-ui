@@ -2,43 +2,12 @@ import { request } from '@/utils/request'
 
 export function getUserList (parameter) {
   return request({
-    url: '/user/list',
-    method: 'get',
-    params: parameter
-  })
-}
-
-export function getRoleList (parameter) {
-  return request({
-    url: '/role/list',
-    method: 'get',
-    params: parameter
-  })
-}
-
-export function getServiceList (parameter) {
-  return request({
-    url: '/service/list',
-    method: 'get',
-    params: parameter
-  })
-}
-
-export function getPermissions (parameter) {
-  return request({
-    url: '/user/permission',
-    method: 'get',
-    params: parameter
-  })
-}
-
-export function saveService (parameter) {
-  return request({
-    url: '/service/save',
+    url: '/user/page',
     method: 'post',
     data: parameter
   })
 }
+
 export function listConfig (parameter) {
   return request({
     url: '/config/list',
@@ -52,19 +21,6 @@ export function saveConfig (parameter) {
     url: '/config/save',
     method: 'post',
     data: parameter
-  })
-}
-export function saveOauth (parameter) {
-  return request({
-    url: '/config/saveOauth',
-    method: 'post',
-    data: parameter
-  })
-}
-export function getOauth (id) {
-  return request({
-    url: '/config/getOauth/' + id,
-    method: 'get'
   })
 }
 export function delConfig (id) {
@@ -88,12 +44,6 @@ export function getById (id) {
 export function getId () {
   return request({
     url: '/config/getId',
-    method: 'get'
-  })
-}
-export function listPosition () {
-  return request({
-    url: '/config/listPosition',
     method: 'get'
   })
 }

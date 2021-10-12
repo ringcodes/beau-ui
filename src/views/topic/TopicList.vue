@@ -30,8 +30,7 @@
       <a-col :span="4">图标</a-col>
       <a-col :span="4">名称</a-col>
       <a-col :span="4">类型</a-col>
-      <a-col :span="4">位置</a-col>
-      <a-col :span="4">更新时间</a-col>
+      <a-col :span="6">更新时间</a-col>
       <a-col :span="4">操作</a-col>
     </a-row>
     <div v-for="item in data.list" :key="item.id">
@@ -44,13 +43,12 @@
         </a-col>
         <a-col :span="4">{{ item.topicName }}</a-col>
         <a-col :span="4">{{ item.topicTypeName }}</a-col>
-        <a-col :span="4">{{ item.positionName }}</a-col>
-        <a-col :span="4">{{ item.updateTime }}</a-col>
+        <a-col :span="6">{{ item.updateTime }}</a-col>
         <a-col :span="4">
           <a @click="editTopic(item)">编辑</a>
           <a-divider type="vertical" />
           <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(item)">
-            <a>删除</a>
+            <a class="btn-red">删除</a>
           </a-popconfirm>
         </a-col>
       </a-row>
@@ -68,9 +66,6 @@
       <a-form :form="form" >
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
-        </a-form-item>
-        <a-form-item v-show="false">
-          <a-input v-decorator="['topicPic']"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
@@ -93,8 +88,8 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="图片">
-          <img :src="imageUrl" />
-          <s-upload @change="handleChange" :code="uploadData.code" :source="2"/>
+          <s-upload ref="imgUpload" @change="handleChange" :source="2"/>
+          <a-input v-decorator="['topicPic']"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -105,7 +100,7 @@
 import { STable, ImgUpload } from '@/components'
 import { getTopicList, saveTopic, delTopic } from '@/api/content'
 import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider } from 'ant-design-vue'
-import { getId, listPosition } from '@/api/manage'
+import { getId } from '@/api/manage'
 export default {
   name: 'TableList',
   components: {
@@ -143,7 +138,7 @@ export default {
       queryParam: {},
       // 加载数据方法 必须为 Promise 对象
       data: [],
-      imageUrl: '',
+      imageUrl: [],
       uploadData: {
         source: 1,
         code: ''
@@ -174,12 +169,17 @@ export default {
     editTopic (record) {
       this.visible = true
       this.$nextTick(() => {
-        this.uploadData.code = record
+        this.$refs.imgUpload.setImg([{
+          uid: '-1',
+          name: record.topicName,
+          status: 'done',
+          url: record.topicPic
+        }]);
         this.form.setFieldsValue({
           'id': record.id,
           'topicName': record.topicName,
-          'topicType': record.topicType + '',
-          'topicPosition': record.position + ''
+          'topicType': record.topicType,
+          'topicPic': record.topicPic
         })
       })
     },
@@ -213,7 +213,7 @@ export default {
     },
     handleChange (info) {
       const file = info[0]
-      if (file.status !== 'done') {
+      if (!file || file.status !== 'done') {
         return
       }
       const data = file.response
@@ -221,7 +221,6 @@ export default {
         this.form.setFieldsValue({
           'topicPic': data.data.fileName
         })
-        this.imageUrl = data.data.fileName
       }
     }
   }

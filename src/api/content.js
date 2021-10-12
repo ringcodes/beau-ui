@@ -66,6 +66,13 @@ export function getTagList (parameter) {
     params: parameter
   })
 }
+export function getTagPage (parameter) {
+  return request({
+    url: '/tag/page',
+    method: 'post',
+    data: parameter
+  })
+}
 export function saveTag (parameter) {
   return request({
     url: '/tag/save',

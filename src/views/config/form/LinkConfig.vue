@@ -31,7 +31,6 @@ export default {
   data () {
     return {
       id: null,
-      biz: 'LINK',
       linkList: []
     }
   },
@@ -63,14 +62,13 @@ export default {
     handleSubmit () {
       var values = {
         id: this.id,
-        biz: this.biz,
-        name: '友情链接',
+        config_type: "BASE",
+        config_key: "LINK",
+        config_name: '友情链接',
         content: JSON.stringify(this.linkList)
       }
       saveConfig(values).then(res => {
-        if (res.ok) {
-          this.$message.info('保存成功')
-        }
+        this.$message.info('保存成功')
       })
     }
   },
