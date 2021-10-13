@@ -100,14 +100,6 @@ export default {
           dataIndex: 'sourceName'
         },
         {
-          title: '权限',
-          dataIndex: 'privilege'
-        },
-        {
-          title: '类型',
-          dataIndex: 'sourceType'
-        },
-        {
           title: '创建人',
           dataIndex: 'createName'
         },
@@ -131,10 +123,10 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.$router.push({ path: '/admin/article/edit?id=0' })
+      this.$router.push({ path: '/article/edit?id=0' })
     },
     handleEdit (record) {
-      this.$router.push({ path: '/admin/article/edit?id=' + record.id })
+      this.$router.push({ path: '/article/edit?id=' + record.id })
     },
     handleDel (record) {
       delArticle(record.id).then(res => {
@@ -145,7 +137,7 @@ export default {
       })
     },
     handleDetail (record) {
-      this.$router.push({ path: '/admin/article/detail?id=' + record.id })
+      this.$router.push({ path: '/article/detail?id=' + record.id })
     }
   }
 }

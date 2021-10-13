@@ -50,7 +50,7 @@
             class="login-button"
             :loading="state.loginBtn"
             :disabled="state.loginBtn"
-          >确定
+          >登录
           </a-button>
         </a-form-item>
       </div>
@@ -111,7 +111,7 @@ export default {
       })
     },
     loginSuccess (res) {
-      this.$router.push({ path: '/admin' })
+      this.$router.push({ path: '/home' }).catch(err => {});
     },
     requestFailed (err) {
       this.$message.error(err.msg || '请求出现错误，请稍后再试')

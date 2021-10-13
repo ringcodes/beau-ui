@@ -159,6 +159,6 @@ export default {
     z-index: 99;
     border-radius: 5px;
     background:rgba(148, 148, 145, 0.6);
-    padding: 18px 100px;
+    padding: 5px 10px;
  }
 </style>

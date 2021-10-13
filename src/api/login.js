@@ -13,7 +13,7 @@ import { request } from '@/utils/request'
  */
 export function login (parameter) {
   return request({
-    url: '/auth/login',
+    url: '/auth/doLogin',
     method: 'post',
     data: parameter
   })

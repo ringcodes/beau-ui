@@ -15,8 +15,8 @@
           </a-form-item>
           <a-form-item
             label="图片">
-            <img src="admin.iml"/>
             <a-input v-decorator="['titlePic']" v-show="false"/>
+            <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
           </a-form-item>
           <a-form-item
             label="源地址">
@@ -66,6 +66,7 @@ import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio } from 'ant-
 import { getTopicListType, saveArticle, getTagList, getArticle } from '@/api/content'
 import { quillEditor } from 'vue-quill-editor' // 调用富文本编辑器
 import 'quill/dist/quill.snow.css' // 富文本编辑器外部引用样式  三种样式三选一引入即可
+import { ImgUpload } from '@/components'
 export default {
   name: 'ArticleEdit',
   components: {
@@ -82,7 +83,8 @@ export default {
     ATextarea: Input.TextArea,
     ARadio: Radio,
     ARadioGroup: Radio.Group,
-    quillEditor
+    quillEditor,
+    ImgUpload
   },
   data () {
     return {
@@ -110,6 +112,18 @@ export default {
           })
         }
       })
+    },
+    handleChange (info) {
+      const file = info[0]
+      if (!file || file.status !== 'done') {
+        return
+      }
+      const data = file.response
+      if (data.ok) {
+        this.form.setFieldsValue({
+          'topicPic': data.data.fileName
+        })
+      }
     }
   },
   mounted () {

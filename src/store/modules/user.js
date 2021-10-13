@@ -17,9 +17,8 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, { name, welcome }) => {
+    SET_NAME: (state,  name) => {
       state.name = name
-      state.welcome = welcome
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
@@ -41,8 +40,11 @@ const user = {
           if (!response.ok) {
             reject(response)
           }
-          Vue.ls.set(ACCESS_TOKEN, result, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result)
+          console.log(result)
+          Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
+          commit('SET_TOKEN', result.token)
+          commit('SET_NAME', result.name)
+          commit('SET_AVATAR', result.avatar)
           resolve()
         }).catch(error => {
           reject(error)
@@ -55,16 +57,8 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const result = response.data;
-          if (result.role) {
-            commit('SET_ROLES', result.role)
-            commit('SET_INFO', result)
-          } else {
-            reject(new Error('getInfo: roles must be a non-null array !'))
-          }
-
-          commit('SET_NAME', { name: result.name, welcome: welcome() })
+          commit('SET_NAME', result.name)
           commit('SET_AVATAR', result.avatar)
-
           resolve(response)
         }).catch(error => {
           reject(error)
