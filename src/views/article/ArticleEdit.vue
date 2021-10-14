@@ -53,8 +53,8 @@
       </a-row>
       <a-row type="flex" justify="center" align="top">
         <a-col span="20">
-          <quill-editor v-model="contentModel" ref="myQuillEditor" class="editor" @change="onEditorChange($event)">
-          </quill-editor>
+          <QuillEditor ref="myQuillEditor" class="mt-editor" @change="onEditorChange">
+          </QuillEditor>
         </a-col>
       </a-row>
     </a-form>
@@ -64,9 +64,7 @@
 <script>
 import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle } from '@/api/content'
-import { quillEditor } from 'vue-quill-editor' // 调用富文本编辑器
-import 'quill/dist/quill.snow.css' // 富文本编辑器外部引用样式  三种样式三选一引入即可
-import { ImgUpload } from '@/components'
+import { ImgUpload,QuillEditor } from '@/components'
 export default {
   name: 'ArticleEdit',
   components: {
@@ -83,19 +81,20 @@ export default {
     ATextarea: Input.TextArea,
     ARadio: Radio,
     ARadioGroup: Radio.Group,
-    quillEditor,
+    QuillEditor,
     ImgUpload
   },
   data () {
     return {
       form: this.$form.createForm(this),
       topicList: [],
-      contentModel: null,
+      contentModel: '',
       tagList: []
     }
   },
   methods: {
-    onEditorChange () {
+    onEditorChange (html) {
+      this.contentModel = html;
     },
     save () {
       this.form.setFieldsValue({
@@ -156,10 +155,17 @@ export default {
 </script>
 
 <style scoped>
- .editor {
+ .mt-editor {
   line-height: normal !important;
   height: 500px;
   text-align: center;
   display: inline-block;
  }
+</style>
+<style lang="less">
+.jsmind-container {
+  background: #eee;
+  padding: 5px;
+  border: 1px solid #eeef;
+}
 </style>

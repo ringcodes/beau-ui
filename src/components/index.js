@@ -18,7 +18,7 @@ import TagSelect from '@/components/TagSelect'
 import ExceptionPage from '@/components/Exception'
 import StandardFormRow from '@/components/StandardFormRow'
 import ArticleListContent from '@/components/ArticleListContent'
-
+import QuillEditor from '@/components/Editor/QuillEditor'
 export {
   AvatarList,
   ChartCard,
@@ -38,5 +38,6 @@ export {
   TagSelect,
   StandardFormRow,
   ArticleListContent,
-  ImgUpload
+  ImgUpload,
+  QuillEditor,
 }

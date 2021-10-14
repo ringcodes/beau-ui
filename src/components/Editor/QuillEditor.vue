@@ -1,82 +1,143 @@
 <template>
-  <div :class="prefixCls">
-    <quill-editor
-      v-model="content"
-      ref="myQuillEditor"
-      :options="editorOption"
-      @blur="onEditorBlur($event)"
-      @focus="onEditorFocus($event)"
-      @ready="onEditorReady($event)"
-      @change="onEditorChange($event)">
-    </quill-editor>
-
+  <div>
+    <div ref="quillEditor"></div>
+    <a-modal
+      title="插入图形"
+      :visible="visible"
+      @ok="handleOk"
+      width="700px"
+      @cancel="()=>this.visible = false"
+    >
+      <div class="left">
+          <a-textarea v-model="graphCode" placeholder="Basic usage" :rows="10" @change="render"/>
+      </div>
+      <div class="right">
+        <div class="mermaid">
+          <div id="graphDiv" v-html="graphSvg"></div>
+        </div>
+      </div>
+    </a-modal>
   </div>
 </template>
 
 <script>
-import 'quill/dist/quill.core.css'
+import Quill from './Quill'
 import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-
-import { quillEditor } from 'vue-quill-editor'
+import { Modal,Input } from 'ant-design-vue'
+import mermaid from 'mermaid'
 
 export default {
-  name: 'QuillEditor',
-  components: {
-    quillEditor
+  name: 'editor',
+  components:{
+    AModal: Modal,
+    ATextarea: Input.TextArea
   },
   props: {
-    prefixCls: {
-      type: String,
-      default: 'ant-editor-quill'
-    },
-    // 表单校验用字段
-    // eslint-disable-next-line
-    value: {
-      type: String
-    }
+    value: Object
   },
-  data () {
+  data() {
     return {
-      content: null,
-      editorOption: {
-        // some quill options
+      quill:null,
+      visible: false,
+      graphCode: '',
+      graphSvg: '',
+      _content: '',
+      options: {
+        theme: 'snow',
+        modules: {
+            toolbar:{
+              container: [
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [{ 'header': 1 }, { 'header': 2 }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'script': 'sub' }, { 'script': 'super' }],
+                [{ 'indent': '-1' }, { 'indent': '+1' }],
+                [{ 'direction': 'rtl' }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+                ['clean'],
+                ['link', 'image', 'video'],
+                ['mind']
+              ],
+              handlers: {
+                mind: ()=>{
+                  this.visible = true;
+                }
+              },
+              initButton() {
+                const insertInputButtons = document.querySelectorAll('.ql-mind')
+                for (let btnDom of insertInputButtons) {
+                  btnDom.classList.add('iconeditor')
+                  btnDom.classList.add('iconfont')
+                  btnDom.classList.add('owner-tool-btn')
+                  btnDom.title = '插入输入框'
+                  }
+                },
+            }
+          },
+          placeholder: 'Insert text here ...'
       }
     }
   },
-  methods: {
-    onEditorBlur (quill) {
-      console.log('editor blur!', quill)
+  methods:{
+    handleOk(){
+      var  selection = this.quill.getSelection();
+      var index =0;
+      if (selection) index = selection.index;
+      this.quill.insertEmbed(index, 'mind', {
+        code: this.graphCode,
+        svg: this.graphSvg
+      });
+      this.visible =  false;
     },
-    onEditorFocus (quill) {
-      console.log('editor focus!', quill)
-    },
-    onEditorReady (quill) {
-      console.log('editor ready!', quill)
-    },
-    onEditorChange ({ quill, html, text }) {
-      console.log('editor change!', quill, html, text)
-      this.$emit('change', html)
+    render(){
+      const that = this;
+     const cb = function(svgGraph){
+         console.log(svgGraph);
+        that.graphSvg = svgGraph
+     };
+     mermaid.mermaidAPI.render('graphDivaa',this.graphCode,cb);
     }
   },
-  watch: {
-    value (val) {
-      this.content = val
-    }
+  mounted() {
+    this.quill = new Quill(this.$refs.quillEditor, this.options);
+    this.quill.setContents(this.value)
+    this.quill.on('text-change', () => {
+      this.$emit('input', this.quill.getContents())
+    });
+    mermaid.mermaidAPI.initialize({
+        startOnLoad:true
+    });
+    // Update model if text changes
+    this.quill.on('text-change', (delta, oldDelta, source) => {
+      let html = this.$refs.quillEditor.children[0].innerHTML
+      const quill = this.quill
+      const text = this.quill.getText()
+      if (html === '<p><br></p>') html = ''
+      this._content = html
+      this.$emit('change', html, text, quill)
+    })
   }
 }
 </script>
-
+<style>
+.ql-toolbar{
+  text-align: left;
+}
+</style>
 <style lang="less" scoped>
-@import url('../index.less');
-
-/* 覆盖 quill 默认边框圆角为 ant 默认圆角，用于统一 ant 组件风格 */
-.ant-editor-quill {
-  /deep/ .ql-toolbar.ql-snow {
-    border-radius: @border-radius-base @border-radius-base 0 0;
-  }
-  /deep/ .ql-container.ql-snow {
-    border-radius: 0 0 @border-radius-base @border-radius-base;
-  }
+.left{
+  width: 45%;
+  display: inline-block;
+}
+.right{
+  width: 42%;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px 30px;
 }
 </style>
