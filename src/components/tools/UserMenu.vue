@@ -1,11 +1,6 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box">
-      <a href="/" target="_blank">
-        <span class="action">
-          前台
-        </span>
-      </a>
       <notice-icon class="action"/>
       <a-dropdown>
         <span class="action ant-dropdown-link user-dropdown-menu">
