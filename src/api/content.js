@@ -19,7 +19,7 @@ export function saveTopic (parameter) {
   return request({
     url: '/topic/save',
     method: 'post',
-    params: parameter
+    data: parameter
   })
 }
 
