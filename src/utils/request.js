@@ -27,9 +27,7 @@ const err = (error) => {
         message: 'Unauthorized',
         description: 'Authorization verification failed'
       })
-      if (!token) {
-        store.dispatch('Logout');
-      }
+      store.dispatch('Logout');
     }
   }
   return Promise.reject(error)
