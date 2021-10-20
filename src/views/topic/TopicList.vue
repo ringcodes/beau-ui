@@ -38,7 +38,7 @@
         <a-col :span="4">
           <a-avatar
             size="large"
-            :src="item.topicPic"
+            :src="item.topicPicView"
           />
         </a-col>
         <a-col :span="4">{{ item.topicName }}</a-col>
@@ -173,7 +173,7 @@ export default {
           uid: '-1',
           name: record.topicName,
           status: 'done',
-          url: record.topicPic
+          url: record.topicPicView
         }]);
         this.form.setFieldsValue({
           'id': record.id,
