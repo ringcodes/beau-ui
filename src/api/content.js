@@ -26,7 +26,7 @@ export function saveTopic (parameter) {
 export function delTopic (id) {
   return request({
     url: '/topic/del/' + id,
-    method: 'post'
+    method: 'delete'
   })
 }
 
