@@ -35,6 +35,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/article/ArticleEdit'),
         meta: { title: '文章编辑', keepAlive: true, icon: '' }
       }, {
+        path: '/article/add',
+        name: 'ArticleAdd',
+        hidden: true,
+        component: () => import('@/views/article/ArticleAdd'),
+        meta: { title: '文章编辑', keepAlive: true, icon: '' }
+      }, {
         path: '/article/detail',
         name: 'ArticleDetail',
         hidden: true,

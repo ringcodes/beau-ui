@@ -1872,210 +1872,6 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
-"@tanbo/bezier@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmmirror.com/@tanbo/bezier/download/@tanbo/bezier-1.0.0.tgz#2ba1675befd7158c01a7459a875b0f4e382b9c03"
-  integrity sha1-K6FnW+/XFYwBp0Wah1sPTjgrnAM=
-
-"@tanbo/color-picker@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.nlark.com/@tanbo/color-picker/download/@tanbo/color-picker-0.1.2.tgz#9dcb5bb4cf778e95056fac49460b71bb7681e1d9"
-  integrity sha1-nctbtM93jpUFb6xJRgtxu3aB4dk=
-
-"@tanbo/color@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.nlark.com/@tanbo/color/download/@tanbo/color-0.0.3.tgz#e3000a55ef0acf7cc52d3b8b939eb7524fd307ce"
-  integrity sha1-4wAKVe8Kz3zFLTuLk563Uk/TB84=
-
-"@tanbo/css-themes@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.nlark.com/@tanbo/css-themes/download/@tanbo/css-themes-0.0.1.tgz#b72927cfbf75cb68799e9ea20791cd14d37c01a3"
-  integrity sha1-tyknz791y2h5np6iB5HNFNN8AaM=
-
-"@tanbo/di@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.nlark.com/@tanbo/di/download/@tanbo/di-1.0.4.tgz#799122994456a70d0c63a2e9391f9c4415d0426e"
-  integrity sha1-eZEimURWpw0MY6LpOR+cRBXQQm4=
-
-"@textbus/component-library-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/component-library-plugin/download/@textbus/component-library-plugin-1.1.0.tgz#653feaa9204aa05b41a45b4ed17a7bd164d735c7"
-  integrity sha1-ZT/qqSBKoFtBpFtO0Xp70WTXNcc=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    "@textbus/formatters" "^1.1.0"
-    "@textbus/uikit" "^1.1.0"
-    katex "^0.13.0"
-    rxjs "^6.0.0"
-
-"@textbus/components@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/components/download/@textbus/components-1.1.0.tgz#70c30ca98c44d388f15539cd13eb777ddcc97a06"
-  integrity sha1-cMMMqYxE04jxVTnNE+t3fdzJegY=
-  dependencies:
-    "@textbus/core" "^1.1.0"
-    prismjs "^1.23.0"
-    rxjs "^6.0.0"
-
-"@textbus/contextmenu-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/contextmenu-plugin/download/@textbus/contextmenu-plugin-1.1.0.tgz#33cacdc396fedd490be3ec0b202d809a721901dc"
-  integrity sha1-M8rNw5b+3UkL4+wLIC2AmnIZAdw=
-  dependencies:
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/core@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/core/download/@textbus/core-1.1.0.tgz#1eefc590a69fb7fa8e6b2358e87ce16b4bd89e23"
-  integrity sha1-Hu/FkKaft/qOayNY6Hzha0vYniM=
-  dependencies:
-    "@tanbo/color" "^0.0.3"
-    "@tanbo/css-themes" "^0.0.1"
-    "@tanbo/di" "^1.0.4"
-    reflect-metadata "^0.1.13"
-    rxjs "^6.0.0"
-
-"@textbus/device-toggle-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/device-toggle-plugin/download/@textbus/device-toggle-plugin-1.1.0.tgz#8500307169c204a5f1da605ac072bd58682aaeaa"
-  integrity sha1-hQAwcWnCBKXx2mBawHK9WGgqrqo=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/formatters@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/formatters/download/@textbus/formatters-1.1.0.tgz#7adce3654753fe90c0d249528919b33794639046"
-  integrity sha1-etzjZUdT/pDA0klSiRmzN5RjkEY=
-  dependencies:
-    "@tanbo/color" "^0.0.3"
-    "@textbus/core" "^1.1.0"
-
-"@textbus/full-screen-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/full-screen-plugin/download/@textbus/full-screen-plugin-1.1.0.tgz#3af4f941dea24a123425141c2497d0f344a86501"
-  integrity sha1-OvT5Qd6iShI0JRQcJJfQ80SoZQE=
-  dependencies:
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/guard-end-block-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/guard-end-block-plugin/download/@textbus/guard-end-block-plugin-1.1.0.tgz#55f645748b2e2d532dde3f422f972232e38471e7"
-  integrity sha1-VfZFdIsuLVMt3j9CL5ciMuOEcec=
-  dependencies:
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/image-and-video-drag-resize-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/image-and-video-drag-resize-plugin/download/@textbus/image-and-video-drag-resize-plugin-1.1.0.tgz#60ad48c42605989195e70ed12e2a2500abe2e1ab"
-  integrity sha1-YK1IxCYFmJGV5w7RLiolAKvi4as=
-  dependencies:
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/link-jump-tip-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/link-jump-tip-plugin/download/@textbus/link-jump-tip-plugin-1.1.0.tgz#9486406661758de14dd41d999c10e4044c4b14e6"
-  integrity sha1-lIZAZmF1jeFN1B2ZnBDkBExLFOY=
-  dependencies:
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/outlines-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/outlines-plugin/download/@textbus/outlines-plugin-1.1.0.tgz#e09e82fb927284bdf1cc6251aff62d60f8d2c8cd"
-  integrity sha1-4J6C+5JyhL3xzGJRr/YtYPjSyM0=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/paste-upload-emitter-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/paste-upload-emitter-plugin/download/@textbus/paste-upload-emitter-plugin-1.1.0.tgz#bee0adb4b1dc9ddd4dce9f9de6c199f267d74677"
-  integrity sha1-vuCttLHcnd1Nzp+d5sGZ8mfXRnc=
-  dependencies:
-    "@textbus/core" "^1.1.0"
-    "@textbus/uikit" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/sourcecode-mode-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/sourcecode-mode-plugin/download/@textbus/sourcecode-mode-plugin-1.1.0.tgz#0ad1b54f9846fea7586e296509b027decaf4f6d8"
-  integrity sha1-CtG1T5hG/qdYbillCbAn3sr09tg=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/core" "^1.1.0"
-    codemirror "^5.60.0"
-    pretty "^2.0.0"
-    rxjs "^6.0.0"
-
-"@textbus/table-edit-enhance-plugin@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/table-edit-enhance-plugin/download/@textbus/table-edit-enhance-plugin-1.1.0.tgz#e97340127f679ac7de1d10fec1fa0b9a21cd11d1"
-  integrity sha1-6XNAEn9nmsfeHRD+wfoLmiHNEdE=
-  dependencies:
-    "@tanbo/bezier" "^1.0.0"
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/textbus@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/textbus/download/@textbus/textbus-1.1.0.tgz#018d93936af673c360ac5dcc8b580326584a0298"
-  integrity sha1-AY2Tk2r2c8NgrF3Mi1gDJlhKApg=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/component-library-plugin" "^1.1.0"
-    "@textbus/components" "^1.1.0"
-    "@textbus/contextmenu-plugin" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    "@textbus/device-toggle-plugin" "^1.1.0"
-    "@textbus/formatters" "^1.1.0"
-    "@textbus/full-screen-plugin" "^1.1.0"
-    "@textbus/guard-end-block-plugin" "^1.1.0"
-    "@textbus/image-and-video-drag-resize-plugin" "^1.1.0"
-    "@textbus/link-jump-tip-plugin" "^1.1.0"
-    "@textbus/outlines-plugin" "^1.1.0"
-    "@textbus/paste-upload-emitter-plugin" "^1.1.0"
-    "@textbus/sourcecode-mode-plugin" "^1.1.0"
-    "@textbus/table-edit-enhance-plugin" "^1.1.0"
-    "@textbus/toolbar" "^1.1.0"
-    "@textbus/uikit" "^1.1.0"
-
-"@textbus/toolbar@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/toolbar/download/@textbus/toolbar-1.1.0.tgz#4a80f9904487db8e508c34ce0705801142869a6d"
-  integrity sha1-SoD5kESH245QjDTOBwWAEUKGmm0=
-  dependencies:
-    "@tanbo/color" "^0.0.3"
-    "@tanbo/color-picker" "^0.1.2"
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/components" "^1.1.0"
-    "@textbus/core" "^1.1.0"
-    "@textbus/formatters" "^1.1.0"
-    "@textbus/uikit" "^1.1.0"
-    rxjs "^6.0.0"
-
-"@textbus/uikit@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmmirror.com/@textbus/uikit/download/@textbus/uikit-1.1.0.tgz#efc11113201d661b976ce5e5082c446aef4139fe"
-  integrity sha1-78EREyAdZhuXbOXlCCxEau9BOf4=
-  dependencies:
-    "@tanbo/css-themes" "^0.0.1"
-    "@textbus/core" "^1.1.0"
-    rxjs "^6.0.0"
-
 "@types/d3-timer@^2.0.0":
   version "2.0.1"
   resolved "https://registry.nlark.com/@types/d3-timer/download/@types/d3-timer-2.0.1.tgz#ffb6620d290624f3726aa362c0c8a4b44c8d7200"
@@ -4114,11 +3910,6 @@ code-point-at@^1.0.0:
   resolved "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.60.0:
-  version "5.63.3"
-  resolved "https://registry.npmmirror.com/codemirror/download/codemirror-5.63.3.tgz?cache=0&sync_timestamp=1634043570906&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcodemirror%2Fdownload%2Fcodemirror-5.63.3.tgz#97042a242027fe0c87c09b36bc01931d37b76527"
-  integrity sha1-lwQqJCAn/gyHwJs2vAGTHTe3ZSc=
-
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
@@ -4186,11 +3977,6 @@ commander@^2.18.0, commander@^2.19.0, commander@~2.20.0:
   version "2.20.0"
   resolved "http://registry.npm.taobao.org/commander/download/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha1-1YuytcHuj4ew00ACfp6U4iLFpCI=
-
-commander@^6.0.0:
-  version "6.2.1"
-  resolved "https://registry.nlark.com/commander/download/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
-  integrity sha1-B5LraC37wyWZm7K4T93duhEKxzw=
 
 commander@~2.19.0:
   version "2.19.0"
@@ -5461,6 +5247,11 @@ detect-node@^2.0.4:
   resolved "https://registry.npmjs.org/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
 
+diff-match-patch@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.nlark.com/diff-match-patch/download/diff-match-patch-1.0.5.tgz#abb584d5f10cd1196dfc55aa03701592ae3f7b37"
+  integrity sha1-q7WE1fEM0Rlt/FWqA3AVkq4/ezc=
+
 diff@^3.2.0:
   version "3.5.0"
   resolved "https://registry.npmjs.org/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
@@ -6271,42 +6062,6 @@ express@^4.16.3, express@^4.17.0:
   version "4.17.0"
   resolved "https://registry.npmjs.org/express/-/express-4.17.0.tgz#288af62228a73f4c8ea2990ba3b791bb87cd4438"
   integrity sha512-1Z7/t3Z5ZnBG252gKUPyItc4xdeaA0X934ca2ewckAsVsw9EG71i++ZHZPYnus8g/s5Bty8IMpSVEuRkmwwPRQ==
-  dependencies:
-    accepts "~1.3.7"
-    array-flatten "1.1.1"
-    body-parser "1.19.0"
-    content-disposition "0.5.3"
-    content-type "~1.0.4"
-    cookie "0.4.0"
-    cookie-signature "1.0.6"
-    debug "2.6.9"
-    depd "~1.1.2"
-    encodeurl "~1.0.2"
-    escape-html "~1.0.3"
-    etag "~1.8.1"
-    finalhandler "~1.1.2"
-    fresh "0.5.2"
-    merge-descriptors "1.0.1"
-    methods "~1.1.2"
-    on-finished "~2.3.0"
-    parseurl "~1.3.3"
-    path-to-regexp "0.1.7"
-    proxy-addr "~2.0.5"
-    qs "6.7.0"
-    range-parser "~1.2.1"
-    safe-buffer "5.1.2"
-    send "0.17.1"
-    serve-static "1.14.1"
-    setprototypeof "1.1.1"
-    statuses "~1.5.0"
-    type-is "~1.6.18"
-    utils-merge "1.0.1"
-    vary "~1.1.2"
-
-express@^4.17.1:
-  version "4.17.1"
-  resolved "https://registry.npm.taobao.org/express/download/express-4.17.1.tgz?cache=0&sync_timestamp=1599054274660&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fexpress%2Fdownload%2Fexpress-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
-  integrity sha1-RJH8OGBc9R+GKdOcK10Cb5ikwTQ=
   dependencies:
     accepts "~1.3.7"
     array-flatten "1.1.1"
@@ -8633,13 +8388,6 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-katex@^0.13.0:
-  version "0.13.18"
-  resolved "https://registry.nlark.com/katex/download/katex-0.13.18.tgz#ba89e8e4b70cc2325e25e019a62b9fe71e5c2931"
-  integrity sha1-uono5LcMwjJeJeAZpiuf5x5cKTE=
-  dependencies:
-    commander "^6.0.0"
-
 khroma@^1.4.1:
   version "1.4.1"
   resolved "https://registry.npm.taobao.org/khroma/download/khroma-1.4.1.tgz#ad6a5b6a972befc5112ce5129887a1a83af2c003"
@@ -8678,6 +8426,11 @@ kleur@^2.0.1:
   version "2.0.2"
   resolved "https://registry.npmjs.org/kleur/-/kleur-2.0.2.tgz#b704f4944d95e255d038f0cb05fb8a602c55a300"
   integrity sha512-77XF9iTllATmG9lSlIv0qdQ2BQ/h9t0bJllHlbvsQ0zUWfU7Yi0S8L5JXzPZgkefIiajLmBJJ4BsMJmqcf7oxQ==
+
+klona@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npm.taobao.org/klona/download/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
+  integrity sha1-e7Hjr/sMuGJFR+9+j2cI6i4538A=
 
 launch-editor-middleware@^2.2.1:
   version "2.2.1"
@@ -9382,6 +9135,11 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.1"
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
+
+neo-async@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.nlark.com/neo-async/download/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
+  integrity sha1-tKr7k+OustgXTKU88WOrfXMIMF8=
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -10572,7 +10330,7 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-pretty@2.0.0, pretty@^2.0.0:
+pretty@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/pretty/-/pretty-2.0.0.tgz#adbc7960b7bbfe289a557dc5f737619a220d06a5"
   integrity sha1-rbx5YLe7/iiaVX3F9zdhmiINBqU=
@@ -10580,11 +10338,6 @@ pretty@2.0.0, pretty@^2.0.0:
     condense-newlines "^0.2.1"
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
-
-prismjs@^1.23.0:
-  version "1.25.0"
-  resolved "https://registry.nlark.com/prismjs/download/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
-  integrity sha1-b4It8b2tllc0sxCzFaIzFc+Zl1Y=
 
 private@^0.1.6, private@^0.1.8:
   version "0.1.8"
@@ -10903,11 +10656,6 @@ realpath-native@^1.0.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
-
-reflect-metadata@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.npm.taobao.org/reflect-metadata/download/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
-  integrity sha1-Z648pXyXKiqhZCsQ/jY/4y1J3Ag=
 
 regenerate-unicode-properties@^8.0.2:
   version "8.1.0"
@@ -11363,13 +11111,6 @@ rx@^4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   integrity sha1-pfE/957zt0D+MKqAP7CfmIBdR4I=
 
-rxjs@^6.0.0:
-  version "6.6.7"
-  resolved "https://registry.npmmirror.com/rxjs/download/rxjs-6.6.7.tgz?cache=0&sync_timestamp=1633554235070&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Frxjs%2Fdownload%2Frxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
-  integrity sha1-kKwBisq/SRv2UEQjXVhjxNq4BMk=
-  dependencies:
-    tslib "^1.9.0"
-
 rxjs@^6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.4.0.tgz#f3bb0fe7bda7fb69deac0c16f17b50b0b8790504"
@@ -11409,6 +11150,14 @@ sane@^2.0.0:
     watch "~0.18.0"
   optionalDependencies:
     fsevents "^1.2.3"
+
+sass-loader@^12.2.0:
+  version "12.2.0"
+  resolved "https://registry.npmmirror.com/sass-loader/download/sass-loader-12.2.0.tgz?cache=0&sync_timestamp=1634035952677&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsass-loader%2Fdownload%2Fsass-loader-12.2.0.tgz#b370010fb0ababae2ef9c6c89e05d6c6debc6042"
+  integrity sha1-s3ABD7Crq64u+cbIngXWxt68YEI=
+  dependencies:
+    klona "^2.0.4"
+    neo-async "^2.6.2"
 
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
@@ -12752,6 +12501,13 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+vditor@^3.8.7:
+  version "3.8.7"
+  resolved "https://registry.nlark.com/vditor/download/vditor-3.8.7.tgz#eea86766b092d931ca8497a0ef39f86b8764dbd5"
+  integrity sha1-7qhnZrCS2THKhJeg7zn4a4dk29U=
+  dependencies:
+    diff-match-patch "^1.0.5"
 
 vendors@^1.0.0:
   version "1.0.3"
