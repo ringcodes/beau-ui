@@ -60,7 +60,7 @@
         </a-select>
       </a-form-item>
       <a-form-item label="状态">
-        <a-radio-group v-decorator="['publishStatus',{rules: [{required: true,message:'请选择主题'}]}]">
+        <a-radio-group v-decorator="['publishStatus',{initialValue: 2}]">
           <a-radio :value="1">未发布</a-radio>
           <a-radio :value="2">已发布</a-radio>
         </a-radio-group>
