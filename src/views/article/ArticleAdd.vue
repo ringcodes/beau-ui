@@ -1,13 +1,13 @@
 <template>
   <a-card>
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
-      <a-row>
-        <a-col span="12">
+      <a-row type="flex" justify="start" align="top" :gutter="16">
+        <a-col span="6">
           <a-form-item v-show="false">
-            <a-input v-decorator="['id']"/>
+            <a-input v-model="dataFrom.id"/>
           </a-form-item>
           <a-form-item v-show="false">
-            <a-input v-decorator="['content']"/>
+            <a-input v-model="dataFrom.content"/>
           </a-form-item>
           <a-form-item
             label="标题">
@@ -25,49 +25,54 @@
         <a-col span="4">
           <a-form-item>
             <a-button type="primary" @click="save">保存</a-button>
+            <a-button type="info" @click="moreSet" style="margin-left: 8px;">更多</a-button>
           </a-form-item>
         </a-col>
       </a-row>
+          </a-form>
       <a-row type="flex" justify="center" align="top">
-        <a-col span="20">
+        <a-col span="24">
           <div id="vditor"></div>
         </a-col>
       </a-row>
       <a-drawer
-      title="Basic Drawer"
+      title="更多设置"
       placement="right"
       :closable="false"
       :visible="visible"
       width="600"
       @close="onClose"
     >
+    <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-form-item
         label="图片">
-        <a-input v-decorator="['titlePic']" v-show="false"/>
+        <a-input v-model="dataFrom.titlePic" v-show="false"/>
         <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
       </a-form-item>
       <a-form-item
         label="源地址">
-        <a-input v-decorator="['sourceUrl']"/>
+        <a-input v-model="dataFrom.sourceUrl"/>
       </a-form-item>
       <a-form-item
         label="描述">
-        <a-textarea v-decorator="['description']" rows="4"/>
+        <a-textarea v-model="dataFrom.description" rows="4"/>
       </a-form-item>
       <a-form-item label="标签">
-        <a-select mode="multiple" v-decorator="['tagList']">
+        <a-select mode="multiple" v-model="dataFrom.tagList">
           <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item label="状态">
-        <a-radio-group v-decorator="['publishStatus',{initialValue: 2}]">
+        <a-radio-group v-model="dataFrom.publishStatus">
           <a-radio :value="1">未发布</a-radio>
           <a-radio :value="2">已发布</a-radio>
         </a-radio-group>
       </a-form-item>
-    </a-drawer>
+      <a-form-item :wrapper-col="{ span: 12, offset: 4 }">
+        <a-button type="primary" @click="save">保存</a-button>
+      </a-form-item>
     </a-form>
-    <div class="flat-btn"><a-button type="primary" @click="moreSet">更多</a-button></div>
+    </a-drawer>
   </a-card>
 </template>
 
@@ -103,7 +108,11 @@ export default {
       topicList: [],
       contentModel: '',
       tagList: [],
-      visible: false
+      visible: false,
+      editor: null,
+      dataFrom:{
+        publishStatus: 2
+      }
     }
   },
   methods: {
@@ -113,16 +122,14 @@ export default {
     moreSet(){
       this.visible = true;
     },
-    onEditorChange (html) {
-      this.contentModel = html;
-    },
     save () {
-      this.form.setFieldsValue({
-        'content': this.contentModel
-      })
+      this.dataFrom.content = this.editor.getValue();
       this.form.validateFields((err, values) => {
         if (!err) {
-          saveArticle(values).then(res => {
+          saveArticle({
+            ...values,
+            ...this.dataFrom
+            }).then(res => {
             if (res.ok) {
               this.$message.info('保存成功')
               this.visible = false
@@ -145,8 +152,8 @@ export default {
       }
     },
     init(){
-      new Vditor('vditor', {
-        height: 500,
+      this.editor = new Vditor('vditor', {
+        minHeight: 600,
         placeholder: '此处为话题内容……',
         theme: 'classic',
         counter: {

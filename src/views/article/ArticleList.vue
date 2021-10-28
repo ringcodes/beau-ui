@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     handleAdd () {
-      this.$router.push({ path: '/article/edit?id=0' })
+      this.$router.push({ path: '/article/add?id=0' })
     },
     handleEdit (record) {
       this.$router.push({ path: '/article/edit?id=' + record.id })

@@ -1,17 +1,16 @@
 <template>
   <a-card :title="'标题：'+ record.title">
-    <a slot="extra" @click="returnPage" >返回</a>
-    <div class="fix-footer">
-      <a-button @click="setArticle" type="primary">设置</a-button>
+    <div slot="extra">
+      <a-button @click="setArticle" type="link">设置</a-button>
       <a-divider type="vertical" />
       <a-popconfirm placement="topLeft" ok-text="确定" cancel-text="取消" @confirm="handleDel">
         <template slot="title">
           <p>确定要删除吗？</p>
         </template>
-        <a-button type="danger">删除</a-button>
+        <a-button type="link" style="color: red;">删除</a-button>
       </a-popconfirm>
       <a-divider type="vertical" />
-      <a-button @click="returnPage">返回</a-button>
+      <a  @click="returnPage" >返回</a>
     </div>
     <a-row type="flex" justify="center" align="top">
       <a-col span="20">
