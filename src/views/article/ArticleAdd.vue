@@ -32,7 +32,7 @@
           </a-form>
       <a-row type="flex" justify="center" align="top">
         <a-col span="24">
-          <div id="vditor"></div>
+          <div id="vditor" ></div>
         </a-col>
       </a-row>
       <a-drawer
@@ -82,7 +82,8 @@ import { getTopicListType, saveArticle, getTagList, getArticle } from '@/api/con
 import { ImgUpload, } from '@/components'
 import Vditor from 'vditor'
 import "vditor/dist/index.css";
-
+import Vue from 'vue'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
 export default {
   name: 'ArticleEdit',
   components: {
@@ -153,12 +154,16 @@ export default {
     },
     init(){
       this.editor = new Vditor('vditor', {
+        width: '100%',
         minHeight: 600,
         placeholder: '此处为话题内容……',
         theme: 'classic',
         counter: {
           enable: true,
           type: 'markdown'
+        },
+        outline:{
+          enable: true,
         },
         preview: {
           delay: 0,
@@ -176,6 +181,36 @@ export default {
           enable: false
         },
         mode: 'wysiwyg',
+        upload: {
+          accept: 'image/*,.mp3, .wav, .rar',
+          url: process.env.VUE_APP_BASE_API + '/file/upload',
+          fieldName: 'file',
+          multiple: false,
+          headers: {
+            Authorization: Vue.ls.get(ACCESS_TOKEN)
+          },
+          extraData: {
+            source: 3,
+            code: '3',
+          },
+          format: function (files, res) {
+            // 观察一下返回的数据结构
+            console.log("files: " + files);
+            console.log("res: " + res);
+            const { code, data, msg } = JSON.parse(res);
+
+            return JSON.stringify({
+              "msg": msg,
+              "code": code,
+              "data": {
+              "errFiles": [],
+              "succMap": {
+                [data.fileName]: data.previewUrl,
+                }
+              }
+            });
+          }
+        },
         toolbar: [
           'emoji',
           'headings',
@@ -251,10 +286,4 @@ export default {
   display: inline-block;
  }
 </style>
-<style lang="less">
-.flat-btn{
-  position: absolute;
-  right: 10px;
-  top: 40%;
-}
 </style>
