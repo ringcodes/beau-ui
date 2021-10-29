@@ -274,6 +274,23 @@ export default {
         this.tagList = res.data
     })
     this.init();
+    if(id > 0){
+      getArticle(id).then(result => {
+        const res = result.data
+        this.contentModel = res.content
+        this.form.setFieldsValue({
+          'content': res.content,
+          'id': res.id,
+          'title': res.title,
+          'titlePic': res.titlePic,
+          'sourceUrl': res.sourceUrl,
+          'description': res.description,
+          'topicId': res.topicId,
+          'tag': res.tag,
+          'publishStatus': res.publishStatus
+        })
+      })
+    }
   }
 }
 </script>
