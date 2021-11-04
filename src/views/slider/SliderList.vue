@@ -4,7 +4,7 @@
       <a-row :gutter="48">
         <a-col :md="6" :sm="24">
           <a-form-item label="位置">
-            <a-select placeholder="请选择" v-model="queryParam.sliderType">
+            <a-select placeholder="请选择位置" v-model="queryParam.sliderType">
               <a-select-option value="">全部</a-select-option>
               <a-select-option v-for="item in positionList" :value="item.name" :key="item.name">{{ item.desc }}</a-select-option>
             </a-select>
@@ -22,7 +22,7 @@
     </div>
 
     <s-table
-      size="default"
+      size="small"
       :rowKey="(record) => record.id"
       :columns="columns"
       :data="dataList"
@@ -45,11 +45,11 @@
     <a-modal
       title="新增"
       style="top: 20px;"
-      :width="800"
+      :width="600"
       v-model="visible"
       @ok="handleOk"
     >
-      <a-form :form="form" >
+      <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
         </a-form-item>
@@ -57,23 +57,17 @@
           <a-input v-decorator="['pic']"/>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="名称">
           <a-input
             v-decorator="['name', { rules: [{ required: true, message: '请输入名称' }] }]"/>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="位置">
           <a-select v-decorator="['sliderType', {  rules: [{ required: true, message: '请选择类型' }] }]" >
             <a-select-option v-for="item in positionList" :value="item.name" :key="item.name">{{ item.desc }}</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="图片">
           <s-upload @change="handleChange" :code="uploadData.code" :source="4"/>
         </a-form-item>

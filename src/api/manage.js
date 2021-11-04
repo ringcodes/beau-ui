@@ -10,7 +10,7 @@ export function getUserList (parameter) {
 
 export function listConfigPage (parameter) {
   return request({
-    url: '/config/page',
+    url: '/config/pageSimple',
     method: 'post',
     data: parameter
   })
@@ -26,7 +26,7 @@ export function saveConfig (parameter) {
 export function delConfig (id) {
   return request({
     url: '/config/del/' + id,
-    method: 'post'
+    method: 'delete'
   })
 }
 export function listConfigType (type,key) {

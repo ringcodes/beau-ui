@@ -16,8 +16,12 @@ export const CONTENT_WIDTH_TYPE = {
 }
 
 export const PRIVILEGE_TYPE = {
-  1: '公开',
-  2: '登录',
-  3: '私有',
-  4: 'VIP'
+  0: '未发布',
+  1: '已发布',
+}
+
+export const FLAG_TYPE = {
+  1: '置顶',
+  2: '推荐',
+  3: '热门'
 }

@@ -30,7 +30,6 @@ export default {
       confirmLoading: false,
       title: '角色编辑',
       formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' })
     }
   },
   components: {

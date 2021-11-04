@@ -2,12 +2,12 @@
   <div class="table-wrapper">
     <a-form layout="inline">
       <a-row :gutter="48">
-        <a-col :md="8" :sm="24">
+        <a-col :md="6" :sm="24">
           <a-form-item label="名称">
-            <a-input placeholder="请输入"/>
+            <a-input placeholder="请输入名称"/>
           </a-form-item>
         </a-col>
-        <a-col :md="8" :sm="24">
+        <a-col :md="3" :sm="24">
           <span class="table-page-search-submitButtons">
             <a-button type="primary" @click="refresh">查询</a-button>
           </span>
@@ -39,13 +39,11 @@
       v-model="visible"
       @ok="handleOk"
     >
-      <a-form :form="form" >
+      <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="名称"
         >
           <a-input

@@ -1,13 +1,13 @@
 <template>
   <div class="table-wrapper">
     <a-form layout="inline">
-      <a-row :gutter="48">
-        <a-col :md="4" :sm="24">
+      <a-row :gutter="16">
+        <a-col :md="6" :sm="24">
           <a-form-item label="名称">
             <a-input placeholder="请输入"/>
           </a-form-item>
         </a-col>
-        <a-col :md="4" :sm="24">
+        <a-col :md="6" :sm="24">
           <a-form-item label="类型">
             <a-select placeholder="请选择" default-value="">
               <a-select-option value="">全部</a-select-option>
@@ -26,57 +26,45 @@
     <div class="table-operator">
       <a-button type="primary" icon="plus" @click="handleAdd()">添加</a-button>
     </div>
-    <a-row style="padding: 14px 0px;background: #fafafa;border-bottom: 1px solid #ebedf0">
-      <a-col :span="4">图标</a-col>
-      <a-col :span="4">名称</a-col>
-      <a-col :span="4">类型</a-col>
-      <a-col :span="6">更新时间</a-col>
-      <a-col :span="4">操作</a-col>
-    </a-row>
-    <div v-for="item in data.list" :key="item.id">
-      <a-row :gutter="4" style="padding:8px 0px;border-bottom: 1px solid #ebedf0;vertical-align: bottom">
-        <a-col :span="4">
-          <a-avatar
-            size="large"
-            :src="item.topicPicView"
-          />
-        </a-col>
-        <a-col :span="4">{{ item.topicName }}</a-col>
-        <a-col :span="4">{{ item.topicTypeName }}</a-col>
-        <a-col :span="6">{{ item.updateTime }}</a-col>
-        <a-col :span="4">
-          <a @click="editTopic(item)">编辑</a>
-          <a-divider type="vertical" />
-          <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(item)">
-            <a class="btn-red">删除</a>
-          </a-popconfirm>
-        </a-col>
-      </a-row>
-    </div>
-    <div style="text-align: center;padding-top: 8px">
-      <a-pagination v-model="data.pageNumber" :total="data.totalRow" showLessItems @change="onChange"/>
-    </div>
+    <s-table
+      size="small"
+      :rowKey="(record) => record.id"
+      :columns="columns"
+      :data="dataList"
+      ref="table"
+      :pageSize="6"
+    >
+      <span slot="pic" slot-scope="text">
+        <img :src="text" alt="" class="img-list">
+      </span>
+      <span slot="target" slot-scope="text">
+        <a :href="text" target="_blank">{{text}}</a>
+      </span>
+      <span slot="action" slot-scope="text, record">
+        <a @click="editTopic(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
+          <a class="btn-red">删除</a>
+        </a-popconfirm>
+      </span>
+    </s-table>
     <a-modal
       title="操作"
       style="top: 20px;"
-      :width="800"
+      :width="600"
       v-model="visible"
       @ok="handleOk"
     >
-      <a-form :form="form" >
+      <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="名称">
           <a-input
             v-decorator="['topicName', { rules: [{ required: true, message: '请输入名称' }] }]"/>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="类型">
           <a-select
             v-decorator="['topicType', { initialValue:'1', rules: [{ required: true, message: '请选择类型' }] }]" >
@@ -85,11 +73,9 @@
           </a-select>
         </a-form-item>
         <a-form-item
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
           label="图片">
           <s-upload ref="imgUpload" @change="handleChange" :source="2"/>
-          <a-input v-decorator="['topicPic']"/>
+          <a-input v-decorator="['topicPic']" placeholder="手动输入图片地址"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -122,32 +108,46 @@ export default {
   data () {
     return {
       visible: false,
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 5 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      },
       form: this.$form.createForm(this),
       loading: false,
-      loadingMore: false,
-      mdl: {},
-      // 查询参数
       queryParam: {},
-      // 加载数据方法 必须为 Promise 对象
       data: [],
       imageUrl: [],
       uploadData: {
         source: 1,
         code: ''
       },
-      positionList: []
+      columns: [
+        {
+          title: '图片',
+          dataIndex: 'topicPicView',
+          width: 200,
+          scopedSlots: { customRender: 'pic' }
+        },{
+          title: '名称',
+          dataIndex: 'topicName',
+          width: 220
+        },{
+          title: '类型',
+          dataIndex: 'topicTypeName',
+          width: 250,
+        },{
+          title: '创建时间',
+          dataIndex: 'updateTime',
+          width: 180
+        }, {
+          title: '操作',
+          width: '150px',
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+      dataList: (parameter) => {
+        return getTopicList(Object.assign(parameter, this.queryParam))
+      }
     }
   },
   mounted () {
-    this.showLoadingMore()
   },
   methods: {
     handleAdd () {
@@ -190,26 +190,20 @@ export default {
             if (res.ok) {
               this.$message.info('保存成功')
               this.visible = false
-              this.showLoadingMore()
+              this.refresh()
             }
           })
         }
       })
     },
-    showLoadingMore () {
-      getTopicList(this.queryParam).then(res => {
-        this.data = res.data
-      })
-    },
     handleDel (item) {
       delTopic(item.id).then(res => {
         this.$message.info('删除成功')
-        this.showLoadingMore()
+        this.refresh()
       })
     },
-    onChange (page) {
-      this.queryParam.pageNumber = page
-      this.showLoadingMore()
+    refresh () {
+      this.$refs.table.refresh(true)
     },
     handleChange (info) {
       const file = info[0]
@@ -226,3 +220,9 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+.img-list{
+  max-width: 120px;
+  max-height: 80px;
+}
+</style>

@@ -86,14 +86,14 @@ export function delTag (id) {
     method: 'post'
   })
 }
-export function acount () {
+export function statisticsAcount () {
   return request({
-    url: '/statis/acount'
+    url: '/statistics/acount'
   })
 }
 export function chartData () {
   return request({
-    url: '/statis/chartData'
+    url: '/statistics/chartData'
   })
 }
 //

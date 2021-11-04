@@ -8,12 +8,10 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
-        <a @click="handleDetail(record)">详情</a>
-        <a-divider type="vertical" />
         <a @click="handleEdit(record)">编辑</a>
         <a-divider type="vertical" />
         <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
-          <a>删除</a>
+          <a class="btn-red">删除</a>
         </a-popconfirm>
       </span>
     </s-table>
@@ -40,7 +38,7 @@
 </template>
 
 <script>
-import { Form, Input, Spin, Select, Icon,Modal } from 'ant-design-vue'
+import { Form, Input, Spin, Select, Icon,Modal,Divider,Popconfirm } from 'ant-design-vue'
 import { saveConfig, listConfigPage,delConfig } from '@/api/manage'
 import { STable } from '@/components'
 
@@ -50,6 +48,7 @@ export default {
     return {
       visible: false,
       id: null,
+      form: this.$form.createForm(this),
       queryParam: {
         configTypeEnum: 'WEB_CONFIG',
         configKeyEnum: 'LINK'
@@ -73,7 +72,7 @@ export default {
         }
       ],
       dataList: (parameter) => {
-        return listConfigPage(this.queryParam)
+        return listConfigPage(Object.assign(parameter, this.queryParam))
       }
     }
   },
@@ -87,16 +86,24 @@ export default {
     ASelectOption: Select.Option,
     ATextarea: Input.TextArea,
     AIcon: Icon,
-    AModal: Modal
+    AModal: Modal,
+    ADivider: Divider,
+    APopconfirm: Popconfirm
   },
   methods: {
     add () {
       this.visible = true;
+      this.addForm = {}
     },
-    delLink (item) {
+    handleEdit(item){
+      this.addForm = item;
+      this.visible = true;
+    },
+    handleDel (item) {
       delConfig(item.id).then(res =>{
         if(res.ok){
-          this.$message.info('删除成功')
+          this.$message.info('删除成功');
+          this.$refs.table.refresh(true);
         }
       })
     },

@@ -1,20 +1,43 @@
 <template>
   <div class="table-wrapper">
     <a-form layout="inline">
-      <a-row :gutter="48">
-        <a-col :md="4" :sm="24">
+      <a-row :gutter="16" class="query-driver">
+        <a-col :md="6" :sm="24">
           <a-form-item label="标题">
-            <a-input v-model="queryParam.title" placeholder="请输入"/>
+            <a-input v-model="queryParam.title" placeholder="请输入标题"/>
           </a-form-item>
         </a-col>
-        <a-col :md="4" :sm="24">
-          <a-form-item label="状态">
-            <a-select v-model="queryParam.status" placeholder="请选择" default-value="0">
-              <a-select-option v-for="(item, key) in privilegeList" :value="key" :key="key">{{ item }}</a-select-option>
+        <a-col :md="6" :sm="24">
+          <a-form-item label="主题">
+            <a-select v-model="queryParam.topicId" placeholder="请选择主题" :filter-option="filterOption" show-search>
+              <a-select-option v-for="(item, key) in topicList" :value="item.id" :key="key">{{ item.topicName }}</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
         <a-col :md="4" :sm="24">
+          <a-form-item label="状态">
+            <a-select v-model="queryParam.publishStatus" placeholder="请选择状态">
+              <a-select-option v-for="(item, key) in privilegeList" :value="key" :key="key">{{ item }}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :md="6" :sm="24">
+          <a-form-item label="标签">
+            <a-select mode="multiple" v-model="queryParam.tagList" placeholder="请选择标签">
+              <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row :gutter="16" class="query-driver">
+        <a-col :md="6" :sm="24">
+          <a-form-item label="标记">
+            <a-select v-model="queryParam.flagType" placeholder="请选择标记">
+              <a-select-option v-for="(item, key) in flagTypeList" :value="key" :key="key">{{ item }}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :md="2" :sm="24">
           <span class="table-page-search-submitButtons">
             <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
           </span>
@@ -44,8 +67,8 @@
 
 <script>
 import { STable } from '@/components'
-import { getArticleList, delArticle } from '@/api/content'
-import { PRIVILEGE_TYPE } from '@/store/mutation-types'
+import { getArticleList, delArticle,getTopicListType,getTagList } from '@/api/content'
+import { PRIVILEGE_TYPE,FLAG_TYPE } from '@/store/mutation-types'
 import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider } from 'ant-design-vue'
 
 export default {
@@ -66,21 +89,13 @@ export default {
   data () {
     return {
       visible: false,
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 5 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      },
       form: null,
-      mdl: {},
-      // 高级搜索 展开/关闭
-      advanced: false,
+      topicList:[],
+      tagList: [],
       // 查询参数
       queryParam: {},
       privilegeList: PRIVILEGE_TYPE,
+      flagTypeList: FLAG_TYPE,
       // 表头
       columns: [
         {
@@ -120,10 +135,23 @@ export default {
     }
   },
   mounted () {
+    getTopicListType(1).then(res => {
+      if (res.ok) {
+        this.topicList = res.data
+      }
+    });
+    getTagList({}).then(res => {
+        this.tagList = res.data
+    });
   },
   methods: {
     handleAdd () {
       this.$router.push({ path: '/article/add?id=0' })
+    },
+    filterOption(input, option) {
+      return (
+        option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      );
     },
     handleEdit (record) {
       this.$router.push({ path: '/article/edit?id=' + record.id })
@@ -142,3 +170,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" >
+.query-driver{
+  margin-bottom: 10px;
+}
+</style>

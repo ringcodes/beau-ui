@@ -24,7 +24,6 @@
       </a-row>
     </a-form>
     <div class="table-operator">
-      <a-button type="primary" icon="plus" @click="handleAdd()">添加</a-button>
     </div>
     <s-table
       size="default"
