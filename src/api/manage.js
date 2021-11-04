@@ -8,10 +8,10 @@ export function getUserList (parameter) {
   })
 }
 
-export function listConfig (parameter) {
+export function listConfigPage (parameter) {
   return request({
-    url: '/config/list',
-    method: 'get',
+    url: '/config/page',
+    method: 'post',
     data: parameter
   })
 }
@@ -29,9 +29,9 @@ export function delConfig (id) {
     method: 'post'
   })
 }
-export function getConfigType (type) {
+export function listConfigType (type,key) {
   return request({
-    url: '/config/getByBiz/' + type,
+    url: '/config/'+type+'/' + key,
     method: 'get'
   })
 }

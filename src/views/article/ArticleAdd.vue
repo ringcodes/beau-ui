@@ -46,7 +46,6 @@
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-form-item
         label="图片">
-        <a-input v-model="dataFrom.titlePic" v-show="false"/>
         <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
       </a-form-item>
       <a-form-item
@@ -67,9 +66,6 @@
           <a-radio :value="1">未发布</a-radio>
           <a-radio :value="2">已发布</a-radio>
         </a-radio-group>
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 12, offset: 4 }">
-        <a-button type="primary" @click="save">保存</a-button>
       </a-form-item>
     </a-form>
     </a-drawer>
@@ -148,9 +144,7 @@ export default {
       }
       const data = file.response
       if (data.ok) {
-        this.form.setFieldsValue({
-          'topicPic': data.data.fileName
-        })
+        this.dataFrom.titlePic = data.data.fileName;
       }
     },
     init(){

@@ -1,40 +1,84 @@
 <template>
   <div>
-    <a-input v-model="id" v-show="false"/>
-    <div v-for="(item,index) in linkList" :key="index" class="link-item">
-      名称：<a-input v-model="linkList[index].name" style="width:220px;"/>
-      <span style="padding-left:30px;">链接：<a-input v-model="linkList[index].url" style="width:500px;"/></span>
-      <a-icon
-        v-if="linkList.length > 1"
-        class="dynamic-delete-button"
-        type="minus-circle-o"
-        @click="() => remove(index)"
-      />
-    </div>
-    <div>
-      <a-button type="dashed" style="width: 50%" @click="add">
-        <a-icon type="plus" /> 新增
-      </a-button>
-    </div>
-    <div style="margin-top:20px;margin-left:40px;">
-      <a-button type="primary" @click="handleSubmit">保存</a-button>
-    </div>
+    <s-table
+      size="default"
+      :rowKey="(record) => record.id"
+      :columns="columns"
+      :data="dataList"
+      ref="table"
+    >
+      <span slot="action" slot-scope="text, record">
+        <a @click="handleDetail(record)">详情</a>
+        <a-divider type="vertical" />
+        <a @click="handleEdit(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
+          <a>删除</a>
+        </a-popconfirm>
+      </span>
+    </s-table>
+    <a-modal
+      title="新增"
+      style="top: 20px;"
+      :width="450"
+      v-model="visible"
+      @ok="handleSubmit"
+    >
+      <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
+        <a-input v-model="addForm.id" v-show="false"/>
+        <a-form-item
+          label="标题">
+          <a-input v-model="addForm.configName"/>
+        </a-form-item>
+        <a-form-item
+          label="链接">
+          <a-input v-model="addForm.configContent"/>
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
 <script>
-import { Form, Input, Spin, Select, Icon } from 'ant-design-vue'
-import { saveConfig, getConfigType } from '@/api/manage'
+import { Form, Input, Spin, Select, Icon,Modal } from 'ant-design-vue'
+import { saveConfig, listConfigPage,delConfig } from '@/api/manage'
+import { STable } from '@/components'
 
 export default {
   name: 'LinkConfig',
   data () {
     return {
+      visible: false,
       id: null,
-      linkList: []
+      queryParam: {
+        configTypeEnum: 'WEB_CONFIG',
+        configKeyEnum: 'LINK'
+      },
+      addForm: {},
+      columns:[
+        {
+          title: 'ID',
+          dataIndex: 'id'
+        },{
+          title: '标题',
+          dataIndex: 'configName'
+        },{
+          title: '链接',
+          dataIndex: 'configContent'
+        }, {
+          title: '操作',
+          width: '150px',
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+      dataList: (parameter) => {
+        return listConfigPage(this.queryParam)
+      }
     }
   },
   components: {
+    STable,
     ASpin: Spin,
     AForm: Form,
     AFormItem: Form.Item,
@@ -42,38 +86,36 @@ export default {
     ASelect: Select,
     ASelectOption: Select.Option,
     ATextarea: Input.TextArea,
-    AIcon: Icon
+    AIcon: Icon,
+    AModal: Modal
   },
   methods: {
-    show () {
-      getConfigType('LINK').then(res => {
-        if (res.ok) {
-          this.id = res.data.id
-          this.linkList = JSON.parse(res.data.content)
+    add () {
+      this.visible = true;
+    },
+    delLink (item) {
+      delConfig(item.id).then(res =>{
+        if(res.ok){
+          this.$message.info('删除成功')
         }
       })
     },
-    add () {
-      this.linkList.push({})
-    },
-    remove (i) {
-      this.linkList.splice(i, 1)
-    },
     handleSubmit () {
       var values = {
-        id: this.id,
-        config_type: "BASE",
-        config_key: "LINK",
-        config_name: '友情链接',
-        content: JSON.stringify(this.linkList)
+        id: this.addForm.id,
+        configType: "WEB_CONFIG",
+        configKey: "LINK",
+        configName: this.addForm.configName,
+        configContent: this.addForm.configContent
       }
       saveConfig(values).then(res => {
-        this.$message.info('保存成功')
+        this.$message.info('保存成功');
+        this.$refs.table.refresh(true);
+        this.visible = false;
       })
     }
   },
   mounted () {
-    this.show()
   }
 }
 </script>

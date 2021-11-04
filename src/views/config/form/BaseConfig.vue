@@ -1,11 +1,5 @@
 <template>
-  <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 14 }">
-    <a-form-item v-show="false">
-      <a-input v-decorator="['biz', {initialValue:''}]"/>
-    </a-form-item>
-    <a-form-item v-show="false">
-      <a-input v-decorator="['id']"/>
-    </a-form-item>
+  <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 12 }">
     <a-form-item label="网站名称">
       <a-input v-decorator="['webName',{rules: [{required: true,message:'请输入名称'}]}]"/>
     </a-form-item>
@@ -23,11 +17,7 @@ export default {
   name: 'BaseConfig',
   data () {
     return {
-      confirmLoading: false,
-      title: '角色编辑',
-      formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
-      configType: []
     }
   },
   props: {
