@@ -174,8 +174,7 @@ export default {
     },
     initData (list,page,total, pagination) {
       if (!list) {
-        this.localLoading = false
-        return;
+        list = [];
       }
       this.localPagination = this.showPagination && Object.assign({}, this.localPagination, {
         current: page, // 返回结果中的当前分页数

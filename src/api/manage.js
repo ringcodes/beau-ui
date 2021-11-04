@@ -47,3 +47,23 @@ export function getId () {
     method: 'get'
   })
 }
+
+export function listMenu(){
+  return request({
+    url: '/menu/list',
+    method: 'get'
+  })
+}
+export function saveMenu(param){
+  return request({
+    url: '/menu/save',
+    method: 'post',
+    data: param
+  })
+}
+export function delMenu(param){
+  return request({
+    url: '/menu/del/'+param,
+    method: 'delete'
+  })
+}

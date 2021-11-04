@@ -2,11 +2,11 @@
   <div class="table-wrapper">
     <a-form layout="inline">
       <a-row :gutter="48">
-        <a-col :md="8" :sm="24">
+        <a-col :md="6" :sm="24">
           <a-form-item label="位置">
-            <a-select placeholder="请选择" v-model="queryParam.position">
+            <a-select placeholder="请选择" v-model="queryParam.sliderType">
               <a-select-option value="">全部</a-select-option>
-              <a-select-option v-for="item in positionList" :value="item.value" :key="item.value">{{ item.name }}</a-select-option>
+              <a-select-option v-for="item in positionList" :value="item.name" :key="item.name">{{ item.desc }}</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -20,31 +20,28 @@
     <div class="table-operator">
       <a-button type="primary" icon="plus" @click="handleAdd()">添加</a-button>
     </div>
-    <a-row style="padding-bottom: 4px;border-bottom: 1px solid #ebedf0">
-      <a-col :span="4">图标</a-col>
-      <a-col :span="4">名称</a-col>
-      <a-col :span="4">位置</a-col>
-      <a-col :span="4">更新时间</a-col>
-      <a-col :span="4">操作</a-col>
-    </a-row>
-    <div v-for="item in data.list" :key="item.id">
-      <a-row :gutter="4" style="padding:8px 0px;border-bottom: 1px solid #ebedf0;vertical-align: bottom">
-        <a-col :span="4">
-          <img :src="item.pic" width="200" height="120"/>
-        </a-col>
-        <a-col :span="4">{{ item.name }}</a-col>
-        <a-col :span="4">{{ item.positionName }}</a-col>
-        <a-col :span="4">{{ item.updateTime }}</a-col>
-        <a-col :span="4">
-          <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(item)">
-            <a>删除</a>
-          </a-popconfirm>
-        </a-col>
-      </a-row>
-    </div>
-    <div style="text-align: center;padding-top: 8px">
-      <a-pagination v-model="data.pageNumber" :total="data.totalRow" showLessItems @change="onChange"/>
-    </div>
+
+    <s-table
+      size="default"
+      :rowKey="(record) => record.id"
+      :columns="columns"
+      :data="dataList"
+      ref="table"
+    >
+      <span slot="pic" slot-scope="text">
+        <img :src="text" alt="" class="img-list">
+      </span>
+      <span slot="target" slot-scope="text">
+        <a :href="text" target="_blank">{{text}}</a>
+      </span>
+      <span slot="action" slot-scope="text, record">
+        <a @click="handleEdit(record)">编辑</a>
+        <a-divider type="vertical" />
+        <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
+          <a class="btn-red">删除</a>
+        </a-popconfirm>
+      </span>
+    </s-table>
     <a-modal
       title="新增"
       style="top: 20px;"
@@ -70,9 +67,8 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="位置">
-          <a-select
-            v-decorator="['position', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option v-for="item in positionList" :value="item.value" :key="item.value">{{ item.name }}</a-select-option>
+          <a-select v-decorator="['sliderType', {  rules: [{ required: true, message: '请选择类型' }] }]" >
+            <a-select-option v-for="item in positionList" :value="item.name" :key="item.name">{{ item.desc }}</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item
@@ -134,11 +130,42 @@ export default {
         source: 1,
         code: ''
       },
-      positionList: []
+      positionList: [],
+      columns: [
+        {
+          title: '图片',
+          dataIndex: 'pic',
+          width: 200,
+          scopedSlots: { customRender: 'pic' }
+        },{
+          title: '标题',
+          dataIndex: 'title'
+        },{
+          title: '地址',
+          dataIndex: 'target',
+          width: 250,
+          scopedSlots: { customRender: 'target' }
+        }, {
+          title: '位置',
+          dataIndex: 'positionName',
+          width: 120
+        },{
+          title: '创建时间',
+          dataIndex: 'updateTime',
+          width: 180
+        }, {
+          title: '操作',
+          width: '150px',
+          dataIndex: 'action',
+          scopedSlots: { customRender: 'action' }
+        }
+      ],
+      dataList: (parameter) => {
+        return getSliderList(Object.assign(parameter, this.queryParam))
+      }
     }
   },
   mounted () {
-    this.showLoadingMore()
     listSliderPosition().then(res => {
       if (res.ok) {
         this.positionList = res.data
@@ -178,9 +205,7 @@ export default {
       })
     },
     showLoadingMore () {
-      getSliderList(this.queryParam).then(res => {
-        this.data = res.data
-      })
+      this.$refs.table.refresh(true)
     },
     handleDel (item) {
       delSlider(item.id).then(res => {
@@ -210,3 +235,10 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.img-list{
+  width: 200px;
+  max-height: 150px;
+}
+</style>
