@@ -125,6 +125,7 @@ export default {
     },
     save () {
       this.dataFrom.content = this.editor.getValue();
+      this.dataFrom.articleType = 2;
       this.form.validateFields((err, values) => {
         if (!err) {
           saveArticle({
@@ -194,11 +195,7 @@ export default {
             code: '3',
           },
           format: function (files, res) {
-            // 观察一下返回的数据结构
-            console.log("files: " + files);
-            console.log("res: " + res);
             const { code, data, msg } = JSON.parse(res);
-
             return JSON.stringify({
               "msg": msg,
               "code": code,
