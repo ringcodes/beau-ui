@@ -49,12 +49,12 @@
         <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
       </a-form-item>
       <a-form-item
-        label="源地址">
-        <a-input v-model="dataFrom.sourceUrl"/>
-      </a-form-item>
-      <a-form-item
         label="描述">
         <a-textarea v-model="dataFrom.description" rows="4"/>
+      </a-form-item>
+      <a-form-item
+        label="源地址">
+        <a-input v-model="dataFrom.sourceUrl"/>
       </a-form-item>
       <a-form-item label="标签">
         <a-select mode="multiple" v-model="dataFrom.tagList">
@@ -147,9 +147,10 @@ export default {
         this.dataFrom.titlePic = data.data.fileName;
       }
     },
-    init(){
+    init(content){
       this.editor = new Vditor('vditor', {
         width: '100%',
+        value: content,
         minHeight: 600,
         placeholder: '此处为话题内容……',
         theme: 'classic',
@@ -264,7 +265,6 @@ export default {
     getTagList({}).then(res => {
         this.tagList = res.data
     })
-    this.init();
     if(id > 0){
       getArticle(id).then(result => {
         const res = result.data
@@ -281,6 +281,8 @@ export default {
           'publishStatus': res.publishStatus
         })
       })
+    } else {
+      this.init();
     }
   }
 }

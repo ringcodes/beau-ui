@@ -45,7 +45,19 @@
       </a-row>
     </a-form>
     <div class="table-operator">
-      <a-button type="primary" icon="plus" @click="handleAdd()">添加</a-button>
+      <a-dropdown>
+        <span>
+          <a-button type="primary">新增<a-icon type="down-circle" /></a-button>
+        </span>
+        <a-menu slot="overlay" @click="handleAdd">
+          <a-menu-item key="html">
+            <a href="javascript:;">富文本</a>
+          </a-menu-item>
+          <a-menu-item key="markdown">
+            <a href="javascript:;">Markdown</a>
+          </a-menu-item>
+        </a-menu>
+      </a-dropdown>
     </div>
     <s-table
       size="default"
@@ -55,7 +67,7 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
-        <a @click="handleDetail(record)">详情</a>
+        <a @click="handleEdit(record)">编辑</a>
         <a-divider type="vertical" />
         <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
           <a class="btn-red">删除</a>
@@ -69,7 +81,7 @@
 import { STable } from '@/components'
 import { getArticleList, delArticle,getTopicListType,getTagList } from '@/api/content'
 import { PRIVILEGE_TYPE,FLAG_TYPE } from '@/store/mutation-types'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider } from 'ant-design-vue'
+import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
@@ -84,7 +96,11 @@ export default {
     ASelectOption: Select.Option,
     AInput: Input,
     APopconfirm: Popconfirm,
-    ADivider: Divider
+    ADivider: Divider,
+    ADropdown: Dropdown,
+    AMenu: Menu,
+    AMenuItem: Menu.Item,
+    AIcon: Icon
   },
   data () {
     return {
@@ -145,8 +161,14 @@ export default {
     });
   },
   methods: {
-    handleAdd () {
-      this.$router.push({ path: '/article/add?id=0' })
+    handleAdd (e) {
+      if(e.key === 'html'){
+        this.$router.push({ path: '/article/edit?id=0' })
+      } else if(e.key === 'markdown'){
+        this.$router.push({ path: '/article/add?id=0' })
+      } else {
+        this.$message.error('文章类型不支持');
+      }
     },
     filterOption(input, option) {
       return (
@@ -154,7 +176,13 @@ export default {
       );
     },
     handleEdit (record) {
-      this.$router.push({ path: '/article/edit?id=' + record.id })
+      if(record.articleType === 2){
+        // markdown
+        this.$router.push({ path: '/article/add?id=' + record.id })
+      } else {
+        // html
+        this.$router.push({ path: '/article/edit?id=' + record.id })
+      }
     },
     handleDel (record) {
       delArticle(record.id).then(res => {

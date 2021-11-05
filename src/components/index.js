@@ -18,7 +18,8 @@ import TagSelect from '@/components/TagSelect'
 import ExceptionPage from '@/components/Exception'
 import StandardFormRow from '@/components/StandardFormRow'
 import ArticleListContent from '@/components/ArticleListContent'
-import QuillEditor from '@/components/Editor/QuillEditor'
+import Tinymce from '@/components/Tinymce'
+
 export {
   AvatarList,
   ChartCard,
@@ -39,5 +40,5 @@ export {
   StandardFormRow,
   ArticleListContent,
   ImgUpload,
-  QuillEditor,
+  Tinymce
 }

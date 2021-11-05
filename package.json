@@ -21,7 +21,6 @@
     "mermaid": "^8.13.2",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
-    "quill": "^1.3.7",
     "vditor": "^3.8.7",
     "vue": "^2.5.22",
     "vue-clipboard2": "^0.2.1",
