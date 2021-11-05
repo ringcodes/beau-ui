@@ -67,6 +67,8 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
+        <a @click="handleDetail(record)">预览</a>
+        <a-divider type="vertical" />
         <a @click="handleEdit(record)">编辑</a>
         <a-divider type="vertical" />
         <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
@@ -81,7 +83,7 @@
 import { STable } from '@/components'
 import { getArticleList, delArticle,getTopicListType,getTagList } from '@/api/content'
 import { PRIVILEGE_TYPE,FLAG_TYPE } from '@/store/mutation-types'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon } from 'ant-design-vue'
+import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon,Tag } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
@@ -100,7 +102,8 @@ export default {
     ADropdown: Dropdown,
     AMenu: Menu,
     AMenuItem: Menu.Item,
-    AIcon: Icon
+    AIcon: Icon,
+    ATag: Tag
   },
   data () {
     return {
@@ -116,28 +119,34 @@ export default {
       columns: [
         {
           title: 'ID',
-          dataIndex: 'id'
-        },
-        {
+          dataIndex: 'id',
+          width: 50
+        },{
           title: '标题',
           dataIndex: 'title'
-        },
-        {
+        },{
           title: '主题',
-          dataIndex: 'topicName'
-        },
-        {
-          title: '来源',
-          dataIndex: 'sourceName'
-        },
-        {
+          dataIndex: 'topicName',
+          width: 150
+        },{
+          title: '类型',
+          dataIndex: 'articleType',
+          width: 80,
+          customRender: (val) =>{
+            if(val == 2){
+              return <a-tag color="green" class="tag-cls">markdown</a-tag>
+            } else {
+              return <a-tag color="orange" class="tag-cls">富文本</a-tag>
+            }
+          }
+        },{
           title: '创建人',
-          dataIndex: 'createName'
-        },
-        {
+          dataIndex: 'createName',
+          width: 100
+        },{
           title: '创建时间',
-          dataIndex: 'updateTime',
-          sorter: true
+          dataIndex: 'publishTime',
+          width: 180
         }, {
           title: '操作',
           width: '150px',
@@ -202,5 +211,9 @@ export default {
 <style lang="less" >
 .query-driver{
   margin-bottom: 10px;
+}
+.tag-cls{
+  width:72px;
+  text-align:center;
 }
 </style>

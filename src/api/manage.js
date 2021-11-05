@@ -8,6 +8,13 @@ export function getUserList (parameter) {
   })
 }
 
+export function forbidUser (parameter) {
+  return request({
+    url: '/user/'+parameter+'/forbid',
+    method: 'post'
+  })
+}
+
 export function listConfigPage (parameter) {
   return request({
     url: '/config/pageSimple',

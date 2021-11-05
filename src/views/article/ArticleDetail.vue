@@ -1,14 +1,9 @@
 <template>
   <a-card :title="'标题：'+ record.title">
     <div slot="extra">
-      <a-button @click="setArticle" type="link">设置</a-button>
+      <a @click="handleEdit">编辑</a>
       <a-divider type="vertical" />
-      <a-popconfirm placement="topLeft" ok-text="确定" cancel-text="取消" @confirm="handleDel">
-        <template slot="title">
-          <p>确定要删除吗？</p>
-        </template>
-        <a-button type="link" style="color: red;">删除</a-button>
-      </a-popconfirm>
+      <a @click="setArticle">设置</a>
       <a-divider type="vertical" />
       <a  @click="returnPage" >返回</a>
     </div>
@@ -17,14 +12,13 @@
         <div v-html="record.content"></div>
       </a-col>
     </a-row>
-    <a-modal
-      :width="850"
+    <a-drawer
+      title="文章设置"
+      :width="650"
       :visible="visible"
       @ok="save"
-      @cancel="handleCancel"
-      okText="保存"
-      cancelText="取消"
-      force-render>
+      @close="handleCancel"
+      >
       <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
@@ -33,7 +27,7 @@
           <a-input v-decorator="['title']"/>
         </a-form-item>
         <a-form-item label="图片">
-          <img :src="record.titlePic"/>
+          <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
         </a-form-item>
         <a-form-item label="源地址">
           <a-input v-decorator="['sourceUrl']"/>
@@ -51,15 +45,20 @@
             <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
           </a-select>
         </a-form-item>
+        <a-form-item :wrapper-col="{ offset: 3 }">
+          <a-button type="primary">保存</a-button>
+        </a-form-item>
       </a-form>
-    </a-modal>
+    </a-drawer>
     <a-back-top />
   </a-card>
 </template>
 
 <script>
-import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio, Popconfirm, BackTop } from 'ant-design-vue'
+import { Col, Divider, Form, Input, Drawer, Row, Select, Card, Radio, Popconfirm, BackTop } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle, delArticle } from '@/api/content'
+import { ImgUpload } from '@/components'
+
 export default {
   name: 'ArticleEdit',
   components: {
@@ -68,7 +67,7 @@ export default {
     AForm: Form,
     ACard: Card,
     AFormItem: Form.Item,
-    AModal: Modal,
+    ADrawer: Drawer,
     ASelect: Select,
     ASelectOption: Select.Option,
     AInput: Input,
@@ -77,7 +76,8 @@ export default {
     ARadio: Radio,
     ARadioGroup: Radio.Group,
     APopconfirm: Popconfirm,
-    ABackTop: BackTop
+    ABackTop: BackTop,
+    ImgUpload
   },
   data () {
     return {
@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     setArticle () {
+      this.visible = true;
       getTopicListType(1).then(res => {
         if (res.ok) {
           this.topicList = res.data
@@ -108,7 +109,15 @@ export default {
           'description': this.record.description
         })
       })
-      this.visible = true
+    },
+    handleEdit () {
+      if(this.record.articleType === 2){
+        // markdown
+        this.$router.push({ path: '/article/add?id=' + this.record.id })
+      } else {
+        // html
+        this.$router.push({ path: '/article/edit?id=' + this.record.id })
+      }
     },
     save () {
       this.form.validateFields((err, values) => {
@@ -138,7 +147,17 @@ export default {
     },
     returnPage () {
       this.$router.push({ name: 'ArticleList' })
-    }
+    },
+    handleChange (info) {
+      const file = info[0]
+      if (!file || file.status !== 'done') {
+        return
+      }
+      const data = file.response
+      if (data.ok) {
+        this.dataFrom.titlePic = data.data.fileName;
+      }
+    },
   },
   mounted () {
     const id = this.$route.query.id

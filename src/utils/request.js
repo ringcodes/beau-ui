@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
-import notification from 'ant-design-vue/es/notification'
+import { message } from 'ant-design-vue';
+
 import {
   ACCESS_TOKEN
 } from '@/store/mutation-types'
@@ -17,10 +18,7 @@ const err = (error) => {
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
     if (error.response.status === 403) {
-      notification.error({
-        message: 'Forbidden',
-        description: data.message
-      })
+      message.error(data.msg);
     }
     if (error.response.status === 401) {
       notification.error({
