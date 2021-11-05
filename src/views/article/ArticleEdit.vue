@@ -130,7 +130,7 @@ export default {
     },
     save () {
       this.dataFrom.content = this.contentModel;
-      this.dataFrom.articleType = 2;
+      this.dataFrom.articleType = 1;
       this.form.validateFields((err, values) => {
         if (!err) {
           saveArticle({

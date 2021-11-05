@@ -269,17 +269,22 @@ export default {
       getArticle(id).then(result => {
         const res = result.data
         this.contentModel = res.content
-        this.form.setFieldsValue({
-          'content': res.content,
-          'id': res.id,
-          'title': res.title,
-          'titlePic': res.titlePic,
-          'sourceUrl': res.sourceUrl,
-          'description': res.description,
-          'topicId': res.topicId,
-          'tag': res.tag,
-          'publishStatus': res.publishStatus
-        })
+        this.$nextTick(()=>{
+          this.form.setFieldsValue({
+            'title': res.title,
+            'topicId': res.topicId,
+          })
+        });
+        this.dataFrom = {
+          content: res.content,
+          id: res.id,
+          titlePic: res.titlePic,
+          sourceUrl: res.sourceUrl,
+          description: res.description,
+          tag: res.tag,
+          publishStatus: res.publishStatus
+        }
+        this.init(res.content);
       })
     } else {
       this.init();

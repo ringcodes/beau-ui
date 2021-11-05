@@ -39,7 +39,7 @@ export default {
     height: {
       type: [Number, String],
       required: false,
-      default: 360
+      default: 660
     },
     width: {
       type: [Number, String],
@@ -101,6 +101,7 @@ export default {
       const _this = this
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
+        height: this.height,
         language: 'zh_CN',
         body_class: 'panel-body ',
         object_resizing: false,
@@ -111,10 +112,7 @@ export default {
         powerpaste_word_import: 'clean',
         code_dialog_height: 450,
         code_dialog_width: 1000,
-        autoresize_bottom_margin: 50, 
-        autoresize_min_height: 600,
-        autoresize_max_height: 800,
-        autoresize_on_init: true,
+        autoresize_on_init: false,
         advlist_bullet_styles: 'square',
         advlist_number_styles: 'default',
         imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
