@@ -2,7 +2,7 @@
   <a-card>
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-row type="flex" justify="start" align="top" :gutter="16">
-        <a-col span="6">
+        <a-col span="10">
           <a-form-item
             label="标题">
             <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>

@@ -2,7 +2,7 @@
   <a-card>
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-row type="flex" justify="start" align="top" :gutter="16">
-        <a-col span="6">
+        <a-col span="10">
           <a-form-item v-show="false">
             <a-input v-model="dataFrom.id"/>
           </a-form-item>
