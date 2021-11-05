@@ -9,6 +9,8 @@ import plugins from './plugins'
 import toolbar from './toolbar'
 import load from './dynamicLoadScript'
 
+import { request } from '@/utils/request'
+
 const tinymceCDN = 'https://static.gz640.cn/tinymce-5.10/tinymce.min.js'
 
 export default {
@@ -102,6 +104,7 @@ export default {
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
         height: this.height,
+        min_height: this.height,
         language: 'zh_CN',
         body_class: 'panel-body ',
         object_resizing: false,
@@ -134,43 +137,20 @@ export default {
             _this.fullscreen = e.state
           })
         },
-        // it will try to keep these URLs intact
-        // https://www.tiny.cloud/docs-3x/reference/configuration/Configuration3x@convert_urls/
-        // https://stackoverflow.com/questions/5196205/disable-tinymce-absolute-to-relative-url-conversions
-        convert_urls: false
-        // 整合七牛上传
-        // images_dataimg_filter(img) {
-        //   setTimeout(() => {
-        //     const $image = $(img);
-        //     $image.removeAttr('width');
-        //     $image.removeAttr('height');
-        //     if ($image[0].height && $image[0].width) {
-        //       $image.attr('data-wscntype', 'image');
-        //       $image.attr('data-wscnh', $image[0].height);
-        //       $image.attr('data-wscnw', $image[0].width);
-        //       $image.addClass('wscnph');
-        //     }
-        //   }, 0);
-        //   return img
-        // },
-        // images_upload_handler(blobInfo, success, failure, progress) {
-        //   progress(0);
-        //   const token = _this.$store.getters.token;
-        //   getToken(token).then(response => {
-        //     const url = response.data.qiniu_url;
-        //     const formData = new FormData();
-        //     formData.append('token', response.data.qiniu_token);
-        //     formData.append('key', response.data.qiniu_key);
-        //     formData.append('file', blobInfo.blob(), url);
-        //     upload(formData).then(() => {
-        //       success(url);
-        //       progress(100);
-        //     })
-        //   }).catch(err => {
-        //     failure('出现未知问题，刷新页面，或者联系程序员')
-        //     console.log(err);
-        //   });
-        // },
+        convert_urls: false,
+        images_upload_handler: function (blobInfo, success, failure, progress) {
+          let formData=new FormData();
+          formData.append('code',3);
+          formData.append('source',3);
+          formData.append('file', blobInfo.blob(), blobInfo.filename());
+          request({
+            url: '/file/upload',
+            method: 'post',
+            data: formData
+          }).then(res =>{
+            success(res.data.previewUrl)
+          })
+        }
       })
     },
     destroyTinymce() {
