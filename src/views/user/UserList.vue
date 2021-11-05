@@ -49,21 +49,24 @@
       @close="onClose"
     >
       <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+        <a-form-item label="姓名" :wrapper-col="{ span: 12 }">
+          <a-input v-model="dataFrom.name" />
+        </a-form-item>
         <a-form-item label="角色" :wrapper-col="{ span: 12 }">
-          <a-select placeholder="请选择" v-model="dataFrom.role">
+          <a-select placeholder="请选择角色" v-model="dataFrom.role">
             <a-select-option value="1">普通用户</a-select-option>
             <a-select-option value="3">管理员</a-select-option>
             <a-select-option value="10">超级管理员</a-select-option>
           </a-select>
         </a-form-item>
-        <a-form-item label="性别">
-          <a-select placeholder="" v-model="dataFrom.sex">
+        <a-form-item label="性别" :wrapper-col="{ span: 12 }">
+          <a-select placeholder="请选择性别" v-model="dataFrom.sex">
             <a-select-option value="1">男</a-select-option>
             <a-select-option value="0">女</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 4 }">
-          <a-button type="primary">保存</a-button>
+          <a-button type="primary" @click="saveOK">保存</a-button>
         </a-form-item>
       </a-form>
     </a-drawer>
@@ -72,7 +75,7 @@
 
 <script>
 import { STable } from '@/components'
-import { getUserList,forbidUser } from '@/api/manage'
+import { getUserList,forbidUser,saveUser } from '@/api/manage'
 import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Tag,Drawer } from 'ant-design-vue'
 
 export default {
@@ -145,7 +148,12 @@ export default {
   created () {
   },
   methods: {
-    handleRole () {
+    handleRole (item) {
+      this.dataFrom = {
+        id: item.id,
+        role: item.role,
+        sex: item.sex
+      };
       this.visible = true;
     },
     handleForbid(item){
@@ -161,7 +169,13 @@ export default {
       this.$refs.table.refresh(true)
     },
     saveOK(){
-
+      saveUser(this.dataFrom).then(res => {
+        if(res.ok){
+          this.$message.success('保存成功')
+        } else {
+          this.$message.error('保存失败')
+        }
+      })
     },
     onClose(){
       this.visible = false;

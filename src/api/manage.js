@@ -8,6 +8,14 @@ export function getUserList (parameter) {
   })
 }
 
+export function saveUser (parameter) {
+  return request({
+    url: '/user/save',
+    method: 'post',
+    data: parameter
+  })
+}
+
 export function forbidUser (parameter) {
   return request({
     url: '/user/'+parameter+'/forbid',
