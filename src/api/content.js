@@ -114,7 +114,7 @@ export function saveSlider (parameter) {
 export function delSlider (id) {
   return request({
     url: '/slider/del/' + id,
-    method: 'post'
+    method: 'delete'
   })
 }
 export function listSliderPosition() {

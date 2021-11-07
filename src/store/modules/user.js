@@ -8,7 +8,7 @@ const user = {
     token: '',
     name: '',
     welcome: '',
-    avatar: '',
+    avatar: 'https://static.gz640.cn/user/avatar2.jpg',
     roles: [],
     info: {}
   },
@@ -21,7 +21,9 @@ const user = {
       state.name = name
     },
     SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
+      if(avatar){
+        state.avatar = avatar
+      }
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles

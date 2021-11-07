@@ -59,17 +59,22 @@
         <a-form-item
           label="名称">
           <a-input
-            v-decorator="['name', { rules: [{ required: true, message: '请输入名称' }] }]"/>
+            v-decorator="['title', { rules: [{ required: true, message: '请输入名称' }] }]"/>
         </a-form-item>
         <a-form-item
           label="位置">
           <a-select v-decorator="['sliderType', {  rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option v-for="item in positionList" :value="item.name" :key="item.name">{{ item.desc }}</a-select-option>
+            <a-select-option v-for="item in positionList" :value="item.value" :key="item.name">{{ item.desc }}</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item
+          label="地址">
+          <a-input
+            v-decorator="['target', { rules: [{ required: true, message: '请输入地址' }] }]"/>
+        </a-form-item>
+        <a-form-item
           label="图片">
-          <s-upload @change="handleChange" :code="uploadData.code" :source="4"/>
+          <s-upload ref="imgUpload" @change="handleChange" :code="uploadData.code" :source="4"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -103,21 +108,10 @@ export default {
   data () {
     return {
       visible: false,
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 5 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      },
       form: this.$form.createForm(this),
       loading: false,
       loadingMore: false,
-      mdl: {},
-      // 查询参数
       queryParam: {},
-      // 加载数据方法 必须为 Promise 对象
       data: [],
       imageUrl: '',
       uploadData: {
@@ -137,7 +131,7 @@ export default {
         },{
           title: '地址',
           dataIndex: 'target',
-          width: 250,
+          width: 350,
           scopedSlots: { customRender: 'target' }
         }, {
           title: '位置',
@@ -169,20 +163,25 @@ export default {
   methods: {
     handleAdd () {
       this.visible = true
-      getId().then(res => {
-        if (res.ok) {
-          this.uploadData.code = res.data
-          this.$nextTick(() => {
-            this.form.setFieldsValue({
-              'id': res.data
-            })
-          })
-        } else {
-          this.$message.error('系统错误')
-        }
-      })
       this.$nextTick(() => {
         this.form.resetFields()
+      })
+    },
+    handleEdit(item){
+      this.visible = true
+      this.$nextTick(()=>{
+        this.form.setFieldsValue({
+          "id": item.id,
+          "pic": item.pic,
+          "title": item.title,
+          "sliderType": item.position
+        });
+         this.$refs.imgUpload.setImg([{
+          uid: '-1',
+          name: 'a',
+          status: 'done',
+          url: item.pic
+        }]);
       })
     },
     handleOk () {
@@ -208,10 +207,6 @@ export default {
           this.showLoadingMore()
         }
       })
-    },
-    onChange (page) {
-      this.queryParam.pageNumber = page
-      this.showLoadingMore()
     },
     handleChange (info) {
       const file = info[0]

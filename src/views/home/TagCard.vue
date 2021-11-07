@@ -1,11 +1,15 @@
 <template>
-  <div class="small-box" :style="{background: backColor}">
-    <div class="inner">
-      <h3>{{count}}</h3>
-      <p>{{title}}</p>
-    </div>
-    <div class="icon">
-      <a-icon :type="icon"></a-icon>
+  <div class="small-box">
+    <div class="content-con">
+      <div class="left-area" :style="{background: backColor}">
+        <a-icon :type="icon" style="font-size: 36px; color: rgb(255, 255, 255);" class="icon"/>
+        </div>
+        <div class="right-area" style="width: 64%;">
+          <div class="right-main">
+            <span  class="title">{{count}}</span>
+            <p>{{title}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,37 +42,44 @@ export default {
 </script>
 <style lang="less" scoped>
 .small-box {
-    border-radius: 2px;
+  width: 100%;
+  height: 120px;
+  position: relative;
+}
+ .content-con {
+    width: 100%;
+    height: 100%;
     position: relative;
-    display: block;
-    margin-bottom: 20px;
-    color: #fff;
-    .inner{
-      padding: 10px;
-    }
-    h3{
-      font-size: 38px;
-      font-weight: bold;
-      margin: 0 0 10px 0;
-      white-space: nowrap;
-      padding: 0;
-      color: #fff;
-    }
-    &:hover{
-     .icon {
-          font-size: 95px;
+    background: #fff;
+    border-radius: 0px 6px 6px 0px;
+    .left-area {
+      background: #fff;
+      width: 30%;
+      float: left;
+      height: 100%;
+      display: table;
+      text-align: center;
+      border-radius: 6px 0px 0px 6px;
+      .icon {
+        display: table-cell;
+        vertical-align: middle;
       }
     }
-    .icon{
-      -webkit-transition: all .3s linear;
-      -o-transition: all .3s linear;
-      transition: all .3s linear;
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      z-index: 0;
-      font-size: 90px;
-      color: rgba(0,0,0,0.15);
-    }
-}
+     .right-area {
+        float: left;
+        height: 100%;
+        display: table;
+        text-align: center;
+        .right-main{
+          display: table-cell;
+          vertical-align: middle;
+          .title{
+            font-size: 50px;
+            font-weight: 600;
+            display: inline-block;
+            padding: 5px 0px 9px 0px;
+          }
+        }
+      }
+  }
 </style>

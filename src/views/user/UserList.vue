@@ -4,15 +4,15 @@
       <a-row :gutter="16">
         <a-col :md="6" :sm="24">
           <a-form-item label="用户名">
-            <a-input placeholder="请输入"/>
+            <a-input placeholder="请输入" v-model="queryParam.name"/>
           </a-form-item>
         </a-col>
         <a-col :md="4" :sm="24">
           <a-form-item label="状态">
-            <a-select placeholder="请选择" default-value="0">
-              <a-select-option value="0">全部</a-select-option>
-              <a-select-option value="1">禁用</a-select-option>
-              <a-select-option value="2">正常</a-select-option>
+            <a-select placeholder="请选择" v-model="queryParam.status">
+              <a-select-option :value="null">全部</a-select-option>
+              <a-select-option :value="1">禁用</a-select-option>
+              <a-select-option :value="2">正常</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -33,11 +33,13 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
-        <a-popconfirm title="确认要禁用吗？" @confirm="() => handleForbid(record)">
+        <a-popconfirm title="确认要禁用吗？" @confirm="() => handleForbid(record)" v-show="record.status != 2">
           <a class="btn-red">禁用</a>
         </a-popconfirm>
-        <a-divider type="vertical" />
-        <a @click="handleRole(record)">授权</a>
+        <span v-show="record.role < 20">
+          <a-divider type="vertical" />
+          <a @click="handleRole(record)">授权</a>
+        </span>
       </span>
     </s-table>
     <a-drawer
@@ -54,15 +56,15 @@
         </a-form-item>
         <a-form-item label="角色" :wrapper-col="{ span: 12 }">
           <a-select placeholder="请选择角色" v-model="dataFrom.role">
-            <a-select-option value="1">普通用户</a-select-option>
-            <a-select-option value="3">管理员</a-select-option>
-            <a-select-option value="10">超级管理员</a-select-option>
+            <a-select-option :value="1">普通用户</a-select-option>
+            <a-select-option :value="3">管理员</a-select-option>
+            <a-select-option :value="10">超级管理员</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item label="性别" :wrapper-col="{ span: 12 }">
           <a-select placeholder="请选择性别" v-model="dataFrom.sex">
-            <a-select-option value="1">男</a-select-option>
-            <a-select-option value="0">女</a-select-option>
+            <a-select-option :value="1">男</a-select-option>
+            <a-select-option :value="0">女</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 4 }">
@@ -100,6 +102,7 @@ export default {
       visible: false,
       queryParam: {},
       dataFrom:{},
+      form: this.$form.createForm(this),
       // 表头
       columns: [
         {
@@ -141,7 +144,7 @@ export default {
         }
       ],
       loadData: parameter => {
-        return getUserList(parameter)
+        return getUserList(Object.assign(parameter, this.queryParam))
       },
     }
   },
