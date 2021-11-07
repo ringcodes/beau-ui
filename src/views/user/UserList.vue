@@ -33,12 +33,14 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
-        <a-popconfirm title="确认要禁用吗？" @confirm="() => handleForbid(record)" v-show="record.status != 2">
-          <a class="btn-red">禁用</a>
-        </a-popconfirm>
-        <span v-show="record.role < 20">
+        <span  v-show="record.status != 2">
+          <a-popconfirm title="确认要禁用吗？" @confirm="() => handleForbid(record)">
+            <a class="btn-red">禁用</a>
+          </a-popconfirm>
           <a-divider type="vertical" />
-          <a @click="handleRole(record)">授权</a>
+        </span>
+        <span>
+          <a @click="handleRole(record)">设置</a>
         </span>
       </span>
     </s-table>
@@ -54,7 +56,7 @@
         <a-form-item label="姓名" :wrapper-col="{ span: 12 }">
           <a-input v-model="dataFrom.name" />
         </a-form-item>
-        <a-form-item label="角色" :wrapper-col="{ span: 12 }">
+        <a-form-item label="角色" :wrapper-col="{ span: 12 }" v-show="dataFrom.role < 20">
           <a-select placeholder="请选择角色" v-model="dataFrom.role">
             <a-select-option :value="1">普通用户</a-select-option>
             <a-select-option :value="3">管理员</a-select-option>
@@ -155,6 +157,7 @@ export default {
       this.dataFrom = {
         id: item.id,
         role: item.role,
+        name: item.name,
         sex: item.sex
       };
       this.visible = true;
@@ -162,7 +165,8 @@ export default {
     handleForbid(item){
       forbidUser(item.id).then(res=>{
         if(res.ok){
-          this.$message.success('保存成功')
+          this.$message.success('保存成功');
+          this.refresh();
         } else {
           this.$message.error('保存失败')
         }
@@ -174,7 +178,8 @@ export default {
     saveOK(){
       saveUser(this.dataFrom).then(res => {
         if(res.ok){
-          this.$message.success('保存成功')
+          this.$message.success('保存成功');
+          this.refresh();
         } else {
           this.$message.error('保存失败')
         }

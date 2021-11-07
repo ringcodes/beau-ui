@@ -1294,11 +1294,6 @@
     string-width "^2.0.0"
     strip-ansi "^5"
 
-"@tinymce/tinymce-vue@^3":
-  version "3.2.8"
-  resolved "https://registry.npmmirror.com/@tinymce/tinymce-vue/download/@tinymce/tinymce-vue-3.2.8.tgz#014571b52ec8fa83665a7fa887bf65140207de71"
-  integrity sha1-AUVxtS7I+oNmWn+oh79lFAIH3nE=
-
 "@types/d3-timer@^2.0.0":
   version "2.0.1"
   resolved "https://registry.nlark.com/@types/d3-timer/download/@types/d3-timer-2.0.1.tgz#ffb6620d290624f3726aa362c0c8a4b44c8d7200"
@@ -11276,11 +11271,6 @@ tinycolor2@^1.4.1:
   version "1.4.2"
   resolved "https://registry.nlark.com/tinycolor2/download/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
   integrity sha1-P2pNEHGtB2dtf6Ry4frECnGdiAM=
-
-tinymce@^5.10.1:
-  version "5.10.1"
-  resolved "https://registry.npmmirror.com/tinymce/download/tinymce-5.10.1.tgz#e0a360c7cc42e3e8ba2ac8a523166eca3493a880"
-  integrity sha1-4KNgx8xC4+i6KsilIxZuyjSTqIA=
 
 tmp@^0.0.33:
   version "0.0.33"

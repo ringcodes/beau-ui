@@ -84,7 +84,7 @@
 <script>
 import { STable, ImgUpload } from '@/components'
 import { getSliderList, delSlider, saveSlider, listSliderPosition } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider } from 'ant-design-vue'
+import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider,Switch } from 'ant-design-vue'
 import { getId } from '@/api/manage'
 
 export default {
@@ -103,7 +103,8 @@ export default {
     AAvatar: Avatar,
     APopconfirm: Popconfirm,
     ADivider: Divider,
-    SUpload: ImgUpload
+    SUpload: ImgUpload,
+    ASwitch: Switch
   },
   data () {
     return {
@@ -137,6 +138,13 @@ export default {
           title: '位置',
           dataIndex: 'positionName',
           width: 120
+        }, {
+          title: '状态',
+          dataIndex: 'sliderStatus',
+          width: 120,
+          customRender: (it,row)=>{
+            return <a-switch checked-children="生效" un-checked-children="失效" defaultChecked={it === 0} on-change={(p)=>this.changeStatus(p,row)} />
+          }
         },{
           title: '创建时间',
           dataIndex: 'updateTime',
@@ -220,6 +228,19 @@ export default {
         })
         this.imageUrl = data.data.fileName
       }
+    },
+    changeStatus(p,row){
+      saveSlider({
+        id: row.id,
+        sliderStatus: p ? 0:1
+      }).then(res => {
+            if (res.ok) {
+              this.$message.info('保存成功')
+              this.visible = false
+              this.showLoadingMore()
+            }
+          })
+      console.log(p)
     }
   }
 }
