@@ -123,3 +123,11 @@ export function listSliderPosition() {
     method: 'get'
   })
 }
+
+export function operateLogPage(param){
+  return request({
+    url: '/operate-log/page',
+    method: 'post',
+    data: param
+  })
+}
