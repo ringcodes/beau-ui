@@ -45,9 +45,9 @@
       </a-row>
     </a-form>
     <div class="table-operator">
-      <a-dropdown>
+      <a-dropdown @visibleChange="visibleChange">
         <span>
-          <a-button type="primary">新增<a-icon type="down-circle" /></a-button>
+          <a-button type="primary">新增<a-icon :type="menuTypeIcon" /></a-button>
         </span>
         <a-menu slot="overlay" @click="handleAdd">
           <a-menu-item key="html">
@@ -115,6 +115,7 @@ export default {
       queryParam: {},
       privilegeList: PRIVILEGE_TYPE,
       flagTypeList: FLAG_TYPE,
+      menuTypeIcon: 'caret-down',
       // 表头
       columns: [
         {
@@ -203,6 +204,13 @@ export default {
     },
     handleDetail (record) {
       this.$router.push({ path: '/article/detail?id=' + record.id })
+    },
+    visibleChange(visible){
+      if(visible){
+        this.menuTypeIcon = 'caret-up'
+      } else{
+        this.menuTypeIcon = 'caret-down'
+      }
     }
   }
 }

@@ -14,6 +14,7 @@ const request = axios.create({
 })
 
 const err = (error) => {
+  console.log(error.config)
   if (error.response) {
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
@@ -21,11 +22,10 @@ const err = (error) => {
       message.error(data.msg);
     }
     if (error.response.status === 401) {
-      notification.error({
-        message: 'Unauthorized',
-        description: 'Authorization verification failed'
-      })
-      store.dispatch('Logout');
+      message.warn(data.msg);
+      store.dispatch('Logout').then(() => {
+        window.location.href="/user/login"
+      });
     }
   }
   return Promise.reject(error)

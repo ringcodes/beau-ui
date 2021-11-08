@@ -87,7 +87,8 @@ export default {
         // login type: 0 email, 1 username, 2 telephone
         loginType: 0,
         smsSendBtn: false
-      }
+      },
+      query:{}
     }
   },
   methods: {
@@ -111,11 +112,18 @@ export default {
       })
     },
     loginSuccess (res) {
-      this.$router.push({ path: '/home' }).catch(err => {});
+      if(this.query && this.query.redirect){
+        this.$router.push({ path: this.query.redirect }).catch(err => {});
+      } else {
+        this.$router.push({ path: '/home' }).catch(err => {});
+      }
     },
     requestFailed (err) {
       this.$message.error(err.msg || '请求出现错误，请稍后再试')
     }
+  },
+  mounted(){
+    this.query =this.$route.query
   }
 }
 </script>

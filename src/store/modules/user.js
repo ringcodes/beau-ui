@@ -42,7 +42,6 @@ const user = {
           if (!response.ok) {
             reject(response)
           }
-          console.log(result)
           Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           commit('SET_TOKEN', result.token)
           commit('SET_NAME', result.name)
@@ -74,12 +73,7 @@ const user = {
         commit('SET_TOKEN', '')
         commit('SET_ROLES', [])
         Vue.ls.remove(ACCESS_TOKEN)
-
-        logout(state.token).then(() => {
-          resolve()
-        }).catch(() => {
-          resolve()
-        })
+        resolve()
       })
     }
 

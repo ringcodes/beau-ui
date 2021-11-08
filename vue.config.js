@@ -107,7 +107,7 @@ module.exports = {
     port: 9000,
     proxy:{
       '/proxy': {
-        target: 'http://localhost:7000',
+        target: 'http://localhost:80',
         secure: true,
         changeOrigin: true,
         pathRewrite: {
