@@ -232,7 +232,7 @@ export default {
     changeStatus(p,row){
       saveSlider({
         id: row.id,
-        sliderStatus: p ? 0:1
+        status: p ? 0:1
       }).then(res => {
             if (res.ok) {
               this.$message.info('保存成功')
