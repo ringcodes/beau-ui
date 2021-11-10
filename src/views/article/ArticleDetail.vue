@@ -9,7 +9,7 @@
     </div>
     <a-row type="flex" justify="center" align="top">
       <a-col span="20">
-        <div v-html="record.content"></div>
+        <div v-html="record.contentMdView"></div>
       </a-col>
     </a-row>
     <a-drawer
