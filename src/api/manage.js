@@ -23,6 +23,22 @@ export function forbidUser (parameter) {
   })
 }
 
+export function modifyPassword (parameter) {
+  return request({
+    url: '/user/modifyPassword',
+    method: 'post',
+    data: parameter
+  })
+}
+
+export function addUser (parameter) {
+  return request({
+    url: '/user/add',
+    method: 'post',
+    data: parameter
+  })
+}
+
 export function listConfigPage (parameter) {
   return request({
     url: '/config/pageSimple',
