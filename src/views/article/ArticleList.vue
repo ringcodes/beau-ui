@@ -81,9 +81,9 @@
 
 <script>
 import { STable } from '@/components'
-import { getArticleList, delArticle,getTopicListType,getTagList } from '@/api/content'
+import { getArticleList, delArticle,getTopicListType,getTagList,saveArticle } from '@/api/content'
 import { PRIVILEGE_TYPE,FLAG_TYPE } from '@/store/mutation-types'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon,Tag } from 'ant-design-vue'
+import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon,Tag,Switch } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
@@ -103,7 +103,8 @@ export default {
     AMenu: Menu,
     AMenuItem: Menu.Item,
     AIcon: Icon,
-    ATag: Tag
+    ATag: Tag,
+    ASwitch: Switch
   },
   data () {
     return {
@@ -139,6 +140,22 @@ export default {
             } else {
               return <a-tag color="orange" class="tag-cls">富文本</a-tag>
             }
+          }
+        },{
+          title: '发布状态',
+          dataIndex: 'publishStatus',
+          width: 100,
+          customRender: (it,row)=>{
+            switch(it){
+              case 1:
+                return <a-switch checked-children="已发布" un-checked-children="未发布" on-change={(p)=>this.changeStatus(p,row)} />
+              case 2:
+                return <a-switch checked-children="已发布" un-checked-children="未发布" defaultChecked on-change={(p)=>this.changeStatus(p,row)} />
+              case 3:
+                return <span>发布失败</span>;
+              default:
+                return '未知';
+            } 
           }
         },{
           title: '创建人',
@@ -211,6 +228,18 @@ export default {
       } else{
         this.menuTypeIcon = 'caret-down'
       }
+    },
+    changeStatus(p,row){
+      saveArticle({
+        id: row.id,
+        publishStatus: p ? 2:1
+      }).then(res => {
+        if (res.ok) {
+          this.$message.info('保存成功')
+          this.visible = false
+          this.$refs.table.refresh(true)
+        }
+      })
     }
   }
 }
