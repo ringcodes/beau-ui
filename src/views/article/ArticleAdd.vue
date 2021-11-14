@@ -255,7 +255,7 @@ export default {
     });
     }
   },
-  mounted () {
+  activated () {
     const id = this.$route.query.id
     getTopicListType(1).then(res => {
       if (res.ok) {

@@ -3,14 +3,12 @@
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-row type="flex" justify="start" align="top" :gutter="16">
         <a-col span="10">
-          <a-form-item
-            label="标题">
+          <a-form-item label="标题">
             <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>
           </a-form-item>
         </a-col>
         <a-col span="6">
-          <a-form-item
-            label="主题">
+          <a-form-item label="主题">
             <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
               <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
             </a-select>
@@ -157,7 +155,7 @@ export default {
       }
     },
   },
-  mounted () {
+  activated () {
     const id = this.$route.query.id
     getTopicListType(1).then(res => {
       if (res.ok) {
