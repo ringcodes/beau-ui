@@ -10,6 +10,7 @@
         <a-col :md="6" :sm="24">
           <a-form-item label="主题">
             <a-select v-model="queryParam.topicId" placeholder="请选择主题" :filter-option="filterOption" show-search>
+              <a-select-option value="">全部</a-select-option>
               <a-select-option v-for="(item, key) in topicList" :value="item.id" :key="key">{{ item.topicName }}</a-select-option>
             </a-select>
           </a-form-item>
@@ -17,6 +18,7 @@
         <a-col :md="4" :sm="24">
           <a-form-item label="状态">
             <a-select v-model="queryParam.publishStatus" placeholder="请选择状态">
+              <a-select-option value="">全部</a-select-option>
               <a-select-option v-for="(item, key) in privilegeList" :value="key" :key="key">{{ item }}</a-select-option>
             </a-select>
           </a-form-item>
@@ -24,6 +26,7 @@
         <a-col :md="6" :sm="24">
           <a-form-item label="标签">
             <a-select mode="multiple" v-model="queryParam.tagList" placeholder="请选择标签">
+              <a-select-option value="">全部</a-select-option>
               <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
             </a-select>
           </a-form-item>
@@ -33,6 +36,7 @@
         <a-col :md="6" :sm="24">
           <a-form-item label="标记">
             <a-select v-model="queryParam.flagType" placeholder="请选择标记">
+              <a-select-option value="">全部</a-select-option>
               <a-select-option v-for="(item, key) in flagTypeList" :value="key" :key="key">{{ item }}</a-select-option>
             </a-select>
           </a-form-item>
@@ -66,12 +70,10 @@
       :data="dataList"
       ref="table"
     >
-    <span slot="detailAction" slot-scope="text, record">
-        <a @click="handleDetail(record)">预览</a>
-    </span>
+      <span slot="detailAction" slot-scope="text, record">
+        <a @click="handleDetail(record)">{{text}}</a>
+      </span>
       <span slot="action" slot-scope="text, record">
-        <a @click="handleDetail(record)">预览</a>
-        <a-divider type="vertical" />
         <a @click="handleEdit(record)">编辑</a>
         <a-divider type="vertical" />
         <a-popconfirm title="确认要删除吗？" @confirm="() => handleDel(record)">
@@ -128,11 +130,12 @@ export default {
           width: 50
         },{
           title: '标题',
-          dataIndex: 'title'
+          dataIndex: 'title',
+          scopedSlots: { customRender: 'detailAction' }
         },{
           title: '主题',
           dataIndex: 'topicName',
-          width: 150
+          width: 200
         },{
           title: '类型',
           dataIndex: 'articleType',
@@ -148,18 +151,17 @@ export default {
           title: '发布状态',
           dataIndex: 'publishStatus',
           width: 100,
-          customRender: (it,row)=>{
-            switch(it){
-              case 1:
-                return <a-switch checked-children="已发布" un-checked-children="未发布" on-change={(p)=>this.changeStatus(p,row)} />
-              case 2:
-                return <a-switch checked-children="已发布" un-checked-children="未发布" defaultChecked on-change={(p)=>this.changeStatus(p,row)} />
-              case 3:
-                return <span>发布失败</span>;
-              default:
-                return '未知';
-            } 
+          customRender: (it,row) => {
+            if(it === 2) {
+              return <a-switch checked-children="已发布" un-checked-children="未发布" defaultChecked on-change={(p)=>this.changeStatus(p,row)} />
+            } else {
+              return <a-switch checked-children="已发布" un-checked-children="未发布" on-change={(p)=>this.changeStatus(p,row)} />
+            }
           }
+        },{
+          title: '来源',
+          dataIndex: 'sourceName',
+          width: 100
         },{
           title: '创建人',
           dataIndex: 'createName',
