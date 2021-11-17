@@ -66,6 +66,9 @@
       :data="dataList"
       ref="table"
     >
+    <span slot="detailAction" slot-scope="text, record">
+        <a @click="handleDetail(record)">预览</a>
+    </span>
       <span slot="action" slot-scope="text, record">
         <a @click="handleDetail(record)">预览</a>
         <a-divider type="vertical" />
@@ -132,6 +135,17 @@ export default {
         },{
           title: '类型',
           dataIndex: 'articleType',
+          width: 80,
+          customRender: (val) =>{
+            if(val == 2){
+              return <a-tag color="green" class="tag-cls">markdown</a-tag>
+            } else {
+              return <a-tag color="orange" class="tag-cls">富文本</a-tag>
+            }
+          }
+        },{
+          title: '状态',
+          dataIndex: 'publishStatus',
           width: 80,
           customRender: (val) =>{
             if(val == 2){
