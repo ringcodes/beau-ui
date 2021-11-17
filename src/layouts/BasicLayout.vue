@@ -68,7 +68,7 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 import GlobalFooter from '@/components/GlobalFooter'
 
-import { Layout } from 'ant-design-vue'
+import { Layout,Drawer } from 'ant-design-vue'
 
 export default {
   name: 'BasicLayout',
@@ -82,7 +82,8 @@ export default {
     ALayout: Layout,
     ALayoutContent: Layout.Content,
     ALayoutSider: Layout.Sider,
-    ALayoutFooter: Layout.Footer
+    ALayoutFooter: Layout.Footer,
+    ADrawer: Drawer
   },
   data () {
     return {

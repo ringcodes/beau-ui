@@ -45,7 +45,7 @@ export const asyncRouterMap = [
         name: 'ArticleDetail',
         hidden: true,
         component: () => import('@/views/article/ArticleDetail'),
-        meta: { title: '文章编辑', keepAlive: false, icon: '' }
+        meta: { title: '文章编辑', keepAlive: true, icon: '' }
       }, {
         path: '/tag',
         name: 'TagList',

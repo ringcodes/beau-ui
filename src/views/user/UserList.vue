@@ -18,12 +18,13 @@
         </a-col>
         <a-col :md="4" :sm="24">
           <span class="table-page-search-submitButtons">
-            <a-button type="primary" @click="refresh()">查询</a-button>
+            <a-button type="primary" @click="refresh()" icon="search">查询</a-button>
           </span>
         </a-col>
       </a-row>
     </a-form>
     <div class="table-operator">
+      <a-button type="primary" icon="plus" @click="() => {this.form.resetFields();this.dialogVisible = true}">添加</a-button>
     </div>
     <s-table
       size="default"
@@ -74,12 +75,50 @@
         </a-form-item>
       </a-form>
     </a-drawer>
+    <a-modal
+      title="新增用户"
+      style="top: 20px;"
+      :width="600"
+      v-model="dialogVisible"
+      @ok="handleAddUser"
+    >
+      <a-form :form="addForm" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
+        <a-form-item v-show="false">
+          <a-input v-decorator="['id']"/>
+        </a-form-item>
+        <a-form-item label="姓名">
+          <a-input v-decorator="['name', { rules: [{ required: true, message: '请输入名称' }] }]"/>
+        </a-form-item>
+        <a-form-item label="邮箱">
+          <a-input v-decorator="['email', { rules: [{ required: true, message: '请输入名称' }] }]"/>
+        </a-form-item>
+        <a-form-item label="手机">
+          <a-input v-decorator="['mobile']"/>
+        </a-form-item>
+        <a-form-item label="性别">
+          <a-select v-decorator="['sex', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]" >
+            <a-select-option :value="1">男</a-select-option>
+            <a-select-option :value="0">女</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item label="角色">
+          <a-select placeholder="请选择角色"  v-decorator="['role',{ initialValue:1}]">
+            <a-select-option :value="1">普通用户</a-select-option>
+            <a-select-option :value="3">管理员</a-select-option>
+            <a-select-option :value="10">超级管理员</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item label="初始密码">
+          <a-input v-decorator="['password', { initialValue:'123456'}]"/>
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
 <script>
 import { STable } from '@/components'
-import { getUserList,forbidUser,saveUser } from '@/api/manage'
+import { getUserList,forbidUser,saveUser,addUser } from '@/api/manage'
 import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Tag,Drawer } from 'ant-design-vue'
 
 export default {
@@ -102,9 +141,11 @@ export default {
   data () {
     return {
       visible: false,
+      dialogVisible: false,
       queryParam: {},
       dataFrom:{},
       form: this.$form.createForm(this),
+      addForm: this.$form.createForm(this),
       // 表头
       columns: [
         {
@@ -187,6 +228,17 @@ export default {
     },
     onClose(){
       this.visible = false;
+    },
+    handleAddUser(){
+      this.addForm.validateFields((err, values) => {
+        if (!err) {
+          addUser(values).then(() => {
+              this.$message.info('保存成功')
+              this.dialogVisible = false
+              this.refresh();
+          }).catch((res) => this.$message.error(res.msg))
+        }
+      })
     }
   }
 }

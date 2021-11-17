@@ -27,6 +27,9 @@ const err = (error) => {
         window.location.href="/user/login"
       });
     }
+    if (error.response.status === 500) {
+      return Promise.reject(data)
+    }
   }
   return Promise.reject(error)
 }
