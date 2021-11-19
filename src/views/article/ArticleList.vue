@@ -123,12 +123,7 @@ export default {
       flagTypeList: FLAG_TYPE,
       menuTypeIcon: 'caret-down',
       // 表头
-      columns: [
-        {
-          title: 'ID',
-          dataIndex: 'id',
-          width: 50
-        },{
+      columns: [{
           title: '标题',
           dataIndex: 'title',
           scopedSlots: { customRender: 'detailAction' }
