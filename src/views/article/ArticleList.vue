@@ -115,7 +115,7 @@ export default {
     return {
       visible: false,
       form: null,
-      topicList:[],
+      topicList: [],
       tagList: [],
       // 查询参数
       queryParam: {},

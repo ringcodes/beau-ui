@@ -48,7 +48,7 @@ export function saveArticle (parameter) {
 export function delArticle (id) {
   return request({
     url: '/article/del/' + id,
-    method: 'post'
+    method: 'delete'
   })
 }
 

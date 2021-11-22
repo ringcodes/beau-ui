@@ -1,12 +1,5 @@
 <template>
   <a-card :title="'标题：'+ record.title">
-    <div slot="extra">
-      <a @click="handleEdit">编辑</a>
-      <a-divider type="vertical" />
-      <a @click="setArticle">设置</a>
-      <a-divider type="vertical" />
-      <a  @click="returnPage" >返回</a>
-    </div>
     <a-row type="flex" justify="center" align="top">
       <a-col span="20">
         <div v-html="record.contentMdView"></div>
@@ -18,7 +11,7 @@
       :visible="visible"
       @ok="save"
       @close="handleCancel"
-      >
+    >
       <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 20 }">
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
@@ -46,10 +39,16 @@
           </a-select>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 3 }">
-          <a-button type="primary">保存</a-button>
+          <a-button type="primary" >保存</a-button>
         </a-form-item>
       </a-form>
     </a-drawer>
+    <div class="tool-btn">
+      <a-button @click="handleEdit" type="primary">编辑</a-button>
+      <a-button @click="setArticle" type="warging">设置</a-button>
+      <a-button @click="handleDel" type="danger">删除</a-button>
+      <a-button @click="returnPage" >返回</a-button>
+    </div>
     <a-back-top />
   </a-card>
 </template>
@@ -90,14 +89,14 @@ export default {
   },
   methods: {
     setArticle () {
-      this.visible = true;
+      this.visible = true
       getTopicListType(1).then(res => {
         if (res.ok) {
           this.topicList = res.data
         }
       })
       getTagList({}).then(res => {
-          this.tagList = res.data
+        this.tagList = res.data
       })
       this.$nextTick(() => {
         this.form.setFieldsValue({
@@ -111,7 +110,7 @@ export default {
       })
     },
     handleEdit () {
-      if(this.record.articleType === 2){
+      if (this.record.articleType === 2) {
         // markdown
         this.$router.push({ path: '/article/add?id=' + this.record.id })
       } else {
@@ -155,11 +154,11 @@ export default {
       }
       const data = file.response
       if (data.ok) {
-        this.dataFrom.titlePic = data.data.fileName;
+        this.dataFrom.titlePic = data.data.fileName
       }
-    },
+    }
   },
-  mounted () {
+  activated () {
     const id = this.$route.query.id
     getArticle(id).then(result => {
       const res = result.data
@@ -169,14 +168,19 @@ export default {
 }
 </script>
 
-<style scoped>
- .fix-footer {
+<style lang="less" scoped>
+ .tool-btn {
     position: fixed;
-    bottom: 0;
-    right: 35%;
+    bottom: 45%;
+    right: 25px;
     z-index: 99;
     border-radius: 5px;
-    background:rgba(148, 148, 145, 0.6);
+    background:rgba(207, 207, 203, 0.6);
     padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    button {
+      margin: 3px 0px;
+    }
  }
 </style>
