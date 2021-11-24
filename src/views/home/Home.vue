@@ -5,7 +5,7 @@
         <TagCard :title="item.name" :count="item.value" :backColor="colorList[key]" :icon="iconList[key]"></TagCard> 
       </a-col>
     </a-row>
-    <a-row :gutter="16">
+    <a-row :gutter="16" class="mt-bp">
       <a-col :span="12">
         <a-card title="按分类统计">
           <div id="cate-chart"></div>
@@ -112,3 +112,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.mt-bp{
+  margin-top: 10px;
+}
+</style>
