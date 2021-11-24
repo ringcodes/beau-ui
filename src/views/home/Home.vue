@@ -5,30 +5,109 @@
         <TagCard :title="item.name" :count="item.value" :backColor="colorList[key]" :icon="iconList[key]"></TagCard> 
       </a-col>
     </a-row>
+    <a-row :gutter="16">
+      <a-col :span="12">
+        <a-card title="按分类统计">
+          <div id="cate-chart"></div>
+        </a-card>
+      </a-col>
+      <a-col :span="12">
+        <a-card title="按时间统计">
+          <div id="qushi-chart"></div>
+        </a-card>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
 <script>
 import TagCard from './TagCard.vue'
-import {Row,Col} from 'ant-design-vue'
-import { statisticsAcount} from '@/api/content'
+import { Row, Col, Card } from 'ant-design-vue'
+import { statisticsAcount, qushiChart, gateChart } from '@/api/content'
+import { Line, Column } from '@antv/g2plot'
+
 export default {
   name: 'Home',
-  data(){
+  data () {
     return {
       data: [],
-      colorList:['#2599df','#096dd9','#d7890e'],
-      iconList: ['read','appstore','user']
+      qushiData: [],
+      cateData: [],
+      colorList: [ '#2599df', '#096dd9', '#d7890e' ],
+      iconList: ['read', 'appstore', 'user']
     }
   },
-  components:{
+  components: {
     TagCard,
-    ARow:Row,
-    ACol: Col
+    ARow: Row,
+    ACol: Col,
+    ACard: Card
   },
-  mounted(){
-    statisticsAcount().then(res=>{
-      this.data = res.data;
+  methods: {
+    renderChart (data) {
+      const line = new Line('qushi-chart', {
+        data,
+        padding: 'auto',
+        xField: 'title',
+        yField: 'val',
+        xAxis: {
+          tickCount: 5
+        },
+        smooth: true,
+        meta: {
+          title: {
+            alias: '日期'
+          },
+          val: {
+            alias: '文章数'
+          }
+        }
+      })
+      line.render()
+    },
+    renderCate (data) {
+      const columnPlot = new Column('cate-chart', {
+        data,
+        xField: 'topicName',
+        yField: 'articleCount',
+        label: {
+          // 可手动配置 label 数据标签位置
+          position: 'middle', // 'top', 'bottom', 'middle',
+          // 配置样式
+          style: {
+            fill: '#FFFFFF',
+            opacity: 0.6
+          }
+        },
+        xAxis: {
+          label: {
+            autoHide: true,
+            autoRotate: false
+          }
+        },
+        meta: {
+          topicName: {
+            alias: '主题'
+          },
+          articleCount: {
+            alias: '文章数'
+          }
+        }
+      })
+      columnPlot.render()
+    }
+  },
+  mounted () {
+    statisticsAcount().then(res => {
+      this.data = res.data
+    })
+    gateChart().then(res => {
+      this.cateData = res.data
+      this.renderCate(this.cateData)
+    })
+    qushiChart().then(res => {
+      this.qushiData = res.data
+      this.renderChart(this.qushiData)
     })
   }
 }

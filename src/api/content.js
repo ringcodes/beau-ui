@@ -117,17 +117,33 @@ export function delSlider (id) {
     method: 'delete'
   })
 }
-export function listSliderPosition() {
+export function listSliderPosition () {
   return request({
     url: '/slider/listPosition',
     method: 'get'
   })
 }
 
-export function operateLogPage(param){
+export function operateLogPage (param) {
   return request({
     url: '/operate-log/page',
     method: 'post',
     data: param
+  })
+}
+
+export function gateChart (param) {
+  return request({
+    url: '/statistics/chartData',
+    method: 'get',
+    params: param
+  })
+}
+
+export function qushiChart (param) {
+  return request({
+    url: '/statistics/qushi',
+    method: 'get',
+    params: param
   })
 }
