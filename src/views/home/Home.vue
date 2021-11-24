@@ -2,7 +2,7 @@
   <div class="home">
     <a-row :gutter="48">
       <a-col :span="6" v-for="(item,key) in data" :key="key">
-        <TagCard :title="item.name" :count="item.value" :backColor="colorList[key]" :icon="iconList[key]"></TagCard> 
+        <TagCard :title="item.name" :count="item.value" :backColor="colorList[key]" :icon="iconList[key]"></TagCard>
       </a-col>
     </a-row>
     <a-row :gutter="16" class="mt-bp">
@@ -33,8 +33,8 @@ export default {
       data: [],
       qushiData: [],
       cateData: [],
-      colorList: [ '#2599df', '#096dd9', '#d7890e' ],
-      iconList: ['read', 'appstore', 'user']
+      colorList: [ '#2599df', '#096dd9', '#d7890e', '#18cf05' ],
+      iconList: ['read', 'appstore', 'user', 'book']
     }
   },
   components: {
