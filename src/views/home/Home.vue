@@ -47,6 +47,7 @@ export default {
     renderChart (data) {
       const line = new Line('qushi-chart', {
         data,
+        height: 300,
         padding: 'auto',
         xField: 'title',
         yField: 'val',
@@ -68,6 +69,7 @@ export default {
     renderCate (data) {
       const columnPlot = new Column('cate-chart', {
         data,
+        height: 300,
         xField: 'topicName',
         yField: 'articleCount',
         label: {
