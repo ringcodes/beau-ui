@@ -33,7 +33,7 @@ export default {
       data: [],
       qushiData: [],
       cateData: [],
-      colorList: [ '#2599df', '#096dd9', '#d7890e', '#18cf05' ],
+      colorList: [ '#2599df', '#096dd9', '#d7890e', '#b1842c' ],
       iconList: ['read', 'appstore', 'user', 'book']
     }
   },
