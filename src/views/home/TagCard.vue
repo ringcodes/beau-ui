@@ -43,7 +43,7 @@ export default {
 <style lang="less" scoped>
 .small-box {
   width: 100%;
-  height: 120px;
+  height: 100px;
   position: relative;
 }
  .content-con {
@@ -74,7 +74,7 @@ export default {
           display: table-cell;
           vertical-align: middle;
           .title{
-            font-size: 50px;
+            font-size: 40px;
             font-weight: 600;
             display: inline-block;
             padding: 5px 0px 9px 0px;

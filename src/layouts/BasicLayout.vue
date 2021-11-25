@@ -40,7 +40,7 @@
       />
 
       <!-- layout content -->
-      <a-layout-content :style="{ height: '100%', margin: '24px 24px 0', paddingTop: fixedHeader ? '50px' : '0' }">
+      <a-layout-content :style="{ height: '100%', margin: '24px 24px 0', paddingTop: fixedHeader ? '40px' : '0' }">
         <multi-tab v-if="multiTab"></multi-tab>
         <transition name="page-transition">
           <route-view />
@@ -68,7 +68,7 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 import GlobalFooter from '@/components/GlobalFooter'
 
-import { Layout,Drawer } from 'ant-design-vue'
+import { Layout, Drawer } from 'ant-design-vue'
 
 export default {
   name: 'BasicLayout',

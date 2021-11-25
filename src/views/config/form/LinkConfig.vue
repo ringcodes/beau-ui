@@ -1,7 +1,7 @@
 <template>
   <div>
     <s-table
-      size="default"
+      size="small"
       :rowKey="(record) => record.id"
       :columns="columns"
       :data="dataList"

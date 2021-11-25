@@ -27,7 +27,6 @@
       <a-button type="primary" icon="plus" @click="handleAdd()">添加</a-button>
     </div>
     <s-table
-      size="small"
       :rowKey="(record) => record.id"
       :columns="columns"
       :data="dataList"

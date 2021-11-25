@@ -120,19 +120,22 @@ body {
   }
 
   .header {
-    height: 64px;
+    height: 48px;
+    line-height: 48px;
     padding: 0 12px 0 0;
     background: #fff;
     box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
     position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 
   .header,
   .top-nav-header-index {
     .user-wrapper {
-      float: right;
-      height: 100%;
-
+      margin-left: auto;
       .action {
         cursor: pointer;
         padding: 0 12px;
@@ -146,7 +149,7 @@ body {
         }
 
         .avatar {
-          margin: 20px 8px 20px 0;
+          margin-right: 10px;
           color: #1890ff;
           background: hsla(0, 0%, 100%, 0.85);
           vertical-align: middle;
@@ -372,10 +375,10 @@ body {
 
   .logo {
     position: relative;
-    height: 64px;
+    height: 48px;
     padding-left: 24px;
     overflow: hidden;
-    line-height: 64px;
+    line-height: 48px;
     background: #002140;
     transition: all .3s;
 

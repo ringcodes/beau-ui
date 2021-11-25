@@ -22,7 +22,6 @@
     </div>
 
     <s-table
-      size="small"
       :rowKey="(record) => record.id"
       :columns="columns"
       :data="dataList"
