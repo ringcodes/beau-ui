@@ -3,12 +3,14 @@
     <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
       <a-row type="flex" justify="start" align="top" :gutter="16">
         <a-col span="10">
-          <a-form-item label="标题">
+          <a-form-item
+            label="标题">
             <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>
           </a-form-item>
         </a-col>
         <a-col span="6">
-          <a-form-item label="主题">
+          <a-form-item
+            label="主题">
             <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
               <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
             </a-select>
@@ -24,7 +26,7 @@
     </a-form>
     <a-row type="flex" justify="center" align="top">
       <a-col span="24">
-        <tinymce :height="600" v-model="contentModel"></tinymce>
+        <tinymce :height="600" v-model="contentModel" ref="tinymce"></tinymce>
       </a-col>
     </a-row>
     <a-drawer
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio, Drawer } from 'ant-design-vue'
+import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio,Drawer } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle } from '@/api/content'
 import { ImgUpload } from '@/components'
 import Tinymce from '@/components/Tinymce'
@@ -109,8 +111,7 @@ export default {
           'searchreplace visualblocks code fullscreen',
           'insertdatetime media table paste code help wordcount'
         ],
-        toolbar:
-          'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
       }
     }
   },
@@ -149,12 +150,11 @@ export default {
       }
       const data = file.response
       if (data.ok) {
-        this.dataFrom.titlePic = data.data.fileName
+        this.dataFrom.titlePic = data.data.fileName;
       }
     }
   },
-  activated () {
-    const id = this.$route.query.id
+  mounted () {
     getTopicListType(1).then(res => {
       if (res.ok) {
         this.topicList = res.data
@@ -163,11 +163,16 @@ export default {
     getTagList({}).then(res => {
       this.tagList = res.data
     })
+  },
+  activated () {
+    const id = this.$route.query.id
     if (id > 0) {
       getArticle(id).then(result => {
         const res = result.data
-        this.contentModel = res.content
         this.$nextTick(() => {
+          this.contentModel = res.content
+          this.$refs.tinymce.setContent(res.content)
+          console.log(this.contentModel)
           this.form.setFieldsValue({
             'title': res.title,
             'topicId': res.topicId
