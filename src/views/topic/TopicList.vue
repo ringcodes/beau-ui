@@ -72,6 +72,13 @@
           </a-select>
         </a-form-item>
         <a-form-item
+          label="位置">
+          <a-select
+            v-decorator="['topicPosition', { initialValue:'1', rules: [{ required: true, message: '请选择类型' }] }]" >
+            <a-select-option :value="item.value" v-for="(item,idx) in posList" :key="idx">{{ item.desc }}</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item
           label="图片">
           <s-upload ref="imgUpload" @change="handleChange" :source="2"/>
           <a-input v-decorator="['topicPic']" placeholder="手动输入图片地址"/>
@@ -83,9 +90,8 @@
 
 <script>
 import { STable, ImgUpload } from '@/components'
-import { getTopicList, saveTopic, delTopic } from '@/api/content'
+import { getTopicList, saveTopic, delTopic, listTopicPos } from '@/api/content'
 import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider } from 'ant-design-vue'
-import { getId } from '@/api/manage'
 export default {
   name: 'TableList',
   components: {
@@ -116,21 +122,22 @@ export default {
         source: 1,
         code: ''
       },
+      posList: [],
       columns: [
         {
           title: '图片',
           dataIndex: 'topicPicView',
           width: 200,
           scopedSlots: { customRender: 'pic' }
-        },{
+        }, {
           title: '名称',
           dataIndex: 'topicName',
           width: 220
-        },{
+        }, {
           title: '类型',
           dataIndex: 'topicTypeName',
-          width: 250,
-        },{
+          width: 250
+        }, {
           title: '创建时间',
           dataIndex: 'updateTime',
           width: 180
@@ -147,20 +154,13 @@ export default {
     }
   },
   mounted () {
+    listTopicPos().then(res => {
+      this.posList = res.data
+    })
   },
   methods: {
     handleAdd () {
       this.visible = true
-      getId().then(res => {
-        if (res.ok) {
-          this.uploadData.code = res.data
-          this.form.setFieldsValue({
-            'id': res.data
-          })
-        } else {
-          this.$message.error('系统错误')
-        }
-      })
       this.$nextTick(() => {
         this.form.resetFields()
       })
@@ -173,7 +173,7 @@ export default {
           name: record.topicName,
           status: 'done',
           url: record.topicPicView
-        }]);
+        }])
         this.form.setFieldsValue({
           'id': record.id,
           'topicName': record.topicName,

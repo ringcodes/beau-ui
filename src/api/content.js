@@ -30,6 +30,13 @@ export function delTopic (id) {
   })
 }
 
+export function listTopicPos (id) {
+  return request({
+    url: '/topic/listTopicPos',
+    method: 'get'
+  })
+}
+
 export function getArticleList (parameter) {
   return request({
     url: '/article/list',
