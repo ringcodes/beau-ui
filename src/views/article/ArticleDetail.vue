@@ -34,12 +34,17 @@
           </a-select>
         </a-form-item>
         <a-form-item label="标签">
-          <a-select mode="multiple" v-decorator="['tagList']">
-            <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
-          </a-select>
+          <a-checkbox-group v-decorator="['tagList']" class="mt-checkbox-g">
+            <template v-for="(item,index) in tagList">
+              <a-checkbox :value="item.id" :key="index" class="mt-checkbox">
+                {{ item.name }}
+              </a-checkbox>
+            </template>
+          </a-checkbox-group>
+          <a-button type="link" @click="()=>this.form.setFieldsValue({tagList:[]})">清除</a-button>
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 3 }">
-          <a-button type="primary" >保存</a-button>
+          <a-button type="primary" @click="save">保存</a-button>
         </a-form-item>
       </a-form>
     </a-drawer>
@@ -48,13 +53,14 @@
       <a-button @click="setArticle" type="warging">设置</a-button>
       <a-button @click="handleDel" type="danger">删除</a-button>
       <a-button @click="returnPage" >返回</a-button>
+      <a :href="hrefPrefix+record.id+'.html'" target="_blank" class="btn">预览</a>
     </div>
     <a-back-top />
   </a-card>
 </template>
 
 <script>
-import { Col, Divider, Form, Input, Drawer, Row, Select, Card, Radio, Popconfirm, BackTop } from 'ant-design-vue'
+import { Col, Divider, Form, Input, Drawer, Row, Select, Card, Radio, Popconfirm, BackTop,Checkbox } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle, delArticle } from '@/api/content'
 import { ImgUpload } from '@/components'
 
@@ -76,7 +82,9 @@ export default {
     ARadioGroup: Radio.Group,
     APopconfirm: Popconfirm,
     ABackTop: BackTop,
-    ImgUpload
+    ImgUpload,
+    ACheckbox: Checkbox,
+    ACheckboxGroup: Checkbox.Group
   },
   data () {
     return {
@@ -84,7 +92,8 @@ export default {
       record: {},
       topicList: [],
       tagList: [],
-      visible: false
+      visible: false,
+      hrefPrefix: process.env.VUE_APP_BASE_API + '/article/'
     }
   },
   methods: {
@@ -102,7 +111,7 @@ export default {
         this.form.setFieldsValue({
           'id': this.record.id,
           'topicId': this.record.topicId,
-          'tagList': this.record.tagList,
+          'tagList': this.record.articleLabelVos.map(it => it.id),
           'title': this.record.title,
           'sourceUrl': this.record.sourceUrl,
           'description': this.record.description
@@ -183,10 +192,29 @@ export default {
       margin: 3px 0px;
     }
  }
+ .mt-checkbox{
+   min-width: 120px;
+ }
+ .mt-checkbox-g{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+ }
+ .btn{
+   padding: 3px 18px;
+   background: #fff;
+   border-radius: 3px;
+   color: #333;
+   margin-top: 5px;
+ }
 </style>
 
 <style>
 img{
    max-width: 100%;
+ }
+ .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+   margin: 0;
  }
 </style>
