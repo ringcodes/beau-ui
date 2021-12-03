@@ -42,7 +42,7 @@
       </span>
     </s-table>
     <a-modal
-      title="新增"
+      :title="title"
       style="top: 20px;"
       :width="600"
       v-model="visible"
@@ -83,8 +83,7 @@
 <script>
 import { STable, ImgUpload } from '@/components'
 import { getSliderList, delSlider, saveSlider, listSliderPosition } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider,Switch } from 'ant-design-vue'
-import { getId } from '@/api/manage'
+import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider, Switch } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
@@ -119,16 +118,17 @@ export default {
         code: ''
       },
       positionList: [],
+      title: '新增',
       columns: [
         {
           title: '图片',
           dataIndex: 'pic',
           width: 200,
           scopedSlots: { customRender: 'pic' }
-        },{
+        }, {
           title: '标题',
           dataIndex: 'title'
-        },{
+        }, {
           title: '地址',
           dataIndex: 'target',
           width: 350,
@@ -141,10 +141,10 @@ export default {
           title: '状态',
           dataIndex: 'sliderStatus',
           width: 120,
-          customRender: (it,row)=>{
-            return <a-switch checked-children="生效" un-checked-children="失效" defaultChecked={it === 0} on-change={(p)=>this.changeStatus(p,row)} />
+          customRender: (it, row) => {
+            return <a-switch checked-children="生效" un-checked-children="失效" defaultChecked={it === 0} on-change={(p) => this.changeStatus(p, row)} />
           }
-        },{
+        }, {
           title: '创建时间',
           dataIndex: 'updateTime',
           width: 180
@@ -169,26 +169,28 @@ export default {
   },
   methods: {
     handleAdd () {
+      this.title = '新增'
       this.visible = true
       this.$nextTick(() => {
         this.form.resetFields()
       })
     },
-    handleEdit(item){
+    handleEdit (item) {
+      this.title = '编辑'
       this.visible = true
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.form.setFieldsValue({
-          "id": item.id,
-          "pic": item.pic,
-          "title": item.title,
-          "sliderType": item.position
-        });
-         this.$refs.imgUpload.setImg([{
+          'id': item.id,
+          'pic': item.pic,
+          'title': item.title,
+          'sliderType': item.position
+        })
+        this.$refs.imgUpload.setImg([{
           uid: '-1',
           name: 'a',
           status: 'done',
           url: item.pic
-        }]);
+        }])
       })
     },
     handleOk () {
@@ -228,18 +230,17 @@ export default {
         this.imageUrl = data.data.fileName
       }
     },
-    changeStatus(p,row){
+    changeStatus (p, row) {
       saveSlider({
         id: row.id,
-        status: p ? 0:1
+        status: p ? 0 : 1
       }).then(res => {
-            if (res.ok) {
-              this.$message.info('保存成功')
-              this.visible = false
-              this.showLoadingMore()
-            }
-          })
-      console.log(p)
+        if (res.ok) {
+          this.$message.info('保存成功')
+          this.visible = false
+          this.showLoadingMore()
+        }
+      })
     }
   }
 }

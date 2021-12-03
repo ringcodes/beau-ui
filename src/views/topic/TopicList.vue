@@ -48,7 +48,7 @@
       </span>
     </s-table>
     <a-modal
-      title="操作"
+      :title="title"
       style="top: 20px;"
       :width="600"
       v-model="visible"
@@ -123,6 +123,7 @@ export default {
         code: ''
       },
       posList: [],
+      title: '新增',
       columns: [
         {
           title: '图片',
@@ -160,12 +161,14 @@ export default {
   },
   methods: {
     handleAdd () {
+      this.title = '新增'
       this.visible = true
       this.$nextTick(() => {
         this.form.resetFields()
       })
     },
     editTopic (record) {
+      this.title = '编辑'
       this.visible = true
       this.$nextTick(() => {
         this.$refs.imgUpload.setImg([{
