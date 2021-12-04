@@ -17,7 +17,7 @@ export const CONTENT_WIDTH_TYPE = {
 
 export const PRIVILEGE_TYPE = {
   0: '未发布',
-  1: '已发布',
+  1: '已发布'
 }
 
 export const FLAG_TYPE = {

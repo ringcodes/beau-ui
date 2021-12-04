@@ -57,22 +57,11 @@
 <script>
 import { STable } from '@/components'
 import { getTagPage, saveTag, delTag } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
-    STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APopconfirm: Popconfirm,
-    ADivider: Divider
+    STable
   },
   data () {
     return {

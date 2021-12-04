@@ -1,7 +1,7 @@
 import T from 'ant-design-vue/es/table/Table'
 import get from 'lodash.get'
 import './common.less'
-import { Table ,Divider } from 'ant-design-vue'
+import { Table, Divider } from 'ant-design-vue'
 
 export default {
   data () {
@@ -24,7 +24,7 @@ export default {
       default: 'key'
     },
     data: {
-      type: [Function,Array],
+      type: [Function, Array],
       required: false
     },
     pageNum: {
@@ -142,25 +142,23 @@ export default {
     loadData (pagination, filters, sorter) {
       this.localLoading = true
       const parameter = Object.assign({
-          pageNumber: (pagination && pagination.current) ||
-            this.showPagination && this.localPagination.current || this.pageNum,
-          pageSize: (pagination && pagination.pageSize) ||
-            this.showPagination && this.localPagination.pageSize || this.pageSize
-        },
-        (sorter && sorter.field && {
-          sortField: sorter.field
-        }) || {},
-        (sorter && sorter.order && {
-          sortOrder: sorter.order
-        }) || {}, {
-          ...filters
-        }
-      )
+        pageNumber: (pagination && pagination.current) ||
+          this.showPagination && this.localPagination.current || this.pageNum,
+        pageSize: (pagination && pagination.pageSize) ||
+          this.showPagination && this.localPagination.pageSize || this.pageSize
+      },
+      (sorter && sorter.field && {
+        sortField: sorter.field
+      }) || {},
+      (sorter && sorter.order && {
+        sortOrder: sorter.order
+      }) || {}, {
+        ...filters
+      })
       console.log('parameter', parameter)
       if (typeof (this.data) === 'object') {
-        console.log("bbbb")
-        this.initData(this.data,1, this.data.length, pagination)
-        return;
+        this.initData(this.data, 1, this.data.length, pagination)
+        return
       }
       const result = this.data(parameter)
       // 对接自己的通用数据接口需要修改下方代码中的 r.pageNo, r.totalCount, r.data
@@ -172,9 +170,9 @@ export default {
         })
       }
     },
-    initData (list,page,total, pagination) {
+    initData (list, page, total, pagination) {
       if (!list) {
-        list = [];
+        list = []
       }
       this.localPagination = this.showPagination && Object.assign({}, this.localPagination, {
         current: page, // 返回结果中的当前分页数
@@ -250,11 +248,8 @@ export default {
     renderClear (callback) {
       if (this.selectedRowKeys.length <= 0) return null
       return (
-        <a style="margin-left: 24px" onClick={() => {
-        callback()
-        this.clearSelected()
-      }}>清空</a>
-    )
+        <a style="margin-left: 24px" onClick={() => { callback(); this.clearSelected() }}>清空</a>
+      )
     },
     renderAlert () {
       // 绘制统计列数据
@@ -274,13 +269,13 @@ export default {
       // 绘制 alert 组件
       return (
         <a-alert showIcon={true} style="margin-bottom: 16px">
-        <template slot="message">
-        <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{this.selectedRows.length}</a></span>
-      {needTotalItems}
-      {clearItem}
-    </template>
-      </a-alert>
-    )
+          <template slot="message">
+            <span style="margin-right: 12px">已选择: <a style="font-weight: 600">{this.selectedRows.length}</a></span>
+            {needTotalItems}
+            {clearItem}
+          </template>
+        </a-alert>
+      )
     }
   },
 
@@ -321,15 +316,15 @@ export default {
     console.log(props)
     const table = (
       <a-table {...{ props, scopedSlots: { ...this.$scopedSlots } }} onChange={this.loadData}>
-      { Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>)) }
-        </a-table>
-  )
+        { Object.keys(this.$slots).map(name => (<template slot={name}>{this.$slots[name]}</template>)) }
+      </a-table>
+    )
 
     return (
       <div class="table-wrapper-item">
-      { showAlert ? this.renderAlert() : null }
-    { table }
-  </div>
-  )
+        { showAlert ? this.renderAlert() : null }
+        { table }
+      </div>
+    )
   }
-  }
+}

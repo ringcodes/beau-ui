@@ -60,31 +60,13 @@
 </template>
 
 <script>
-import { Col, Divider, Form, Input, Drawer, Row, Select, Card, Radio, Popconfirm, BackTop,Checkbox } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle, delArticle } from '@/api/content'
 import { ImgUpload } from '@/components'
 
 export default {
   name: 'ArticleEdit',
   components: {
-    ARow: Row,
-    ACol: Col,
-    AForm: Form,
-    ACard: Card,
-    AFormItem: Form.Item,
-    ADrawer: Drawer,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    ADivider: Divider,
-    ATextarea: Input.TextArea,
-    ARadio: Radio,
-    ARadioGroup: Radio.Group,
-    APopconfirm: Popconfirm,
-    ABackTop: BackTop,
-    ImgUpload,
-    ACheckbox: Checkbox,
-    ACheckboxGroup: Checkbox.Group
+    ImgUpload
   },
   data () {
     return {

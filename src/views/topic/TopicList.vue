@@ -37,7 +37,7 @@
         <img :src="text" alt="" class="img-list">
       </span>
       <span slot="target" slot-scope="text">
-        <a :href="text" target="_blank">{{text}}</a>
+        <a :href="text" target="_blank">{{ text }}</a>
       </span>
       <span slot="action" slot-scope="text, record">
         <a @click="editTopic(record)">编辑</a>
@@ -58,25 +58,20 @@
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
         </a-form-item>
-        <a-form-item
-          label="名称">
-          <a-input
-            v-decorator="['topicName', { rules: [{ required: true, message: '请输入名称' }] }]"/>
+        <a-form-item label="名称">
+          <a-input v-decorator="['topicName', { rules: [{ required: true, message: '请输入名称' }] }]"/>
         </a-form-item>
-        <a-form-item
-          label="类型">
-          <a-select
-            v-decorator="['topicType', { initialValue:'1', rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option value="1">文章</a-select-option>
-            <a-select-option value="2">软件</a-select-option>
-          </a-select>
+        <a-form-item label="类型">
+          <a-radio-group v-decorator="['topicType', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]">
+            <a-radio :value="1">文章</a-radio>
+            <a-radio :value="2">软件</a-radio>
+          </a-radio-group>
         </a-form-item>
-        <a-form-item
-          label="位置">
-          <a-select
-            v-decorator="['topicPosition', { initialValue:'1', rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option :value="item.value" v-for="(item,idx) in posList" :key="idx">{{ item.desc }}</a-select-option>
-          </a-select>
+        <a-form-item label="位置">
+          <a-radio-group v-decorator="['topicPosition', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]">
+            <a-radio :value="item.value" v-for="(item,idx) in posList" :key="idx">{{ item.desc }}</a-radio>
+            <a-radio :value="2">软件</a-radio>
+          </a-radio-group>
         </a-form-item>
         <a-form-item
           label="图片">
@@ -91,23 +86,10 @@
 <script>
 import { STable, ImgUpload } from '@/components'
 import { getTopicList, saveTopic, delTopic, listTopicPos } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider } from 'ant-design-vue'
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
     STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APagination: Pagination,
-    AAvatar: Avatar,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
     SUpload: ImgUpload
   },
   data () {
@@ -137,6 +119,10 @@ export default {
         }, {
           title: '类型',
           dataIndex: 'topicTypeName',
+          width: 250
+        }, {
+          title: '位置',
+          dataIndex: 'topicPositionName',
           width: 250
         }, {
           title: '创建时间',
@@ -181,7 +167,8 @@ export default {
           'id': record.id,
           'topicName': record.topicName,
           'topicType': record.topicType,
-          'topicPic': record.topicPic
+          'topicPic': record.topicPic,
+          'topicPosition': record.topicPosition
         })
       })
     },

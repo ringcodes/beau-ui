@@ -9,18 +9,18 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
-  if(store.getters.addRouters.length === 0){
+  if (store.getters.addRouters.length === 0) {
     store.dispatch('GenerateRoutes', {})
   }
   if (to.path === loginRoutePath) {
     next()
-  } else if(store.getters.token){
-    next();
-  } else{
+  } else if (store.getters.token) {
+    next()
+  } else {
     store.dispatch('GetInfo', {}).then(() => {
-      next();
+      next()
     }).catch(
-      ()=> next({ path: loginRoutePath, query: { redirect: to.fullPath } })
+      () => next({ path: loginRoutePath, query: { redirect: to.fullPath } })
     )
   }
 })

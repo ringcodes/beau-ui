@@ -18,7 +18,7 @@ export function saveUser (parameter) {
 
 export function forbidUser (parameter) {
   return request({
-    url: '/user/'+parameter+'/forbid',
+    url: '/user/' + parameter + '/forbid',
     method: 'post'
   })
 }
@@ -60,9 +60,9 @@ export function delConfig (id) {
     method: 'delete'
   })
 }
-export function listConfigType (type,key) {
+export function listConfigType (type, key) {
   return request({
-    url: '/config/'+type+'/' + key,
+    url: '/config/' + type + '/' + key,
     method: 'get'
   })
 }
@@ -79,22 +79,22 @@ export function getId () {
   })
 }
 
-export function listMenu(){
+export function listMenu () {
   return request({
     url: '/menu/list',
     method: 'get'
   })
 }
-export function saveMenu(param){
+export function saveMenu (param) {
   return request({
     url: '/menu/save',
     method: 'post',
     data: param
   })
 }
-export function delMenu(param){
+export function delMenu (param) {
   return request({
-    url: '/menu/del/'+param,
+    url: '/menu/del/' + param,
     method: 'delete'
   })
 }

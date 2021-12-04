@@ -6,12 +6,11 @@ import store from './store/'
 import bootstrap from './core/bootstrap'
 import './core/use'
 import './permission' // permission control
-
-import { Button, message } from 'ant-design-vue'
-Vue.use(Button)
+import 'ant-design-vue/dist/antd.css'
+import Antd from 'ant-design-vue'
 
 Vue.config.productionTip = false
-Vue.prototype.$message = message
+Vue.use(Antd)
 
 new Vue({
   router,

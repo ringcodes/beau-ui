@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
-import { message } from 'ant-design-vue';
+import { message } from 'ant-design-vue'
 
 import {
   ACCESS_TOKEN
@@ -17,15 +17,14 @@ const err = (error) => {
   console.log(error.config)
   if (error.response) {
     const data = error.response.data
-    const token = Vue.ls.get(ACCESS_TOKEN)
     if (error.response.status === 403) {
-      message.error(data.msg);
+      message.error(data.msg)
     }
     if (error.response.status === 401) {
-      message.warn(data.msg);
+      message.warn(data.msg)
       store.dispatch('Logout').then(() => {
-        window.location.href="/user/login"
-      });
+        window.location.href = '/user/login'
+      })
     }
     if (error.response.status === 500) {
       return Promise.reject(data)

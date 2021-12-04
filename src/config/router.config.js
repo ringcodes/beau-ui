@@ -124,7 +124,7 @@ export const asyncRouterMap = [
         name: 'UserList',
         component: () => import('@/views/user/UserList'),
         meta: { title: '用户列表', icon: 'user', keepAlive: true }
-      },{
+      }, {
         path: '/webConfig',
         name: 'WebConfig',
         component: () => import('@/views/config/WebConfig'),
