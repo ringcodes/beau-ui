@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import { Col, Divider, Form, Input, Modal, Row, Select, Card, Radio,Drawer } from 'ant-design-vue'
 import { getTopicListType, saveArticle, getTagList, getArticle } from '@/api/content'
 import { ImgUpload } from '@/components'
 import Tinymce from '@/components/Tinymce'
@@ -75,21 +74,7 @@ import Tinymce from '@/components/Tinymce'
 export default {
   name: 'ArticleEdit',
   components: {
-    ARow: Row,
-    ACol: Col,
-    AForm: Form,
-    ACard: Card,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    ADivider: Divider,
-    ATextarea: Input.TextArea,
-    ARadio: Radio,
-    ARadioGroup: Radio.Group,
     ImgUpload,
-    ADrawer: Drawer,
     Tinymce
   },
   data () {
@@ -150,7 +135,7 @@ export default {
       }
       const data = file.response
       if (data.ok) {
-        this.dataFrom.titlePic = data.data.fileName;
+        this.dataFrom.titlePic = data.data.fileName
       }
     }
   },

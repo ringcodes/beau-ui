@@ -49,23 +49,12 @@
 import { STable } from '@/components'
 import { listConfig, delConfig, getById } from '@/api/manage'
 import { PRIVILEGE_TYPE } from '@/store/mutation-types'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider } from 'ant-design-vue'
 import ConfigEdit from './ConfigEdit'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
     STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
     ConfigEdit
   },
   data () {

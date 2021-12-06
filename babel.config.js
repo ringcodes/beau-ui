@@ -7,7 +7,6 @@ module.exports = {
         'useBuiltIns': 'entry'
       }
     ]
-  ],
+  ]
   // if your use import on Demand, Use this code
-  plugins: []
 }

@@ -71,7 +71,7 @@
       ref="table"
     >
       <span slot="detailAction" slot-scope="text, record">
-        <a @click="handleDetail(record)">{{text}}</a>
+        <a @click="handleDetail(record)">{{ text }}</a>
       </span>
       <span slot="action" slot-scope="text, record">
         <a @click="handleEdit(record)">编辑</a>
@@ -86,30 +86,13 @@
 
 <script>
 import { STable } from '@/components'
-import { getArticleList, delArticle,getTopicListType,getTagList,saveArticle } from '@/api/content'
-import { PRIVILEGE_TYPE,FLAG_TYPE } from '@/store/mutation-types'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Dropdown,Menu,Icon,Tag,Switch } from 'ant-design-vue'
+import { getArticleList, delArticle, getTopicListType, getTagList, saveArticle } from '@/api/content'
+import { PRIVILEGE_TYPE, FLAG_TYPE } from '@/store/mutation-types'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
-    STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
-    ADropdown: Dropdown,
-    AMenu: Menu,
-    AMenuItem: Menu.Item,
-    AIcon: Icon,
-    ATag: Tag,
-    ASwitch: Switch
+    STable
   },
   data () {
     return {
@@ -124,54 +107,53 @@ export default {
       menuTypeIcon: 'caret-down',
       // 表头
       columns: [{
-          title: '标题',
-          dataIndex: 'title',
-          scopedSlots: { customRender: 'detailAction' }
-        },{
-          title: '主题',
-          dataIndex: 'topicName',
-          width: 200
-        },{
-          title: '类型',
-          dataIndex: 'articleType',
-          width: 80,
-          customRender: (val) =>{
-            if(val == 2){
-              return <a-tag color="green" class="tag-cls">markdown</a-tag>
-            } else {
-              return <a-tag color="orange" class="tag-cls">富文本</a-tag>
-            }
+        title: '标题',
+        dataIndex: 'title',
+        scopedSlots: { customRender: 'detailAction' }
+      }, {
+        title: '主题',
+        dataIndex: 'topicName',
+        width: 200
+      }, {
+        title: '类型',
+        dataIndex: 'articleType',
+        width: 80,
+        customRender: (val) => {
+          if (val === 2) {
+            return <a-tag color="green" class="tag-cls">markdown</a-tag>
+          } else {
+            return <a-tag color="orange" class="tag-cls">富文本</a-tag>
           }
-        },{
-          title: '发布状态',
-          dataIndex: 'publishStatus',
-          width: 100,
-          customRender: (it,row) => {
-            if(it === 2) {
-              return <a-switch checked-children="已发布" un-checked-children="未发布" defaultChecked on-change={(p)=>this.changeStatus(p,row)} />
-            } else {
-              return <a-switch checked-children="已发布" un-checked-children="未发布" on-change={(p)=>this.changeStatus(p,row)} />
-            }
-          }
-        },{
-          title: '来源',
-          dataIndex: 'sourceName',
-          width: 100
-        },{
-          title: '创建人',
-          dataIndex: 'createName',
-          width: 100
-        },{
-          title: '创建时间',
-          dataIndex: 'publishTime',
-          width: 180
-        }, {
-          title: '操作',
-          width: '150px',
-          dataIndex: 'action',
-          scopedSlots: { customRender: 'action' }
         }
-      ],
+      }, {
+        title: '发布状态',
+        dataIndex: 'publishStatus',
+        width: 100,
+        customRender: (it, row) => {
+          if (it === 2) {
+            return <a-switch checked-children="已发布" un-checked-children="未发布" defaultChecked on-change={(p) => this.changeStatus(p, row)} />
+          } else {
+            return <a-switch checked-children="已发布" un-checked-children="未发布" on-change={(p) => this.changeStatus(p, row)} />
+          }
+        }
+      }, {
+        title: '来源',
+        dataIndex: 'sourceName',
+        width: 100
+      }, {
+        title: '创建人',
+        dataIndex: 'createName',
+        width: 100
+      }, {
+        title: '创建时间',
+        dataIndex: 'publishTime',
+        width: 180
+      }, {
+        title: '操作',
+        width: '150px',
+        dataIndex: 'action',
+        scopedSlots: { customRender: 'action' }
+      }],
       dataList: (parameter) => {
         return getArticleList(Object.assign(parameter, this.queryParam))
       }
@@ -182,28 +164,28 @@ export default {
       if (res.ok) {
         this.topicList = res.data
       }
-    });
+    })
     getTagList({}).then(res => {
-        this.tagList = res.data
-    });
+      this.tagList = res.data
+    })
   },
   methods: {
     handleAdd (e) {
-      if(e.key === 'html'){
+      if (e.key === 'html') {
         this.$router.push({ path: '/article/edit?id=0' })
-      } else if(e.key === 'markdown'){
+      } else if (e.key === 'markdown') {
         this.$router.push({ path: '/article/add?id=0' })
       } else {
-        this.$message.error('文章类型不支持');
+        this.$message.error('文章类型不支持')
       }
     },
-    filterOption(input, option) {
+    filterOption (input, option) {
       return (
         option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      );
+      )
     },
     handleEdit (record) {
-      if(record.articleType === 2){
+      if (record.articleType === 2) {
         // markdown
         this.$router.push({ path: '/article/add?id=' + record.id })
       } else {
@@ -222,17 +204,17 @@ export default {
     handleDetail (record) {
       this.$router.push({ path: '/article/detail?id=' + record.id })
     },
-    visibleChange(visible){
-      if(visible){
+    visibleChange (visible) {
+      if (visible) {
         this.menuTypeIcon = 'caret-up'
-      } else{
+      } else {
         this.menuTypeIcon = 'caret-down'
       }
     },
-    changeStatus(p,row){
+    changeStatus (p, row) {
       saveArticle({
         id: row.id,
-        publishStatus: p ? 2:1
+        publishStatus: p ? 2 : 1
       }).then(res => {
         if (res.ok) {
           this.$message.info('保存成功')

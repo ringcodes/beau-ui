@@ -31,25 +31,11 @@
 <script>
 import { STable } from '@/components'
 import { operateLogPage } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider,DatePicker } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
-    STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APagination: Pagination,
-    AAvatar: Avatar,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
-    ARangePicker: DatePicker.RangePicker
+    STable
   },
   data () {
     return {
@@ -59,18 +45,18 @@ export default {
         {
           title: '模块',
           dataIndex: 'businessName',
-          width: 200,
-        },{
+          width: 200
+        }, {
           title: '操作内容',
           dataIndex: 'content'
-        },{
+        }, {
           title: 'IP',
           dataIndex: 'ip',
-          width: 200,
-        },{
+          width: 200
+        }, {
           title: '操作人',
           dataIndex: 'userName',
-          width: 150,
+          width: 150
         }, {
           title: '操作时间',
           dataIndex: 'updateTime',
@@ -79,19 +65,18 @@ export default {
       ],
       dataList: (parameter) => {
         console.log(this.queryParam.datetime)
-        if(this.opTime && this.opTime.length > 1){
-          this.queryParam.operateTimeStart = this.opTime[0].format('YYYY-MM-DD');
-          this.queryParam.operateTimeEnd = this.opTime[1].format('YYYY-MM-DD');
+        if (this.opTime && this.opTime.length > 1) {
+          this.queryParam.operateTimeStart = this.opTime[0].format('YYYY-MM-DD')
+          this.queryParam.operateTimeEnd = this.opTime[1].format('YYYY-MM-DD')
         }
         return operateLogPage(Object.assign(parameter, this.queryParam))
       }
     }
   },
   mounted () {
-    
   },
   methods: {
-    refresh(){
+    refresh () {
       this.$refs.table.refresh(true)
     }
   }

@@ -30,16 +30,13 @@ import UserMenu from '../tools/UserMenu'
 import SMenu from '../Menu/'
 import Logo from '../tools/Logo'
 import { mixin } from '@/utils/mixin'
-import { Layout, Icon } from 'ant-design-vue'
 
 export default {
   name: 'GlobalHeader',
   components: {
     UserMenu,
     SMenu,
-    Logo,
-    ALayoutHeader: Layout.Header,
-    AIcon: Icon
+    Logo
   },
   mixins: [mixin],
   props: {

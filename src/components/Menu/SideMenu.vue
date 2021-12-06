@@ -21,11 +21,10 @@
 import Logo from '@/components/tools/Logo'
 import SMenu from './index'
 import { mixin, mixinDevice } from '@/utils/mixin'
-import { Layout } from 'ant-design-vue'
 
 export default {
   name: 'SideMenu',
-  components: { Logo, SMenu, ALayoutSider: Layout.Sider },
+  components: { Logo, SMenu },
   mixins: [mixin, mixinDevice],
   props: {
     mode: {

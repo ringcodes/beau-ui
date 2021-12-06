@@ -10,14 +10,13 @@
 </template>
 
 <script>
-import { Form, Input, Spin, Select } from 'ant-design-vue'
 import { saveConfig } from '@/api/manage'
 
 export default {
   name: 'BaseConfig',
   data () {
     return {
-      form: this.$form.createForm(this, { name: 'coordinated' }),
+      form: this.$form.createForm(this, { name: 'coordinated' })
     }
   },
   props: {
@@ -27,38 +26,18 @@ export default {
     }
   },
   components: {
-    ASpin: Spin,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AInput: Input,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    ATextarea: Input.TextArea
   },
   methods: {
     show () {
-      this.$nextTick(() => {
-        getOauth(this.biz).then(result => {
-          if (result.data) {
-            console.log(result.data.data.clientId)
-            this.form.setFieldsValue({
-              'id': result.data.id,
-              'clientId': result.data.data.clientId,
-              'secret': result.data.data.secret,
-              'callback': result.data.data.callback
-            })
-          }
-        })
-      })
     },
     handleSubmit () {
       const { form: { validateFields } } = this
       validateFields((errors, values) => {
         if (!errors) {
           saveConfig({
-            config_name: "网站配置",
-            config_type: "BASE",
-            config_key: "BASE",
+            config_name: '网站配置',
+            config_type: 'BASE',
+            config_key: 'BASE',
             config_content: values.webName
           }).then(() => {
             this.$message.info('保存成功')

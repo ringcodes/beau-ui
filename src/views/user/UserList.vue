@@ -34,7 +34,7 @@
       ref="table"
     >
       <span slot="action" slot-scope="text, record">
-        <span  v-show="record.status != 2">
+        <span v-show="record.status != 2">
           <a-popconfirm title="确认要禁用吗？" @confirm="() => handleForbid(record)">
             <a class="btn-red">禁用</a>
           </a-popconfirm>
@@ -102,7 +102,7 @@
           </a-select>
         </a-form-item>
         <a-form-item label="角色">
-          <a-select placeholder="请选择角色"  v-decorator="['role',{ initialValue:1}]">
+          <a-select placeholder="请选择角色" v-decorator="['role',{ initialValue:1}]">
             <a-select-option :value="1">普通用户</a-select-option>
             <a-select-option :value="3">管理员</a-select-option>
             <a-select-option :value="10">超级管理员</a-select-option>
@@ -118,32 +118,19 @@
 
 <script>
 import { STable } from '@/components'
-import { getUserList,forbidUser,saveUser,addUser } from '@/api/manage'
-import { Row, Col, Form, Modal, Select, Input, Popconfirm, Divider,Tag,Drawer } from 'ant-design-vue'
+import { getUserList, forbidUser, saveUser, addUser } from '@/api/manage'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
-    STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
-    ATag: Tag,
-    ADrawer: Drawer
+    STable
   },
   data () {
     return {
       visible: false,
       dialogVisible: false,
       queryParam: {},
-      dataFrom:{},
+      dataFrom: {},
       form: this.$form.createForm(this),
       addForm: this.$form.createForm(this),
       // 表头
@@ -169,8 +156,8 @@ export default {
         }, {
           title: '状态',
           dataIndex: 'status',
-          customRender: (val) =>{
-            if(val == 2){
+          customRender: (val) => {
+            if (val === 2) {
               return <a-tag color="pink" >禁用</a-tag>
             } else {
               return <a-tag color="green" >正常</a-tag>
@@ -178,7 +165,7 @@ export default {
           }
         }, {
           title: '更新时间',
-          dataIndex: 'updateTime',
+          dataIndex: 'updateTime'
         }, {
           title: '操作',
           width: '150px',
@@ -188,7 +175,7 @@ export default {
       ],
       loadData: parameter => {
         return getUserList(Object.assign(parameter, this.queryParam))
-      },
+      }
     }
   },
   created () {
@@ -200,14 +187,14 @@ export default {
         role: item.role,
         name: item.name,
         sex: item.sex
-      };
-      this.visible = true;
+      }
+      this.visible = true
     },
-    handleForbid(item){
-      forbidUser(item.id).then(res=>{
-        if(res.ok){
-          this.$message.success('保存成功');
-          this.refresh();
+    handleForbid (item) {
+      forbidUser(item.id).then(res => {
+        if (res.ok) {
+          this.$message.success('保存成功')
+          this.refresh()
         } else {
           this.$message.error('保存失败')
         }
@@ -216,26 +203,26 @@ export default {
     refresh () {
       this.$refs.table.refresh(true)
     },
-    saveOK(){
+    saveOK () {
       saveUser(this.dataFrom).then(res => {
-        if(res.ok){
-          this.$message.success('保存成功');
-          this.refresh();
+        if (res.ok) {
+          this.$message.success('保存成功')
+          this.refresh()
         } else {
           this.$message.error('保存失败')
         }
       })
     },
-    onClose(){
-      this.visible = false;
+    onClose () {
+      this.visible = false
     },
-    handleAddUser(){
+    handleAddUser () {
       this.addForm.validateFields((err, values) => {
         if (!err) {
           addUser(values).then(() => {
-              this.$message.info('保存成功')
-              this.dialogVisible = false
-              this.refresh();
+            this.$message.info('保存成功')
+            this.dialogVisible = false
+            this.refresh()
           }).catch((res) => this.$message.error(res.msg))
         }
       })

@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { Tabs, Card,Row,Col } from 'ant-design-vue'
-import { saveConfig } from '@/api/manage'
 import BaseConfig from './form/BaseConfig'
 import LinkConfig from './form/LinkConfig'
 
@@ -33,17 +31,12 @@ export default {
     }
   },
   components: {
-    ATabs: Tabs,
-    ATabPane: Tabs.TabPane,
-    ACard: Card,
     BaseConfig,
-    LinkConfig,
-    ARow:Row,
-    ACol: Col
+    LinkConfig
   },
   methods: {
-    addLink(){
-      this.$refs.linkConfigRef.add();
+    addLink () {
+      this.$refs.linkConfigRef.add()
     }
   },
   mounted () {

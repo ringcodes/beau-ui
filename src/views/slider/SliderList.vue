@@ -83,26 +83,12 @@
 <script>
 import { STable, ImgUpload } from '@/components'
 import { getSliderList, delSlider, saveSlider, listSliderPosition } from '@/api/content'
-import { Row, Col, Form, Modal, Select, Input, Pagination, Avatar, Popconfirm, Divider, Switch } from 'ant-design-vue'
 
 export default {
   name: 'TableList',
   components: {
-    ARow: Row,
-    ACol: Col,
     STable,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AModal: Modal,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    AInput: Input,
-    APagination: Pagination,
-    AAvatar: Avatar,
-    APopconfirm: Popconfirm,
-    ADivider: Divider,
-    SUpload: ImgUpload,
-    ASwitch: Switch
+    SUpload: ImgUpload
   },
   data () {
     return {

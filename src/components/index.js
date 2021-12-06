@@ -4,8 +4,6 @@ import ImgUpload from '@/components/upload/ImgUpload'
 
 // pro components
 import AvatarList from '@/components/AvatarList'
-import CountDown from '@/components/CountDown'
-import Ellipsis from '@/components/Ellipsis'
 import FooterToolbar from '@/components/FooterToolbar'
 import NumberInfo from '@/components/NumberInfo'
 import DescriptionList from '@/components/DescriptionList'
@@ -13,18 +11,14 @@ import Tree from '@/components/Tree/Tree'
 import STable from '@/components/Table'
 import MultiTab from '@/components/MultiTab'
 import Result from '@/components/Result'
-import IconSelector from '@/components/IconSelector'
 import TagSelect from '@/components/TagSelect'
 import ExceptionPage from '@/components/Exception'
 import StandardFormRow from '@/components/StandardFormRow'
-import ArticleListContent from '@/components/ArticleListContent'
 import Tinymce from '@/components/Tinymce'
 
 export {
   AvatarList,
   ChartCard,
-  CountDown,
-  Ellipsis,
   FooterToolbar,
   NumberInfo,
   DescriptionList,
@@ -35,10 +29,8 @@ export {
   MultiTab,
   Result,
   ExceptionPage,
-  IconSelector,
   TagSelect,
   StandardFormRow,
-  ArticleListContent,
   ImgUpload,
   Tinymce
 }

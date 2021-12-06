@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import { Form, Input, Modal, Spin, Select } from 'ant-design-vue'
 import { saveConfig, getById, getConfigType } from '@/api/manage'
 
 export default {
@@ -45,14 +44,6 @@ export default {
     }
   },
   components: {
-    AModal: Modal,
-    ASpin: Spin,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AInput: Input,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    ATextarea: Input.TextArea
   },
   methods: {
     add () {

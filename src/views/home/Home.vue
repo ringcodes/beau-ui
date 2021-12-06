@@ -22,7 +22,6 @@
 
 <script>
 import TagCard from './TagCard.vue'
-import { Row, Col, Card } from 'ant-design-vue'
 import { statisticsAcount, qushiChart, gateChart } from '@/api/content'
 import { Line, Column } from '@antv/g2plot'
 
@@ -38,10 +37,7 @@ export default {
     }
   },
   components: {
-    TagCard,
-    ARow: Row,
-    ACol: Col,
-    ACard: Card
+    TagCard
   },
   methods: {
     renderChart (data) {

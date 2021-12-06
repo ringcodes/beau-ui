@@ -3,40 +3,38 @@
     <div class="content-con">
       <div class="left-area" :style="{background: backColor}">
         <a-icon :type="icon" style="font-size: 36px; color: rgb(255, 255, 255);" class="icon"/>
-        </div>
-        <div class="right-area" style="width: 64%;">
-          <div class="right-main">
-            <span  class="title">{{count}}</span>
-            <p>{{title}}</p>
+      </div>
+      <div class="right-area" style="width: 64%;">
+        <div class="right-main">
+          <span class="title">{{ count }}</span>
+          <p>{{ title }}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { Icon } from 'ant-design-vue'
 export default {
   name: 'TagCard',
-  components:{
-    AIcon: Icon
+  components: {
   },
   props: {
-    title:{
+    title: {
       type: String,
       required: true
     },
-    count:{
+    count: {
       type: Number,
       required: true
     },
-    backColor:{
+    backColor: {
       type: String,
       default: '#00c0ef'
     },
-    icon:{
+    icon: {
       type: String,
       default: ''
-    },
+    }
   }
 }
 </script>

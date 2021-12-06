@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
+import { UserLayout, BasicLayout, RouteView} from '@/layouts'
 export const asyncRouterMap = [
   {
     path: '/',
@@ -56,11 +56,6 @@ export const asyncRouterMap = [
         name: 'SliderList',
         component: () => import('@/views/slider/SliderList'),
         meta: { title: '轮播管理', keepAlive: true, icon: 'play-square' }
-      }, {
-        path: '/menu',
-        name: 'MenuList',
-        component: () => import('@/views/menu/index'),
-        meta: { title: '菜单管理', keepAlive: true, icon: 'menu' }
       },
       // account
       {

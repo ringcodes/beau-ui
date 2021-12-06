@@ -61,16 +61,10 @@
 <script>
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
-import { Form, Icon, Input, Checkbox } from 'ant-design-vue'
 
 export default {
   components: {
-    TwoStepCaptcha,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AIcon: Icon,
-    AInput: Input,
-    ACheckbox: Checkbox
+    TwoStepCaptcha
   },
   data () {
     return {
