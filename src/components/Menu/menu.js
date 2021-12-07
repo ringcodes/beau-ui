@@ -1,8 +1,3 @@
-import Menu from 'ant-design-vue/es/menu'
-import Icon from 'ant-design-vue/es/icon'
-
-const { Item, SubMenu } = Menu
-
 export default {
   name: 'SMenu',
   props: {
@@ -116,12 +111,12 @@ export default {
       }
 
       return (
-        <Item {...{ key: menu.path }}>
+        <a-item {...{ key: menu.path }}>
           <tag {...{ props, attrs }}>
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
           </tag>
-        </Item>
+        </a-item>
       )
     },
     renderSubMenu (menu) {
@@ -130,13 +125,13 @@ export default {
         menu.children.forEach(item => itemArr.push(this.renderItem(item)))
       }
       return (
-        <SubMenu {...{ key: menu.path }}>
+        <a-sub-menu {...{ key: menu.path }}>
           <span slot="title">
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
           </span>
           {itemArr}
-        </SubMenu>
+        </a-sub-menu>
       )
     },
     renderIcon (icon) {
@@ -146,7 +141,7 @@ export default {
       const props = {}
       typeof (icon) === 'object' ? props.component = icon : props.type = icon
       return (
-        <Icon {... { props } }/>
+        <a-icon {... { props } }/>
       )
     }
   },
@@ -174,9 +169,9 @@ export default {
     })
     // {...{ props, on: on }}
     return (
-      <Menu vModel={this.selectedKeys} {...{ props, on: on }}>
+      <a-menu vModel={this.selectedKeys} {...{ props, on: on }}>
         {menuTree}
-      </Menu>
+      </a-menu>
     )
   }
 }

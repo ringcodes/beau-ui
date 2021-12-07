@@ -26,7 +26,6 @@
 <script>
 import Vue from 'vue'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
-import { Upload, Icon, Modal } from 'ant-design-vue'
 
 function getBase64 (file) {
   return new Promise((resolve, reject) => {
@@ -40,9 +39,6 @@ const token = Vue.ls.get(ACCESS_TOKEN)
 export default {
   name: 'ImgUpload',
   components: {
-    AUpload: Upload,
-    AIcon: Icon,
-    AModal: Modal
   },
   props: {
     code: {

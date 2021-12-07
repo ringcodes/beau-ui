@@ -68,8 +68,6 @@ import SideMenu from '@/components/Menu/SideMenu'
 import GlobalHeader from '@/components/GlobalHeader'
 import GlobalFooter from '@/components/GlobalFooter'
 
-import { Layout, Drawer } from 'ant-design-vue'
-
 export default {
   name: 'BasicLayout',
   mixins: [mixin, mixinDevice],
@@ -78,12 +76,7 @@ export default {
     MultiTab,
     SideMenu,
     GlobalHeader,
-    GlobalFooter,
-    ALayout: Layout,
-    ALayoutContent: Layout.Content,
-    ALayoutSider: Layout.Sider,
-    ALayoutFooter: Layout.Footer,
-    ADrawer: Drawer
+    GlobalFooter
   },
   data () {
     return {

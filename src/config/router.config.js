@@ -93,12 +93,6 @@ export const asyncRouterMap = [
                 meta: { title: '安全设置', hidden: true, keepAlive: true }
               },
               {
-                path: '/account/settings/custom',
-                name: 'CustomSettings',
-                component: () => import('@/views/account/settings/Custom'),
-                meta: { title: '个性化设置', hidden: true, keepAlive: true }
-              },
-              {
                 path: '/account/settings/binding',
                 name: 'BindingSettings',
                 component: () => import('@/views/account/settings/Binding'),

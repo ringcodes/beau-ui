@@ -38,7 +38,6 @@ export default {
 }
 </script>
 <style lang="less">
-@import "~ant-design-vue/lib/style/index";
 
 .exception {
   display: flex;
@@ -87,7 +86,7 @@ export default {
 
     .desc {
       margin-bottom: 16px;
-      color: @text-color-secondary;
+      color: #333;
       font-size: 20px;
       line-height: 28px;
     }
@@ -100,7 +99,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-xl) {
+@media screen and (max-width: 1300px) {
   .exception {
     .imgBlock {
       padding-right: 88px;
@@ -108,7 +107,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-sm) {
+@media screen and (max-width: 768px) {
   .exception {
     display: block;
     text-align: center;
@@ -119,7 +118,7 @@ export default {
   }
 }
 
-@media screen and (max-width: @screen-xs) {
+@media screen and (max-width: 512px) {
   .exception {
     .imgBlock {
       margin-bottom: -24px;

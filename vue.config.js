@@ -13,18 +13,18 @@ const assetsCDN = {
     vuex: 'Vuex',
     axios: 'axios',
     moment: 'moment',
-    'vue-antd-ui': 'antd'
+    'ant-design-vue': 'antd'
   },
   css: [
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.css'
   ],
-  // https://unpkg.com/browse/vue@2.6.10/
   js: [
     'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
     'https://cdn.jsdelivr.net/npm/vue-router@3.1.3/dist/vue-router.min.js',
     'https://cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js',
     'https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js',
     'https://cdn.staticfile.org/moment.js/1.0.0/moment.min.js',
+    'https://cdn.staticfile.org/moment.js/2.9.0/moment-with-locales.min.js',
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.js',
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd-with-locales.min.js'
   ]
@@ -43,6 +43,10 @@ module.exports = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
+
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
 
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()

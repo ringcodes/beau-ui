@@ -18,7 +18,7 @@
         </a-col>
         <a-col :md="4" :sm="24">
           <span class="table-page-search-submitButtons">
-            <a-button type="primary" @click="showLoadingMore()">查询</a-button>
+            <a-button type="primary" @click="refresh">查询</a-button>
           </span>
         </a-col>
       </a-row>

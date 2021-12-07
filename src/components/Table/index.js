@@ -1,7 +1,6 @@
 import T from 'ant-design-vue/es/table/Table'
 import get from 'lodash.get'
 import './common.less'
-import { Table, Divider } from 'ant-design-vue'
 
 export default {
   data () {
@@ -15,8 +14,6 @@ export default {
     }
   },
   components: {
-    ATable: Table,
-    ADivider: Divider
   },
   props: Object.assign({}, T.props, {
     rowKey: {

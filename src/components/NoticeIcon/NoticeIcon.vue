@@ -49,16 +49,9 @@
 </template>
 
 <script>
-import { Popover, Badge, Spin, Tabs, Icon } from 'ant-design-vue'
 export default {
   name: 'HeaderNotice',
   components: {
-    APopover: Popover,
-    ABadge: Badge,
-    ASpin: Spin,
-    ATabs: Tabs,
-    ATabPane: Tabs.TabPane,
-    AIcon: Icon
   },
   data () {
     return {

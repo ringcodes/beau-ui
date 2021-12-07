@@ -8,18 +8,16 @@
 
 <script>
 import { AppDeviceEnquire } from '@/utils/mixin'
-import { ConfigProvider } from 'ant-design-vue'
 
 const { locales } = window.antd // <!-- 2 --> 这里最重要
 
 export default {
   mixins: [AppDeviceEnquire],
   components: {
-    AConfigProvider: ConfigProvider
   },
   data () {
     return {
-      locale: locales.zhCN
+      locale: locales.zh_CN
     }
   },
   mounted () {

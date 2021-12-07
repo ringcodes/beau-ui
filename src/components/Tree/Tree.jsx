@@ -1,7 +1,3 @@
-import { Menu, Icon, Input } from 'ant-design-vue'
-
-const { Item, ItemGroup, SubMenu } = Menu
-const { Search } = Input
 
 export default {
   name: 'Tree',
@@ -37,22 +33,22 @@ export default {
 
     renderSearch () {
       return (
-        <Search
+        <a-search
           placeholder="input search text"
           style="width: 100%; margin-bottom: 1rem"
         />
       )
     },
     renderIcon (icon) {
-      return icon && (<Icon type={icon} />) || null
+      return icon && (<a-icon type={icon} />) || null
     },
     renderMenuItem (item) {
       return (
-        <Item key={item.key}>
+        <a-menu-item key={item.key}>
           { this.renderIcon(item.icon) }
           { item.title }
           <a class="btn" style="width: 20px;z-index:1300" {...{ on: { click: () => this.handlePlus(item) } }}><a-icon type="plus"/></a>
-        </Item>
+        </a-menu-item>
       )
     },
     renderItem (item) {
@@ -64,7 +60,7 @@ export default {
       })
 
       return (
-        <ItemGroup key={item.key}>
+        <a-menu-item-group key={item.key}>
           <template slot="title">
             <span>{ item.title }</span>
             <a-dropdown>
@@ -77,7 +73,7 @@ export default {
             </a-dropdown>
           </template>
           { childrenItems }
-        </ItemGroup>
+        </a-menu-item-group>
       )
     },
     renderSubItem (item, key) {
@@ -97,16 +93,15 @@ export default {
       }
       // titleClick={this.handleTitleClick(item)}
       return (
-        <SubMenu key={key}>
+        <a-sub-menu key={key}>
           { title }
           { childrenItems }
-        </SubMenu>
+        </a-sub-menu>
       )
     }
   },
   render () {
     const { dataSource, search } = this.$props
-
     // this.localOpenKeys = openKeys.slice(0)
     const list = dataSource.map(item => {
       return this.renderItem(item)
@@ -115,9 +110,9 @@ export default {
     return (
       <div class="tree-wrapper">
         { search ? this.renderSearch() : null }
-        <Menu mode="inline" class="custom-tree" {...{ on: { click: item => this.$emit('click', item), 'update:openKeys': val => { this.localOpenKeys = val } } }} openKeys={this.localOpenKeys}>
+        <a-menu mode="inline" class="custom-tree" {...{ on: { click: item => this.$emit('click', item), 'update:openKeys': val => { this.localOpenKeys = val } } }} openKeys={this.localOpenKeys}>
           { list }
-        </Menu>
+        </a-menu>
       </div>
     )
   }
