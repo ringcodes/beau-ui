@@ -13,7 +13,8 @@ const assetsCDN = {
     vuex: 'Vuex',
     axios: 'axios',
     moment: 'moment',
-    'ant-design-vue': 'antd'
+    'ant-design-vue': 'antd',
+    '@antv/g2plot': 'G2Plot'
   },
   css: [
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.css'
@@ -26,7 +27,8 @@ const assetsCDN = {
     'https://cdn.staticfile.org/moment.js/1.0.0/moment.min.js',
     'https://cdn.staticfile.org/moment.js/2.9.0/moment-with-locales.min.js',
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.js',
-    'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd-with-locales.min.js'
+    'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd-with-locales.min.js',
+    'https://cdn.staticfile.org/g2plot/2.3.20/g2plot.min.js'
   ]
 }
 
@@ -44,9 +46,11 @@ module.exports = {
     config.resolve.alias
       .set('@$', resolve('src'))
 
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    if (process.env.NODE_ENV === 'production') {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
 
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()

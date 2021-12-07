@@ -111,12 +111,12 @@ export default {
       }
 
       return (
-        <a-item {...{ key: menu.path }}>
+        <a-menu-item {...{ key: menu.path }}>
           <tag {...{ props, attrs }}>
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
           </tag>
-        </a-item>
+        </a-menu-item>
       )
     },
     renderSubMenu (menu) {

@@ -6,7 +6,6 @@ import store from './store/'
 import bootstrap from './core/bootstrap'
 import './core/use'
 import './permission' // permission control
-import 'ant-design-vue/dist/antd.css'
 import Antd from 'ant-design-vue'
 
 Vue.config.productionTip = false

@@ -23,7 +23,8 @@
 <script>
 import TagCard from './TagCard.vue'
 import { statisticsAcount, qushiChart, gateChart } from '@/api/content'
-import { Line, Column } from '@antv/g2plot'
+
+const { Line, Column } = window.G2Plot
 
 export default {
   name: 'Home',
