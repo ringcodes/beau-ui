@@ -45,8 +45,8 @@ module.exports = {
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
-
-    if (process.env.NODE_ENV === 'production') {
+    console.log(config)
+    if (config.build && config.build.bundleAnalyzerReport) {
       config
         .plugin('webpack-bundle-analyzer')
         .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
