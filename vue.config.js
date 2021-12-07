@@ -25,7 +25,8 @@ const assetsCDN = {
     'https://cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js',
     'https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js',
     'https://cdn.staticfile.org/moment.js/1.0.0/moment.min.js',
-    'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.js'
+    'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.js',
+    'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd-with-locales.min.js'
   ]
 }
 

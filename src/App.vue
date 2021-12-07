@@ -8,8 +8,9 @@
 
 <script>
 import { AppDeviceEnquire } from '@/utils/mixin'
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import { ConfigProvider } from 'ant-design-vue'
+
+const { locales } = window.antd // <!-- 2 --> 这里最重要
 
 export default {
   mixins: [AppDeviceEnquire],
@@ -18,7 +19,7 @@ export default {
   },
   data () {
     return {
-      locale: zhCN
+      locale: locales.zhCN
     }
   },
   mounted () {
