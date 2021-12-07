@@ -1,14 +1,14 @@
 <template>
   <div>
     <a-upload
-     name="file"
-     :action="action"
-     :headers="headers"
-     :data="{code:code,source:source}"
-     list-type="picture-card"
-     :file-list="fileListData"
-     @change="handleChange"
-     @preview="handlePreview"
+      name="file"
+      :action="action"
+      :headers="headers"
+      :data="{code:code,source:source}"
+      list-type="picture-card"
+      :file-list="fileListData"
+      @change="handleChange"
+      @preview="handlePreview"
     >
       <div v-if="fileListData.length < fileMax">
         <a-icon type="plus"/>
@@ -47,7 +47,7 @@ export default {
   props: {
     code: {
       type: String,
-      default: ""
+      default: ''
     },
     source: {
       type: [String, Number],
@@ -70,8 +70,8 @@ export default {
     }
   },
   methods: {
-    setImg(filelist){
-      this.fileListData = filelist;
+    setImg (filelist) {
+      this.fileListData = filelist
     },
     handleCancel () {
       this.previewVisible = false
@@ -88,7 +88,7 @@ export default {
       this.previewVisible = true
     }
   },
-  mounted(){
+  mounted () {
     console.log(this.fileList)
   }
 }

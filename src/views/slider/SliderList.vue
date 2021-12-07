@@ -31,7 +31,7 @@
         <img :src="text" alt="" class="img-list">
       </span>
       <span slot="target" slot-scope="text">
-        <a :href="text" target="_blank">{{text}}</a>
+        <a :href="text" target="_blank">{{ text }}</a>
       </span>
       <span slot="action" slot-scope="text, record">
         <a @click="handleEdit(record)">编辑</a>
@@ -62,7 +62,7 @@
         </a-form-item>
         <a-form-item
           label="位置">
-          <a-select v-decorator="['sliderType', {  rules: [{ required: true, message: '请选择类型' }] }]" >
+          <a-select v-decorator="['sliderType', { rules: [{ required: true, message: '请选择类型' }] }]" >
             <a-select-option v-for="item in positionList" :value="item.value" :key="item.name">{{ item.desc }}</a-select-option>
           </a-select>
         </a-form-item>

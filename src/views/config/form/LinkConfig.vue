@@ -38,8 +38,7 @@
 </template>
 
 <script>
-import { Form, Input, Spin, Select, Icon,Modal,Divider,Popconfirm } from 'ant-design-vue'
-import { saveConfig, listConfigPage,delConfig } from '@/api/manage'
+import { saveConfig, listConfigPage, delConfig } from '@/api/manage'
 import { STable } from '@/components'
 
 export default {
@@ -54,14 +53,14 @@ export default {
         configKeyEnum: 'LINK'
       },
       addForm: {},
-      columns:[
+      columns: [
         {
           title: 'ID',
           dataIndex: 'id'
-        },{
+        }, {
           title: '标题',
           dataIndex: 'configName'
-        },{
+        }, {
           title: '链接',
           dataIndex: 'configContent'
         }, {
@@ -77,48 +76,37 @@ export default {
     }
   },
   components: {
-    STable,
-    ASpin: Spin,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AInput: Input,
-    ASelect: Select,
-    ASelectOption: Select.Option,
-    ATextarea: Input.TextArea,
-    AIcon: Icon,
-    AModal: Modal,
-    ADivider: Divider,
-    APopconfirm: Popconfirm
+    STable
   },
   methods: {
     add () {
-      this.visible = true;
+      this.visible = true
       this.addForm = {}
     },
-    handleEdit(item){
-      this.addForm = item;
-      this.visible = true;
+    handleEdit (item) {
+      this.addForm = item
+      this.visible = true
     },
     handleDel (item) {
-      delConfig(item.id).then(res =>{
-        if(res.ok){
-          this.$message.info('删除成功');
-          this.$refs.table.refresh(true);
+      delConfig(item.id).then(res => {
+        if (res.ok) {
+          this.$message.info('删除成功')
+          this.$refs.table.refresh(true)
         }
       })
     },
     handleSubmit () {
       var values = {
         id: this.addForm.id,
-        configType: "WEB_CONFIG",
-        configKey: "LINK",
+        configType: 'WEB_CONFIG',
+        configKey: 'LINK',
         configName: this.addForm.configName,
         configContent: this.addForm.configContent
       }
       saveConfig(values).then(res => {
-        this.$message.info('保存成功');
-        this.$refs.table.refresh(true);
-        this.visible = false;
+        this.$message.info('保存成功')
+        this.$refs.table.refresh(true)
+        this.visible = false
       })
     }
   },

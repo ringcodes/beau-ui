@@ -20,7 +20,6 @@ export default {
   AvatarItem,
   name: 'AvatarList',
   components: {
-    Avatar,
     AvatarItem
   },
   props: {

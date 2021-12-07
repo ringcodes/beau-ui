@@ -53,57 +53,36 @@ import NoticeIcon from '@/components/NoticeIcon'
 import { mapActions, mapGetters } from 'vuex'
 import { modifyPassword } from '@/api/manage'
 
-import { Icon, Dropdown, Avatar, Menu, Modal,Form,Input } from 'ant-design-vue'
-
 export default {
   name: 'UserMenu',
   components: {
-    NoticeIcon,
-    AIcon: Icon,
-    ADropdown: Dropdown,
-    AAvatar: Avatar,
-    AMenu: Menu,
-    AMenuItem: Menu.Item,
-    AMenuDivider: Menu.Divider,
-    AModal: Modal,
-    AForm: Form,
-    AFormItem: Form.Item,
-    AInput: Input
+    NoticeIcon
   },
-  data(){
+  data () {
     return {
       visible: false,
-      form: this.$form.createForm(this),
+      form: this.$form.createForm(this)
     }
   },
   methods: {
     ...mapActions(['Logout']),
     ...mapGetters(['nickname', 'avatar']),
     handleLogout () {
-      const that = this
-      Modal.confirm({
-        title: '提示',
-        content: '真的要退出登录吗 ?',
-        onOk () {
-          return that.Logout({}).then(() => {
-            window.location.reload()
-          }).catch(err => {
-            that.$message.error({
-              title: '错误',
-              description: err.message
-            })
-          })
-        },
-        onCancel () {
-        }
+      return this.Logout({}).then(() => {
+        window.location.reload()
+      }).catch(err => {
+        this.$message.error({
+          title: '错误',
+          description: err.message
+        })
       })
     },
-    handleOk(){
+    handleOk () {
       this.form.validateFields((err, values) => {
         if (!err) {
           modifyPassword(values).then(() => {
-              this.$message.info('修改成功')
-              this.visible = false
+            this.$message.info('修改成功')
+            this.visible = false
           }).catch((res) => this.$message.error(res.msg))
         }
       })

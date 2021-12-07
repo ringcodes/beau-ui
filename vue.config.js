@@ -4,7 +4,7 @@ const webpack = require('webpack')
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = true // process.env.NODE_ENV === 'production'
 const assetsCDN = {
   // webpack build externals
   externals: {
@@ -13,7 +13,7 @@ const assetsCDN = {
     vuex: 'Vuex',
     axios: 'axios',
     moment: 'moment',
-    'antd': 'antd'
+    'vue-antd-ui': 'antd'
   },
   css: [
     'https://cdn.staticfile.org/ant-design-vue/1.5.6/antd.min.css'

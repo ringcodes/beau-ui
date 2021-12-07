@@ -44,7 +44,6 @@ export default {
   name: 'DetailList',
   Item: Item,
   components: {
-    Col
   },
   props: {
     title: {

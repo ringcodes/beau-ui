@@ -27,7 +27,7 @@ export default {
       visible: false,
       confirmLoading: false,
       title: '角色编辑',
-      formLayout: 'horizontal',
+      formLayout: 'horizontal'
     }
   },
   components: {

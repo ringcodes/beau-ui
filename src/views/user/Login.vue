@@ -82,7 +82,7 @@ export default {
         loginType: 0,
         smsSendBtn: false
       },
-      query:{}
+      query: {}
     }
   },
   methods: {
@@ -106,18 +106,18 @@ export default {
       })
     },
     loginSuccess (res) {
-      if(this.query && this.query.redirect){
-        this.$router.push({ path: this.query.redirect }).catch(err => {});
+      if (this.query && this.query.redirect) {
+        this.$router.push({ path: this.query.redirect }).catch(() => {})
       } else {
-        this.$router.push({ path: '/home' }).catch(err => {});
+        this.$router.push({ path: '/home' }).catch(() => {})
       }
     },
     requestFailed (err) {
       this.$message.error(err.msg || '请求出现错误，请稍后再试')
     }
   },
-  mounted(){
-    this.query =this.$route.query
+  mounted () {
+    this.query = this.$route.query
   }
 }
 </script>
