@@ -8,7 +8,7 @@
     "build": "vue-cli-service build --mode production",
     "build:preview": "vue-cli-service build --mode preview",
     "lint": "vue-cli-service lint",
-    "report": "vue-cli-service build --report"
+    "report": "use_analyzer=true vue-cli-service build"
   },
   "dependencies": {
     "@antv/g2plot": "^2.3.6",

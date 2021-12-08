@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -35,18 +34,18 @@ const assetsCDN = {
 // vue.config.js
 module.exports = {
   configureWebpack: {
-    plugins: [
-      // Ignore all locale files of moment.js
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ],
-    externals: isProd ? assetsCDN.externals : {}
+    externals: isProd ? assetsCDN.externals : {},
+    resolve: {
+      alias: {
+        '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
+      }
+    }
   },
 
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))
-    console.log(config)
-    if (config.build && config.build.bundleAnalyzerReport) {
+    if (process.env.use_analyzer) {
       config
         .plugin('webpack-bundle-analyzer')
         .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
