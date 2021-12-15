@@ -41,7 +41,7 @@ export function addUser (parameter) {
 
 export function listConfigPage (parameter) {
   return request({
-    url: '/config/pageSimple',
+    url: '/config/page',
     method: 'post',
     data: parameter
   })
