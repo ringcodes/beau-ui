@@ -50,22 +50,33 @@
         </a-form-item>
         <a-form-item
           label="描述">
-          <a-textarea v-model="dataFrom.description" rows="4"/>
+          <a-textarea v-model="dataFrom.description" rows="2"/>
         </a-form-item>
         <a-form-item
           label="源地址">
           <a-input v-model="dataFrom.sourceUrl"/>
         </a-form-item>
         <a-form-item label="标签">
-          <a-select mode="multiple" v-model="dataFrom.tagList">
-            <a-select-option v-for="item in tagList" :value="item.id" :key="item.id">{{ item.name }}</a-select-option>
-          </a-select>
+          <a-checkbox-group v-model="dataFrom.tagList" class="mt-checkbox-g">
+            <template v-for="(item,index) in tagList">
+              <a-checkbox :value="item.id" :key="index" class="mt-checkbox">
+                {{ item.name }}
+              </a-checkbox>
+            </template>
+          </a-checkbox-group>
+          <a-button type="link" @click="()=>{this.dataFrom.tagList=[]}">清除</a-button>
         </a-form-item>
         <a-form-item label="状态">
           <a-radio-group v-model="dataFrom.publishStatus">
-            <a-radio :value="1">未发布</a-radio>
-            <a-radio :value="2">已发布</a-radio>
+            <a-radio value="PUBLISH">草稿</a-radio>
+            <a-radio value="PUBLISHED">已发布</a-radio>
           </a-radio-group>
+        </a-form-item>
+        <a-form-item label="SEO关键字">
+          <a-textarea v-model="dataFrom.seoKeys" rows="2"/>
+        </a-form-item>
+        <a-form-item label="SEO描述">
+          <a-textarea v-model="dataFrom.seoDesc" rows="2"/>
         </a-form-item>
       </a-form>
     </a-drawer>
@@ -93,7 +104,7 @@ export default {
       visible: false,
       editor: null,
       dataFrom: {
-        publishStatus: 2
+        publishStatus: 'PUBLISHED'
       }
     }
   },
@@ -242,7 +253,7 @@ export default {
   },
   activated () {
     const id = this.$route.query.id
-    getTopicListType(1).then(res => {
+    getTopicListType('ARTICLE').then(res => {
       if (res.ok) {
         this.topicList = res.data
       }
@@ -284,6 +295,15 @@ export default {
   height: 500px;
   text-align: center;
   display: inline-block;
+ }
+ .mt-checkbox-g{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+ }
+ .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+   margin: 0;
  }
 </style>
 </style>
