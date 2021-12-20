@@ -139,14 +139,14 @@ export default {
       }, {
         title: '来源',
         dataIndex: 'sourceName',
-        width: 100
+        width: 120
       }, {
         title: '创建人',
         dataIndex: 'createName',
         width: 100
       }, {
         title: '创建时间',
-        dataIndex: 'publishTime',
+        dataIndex: 'updateTime',
         width: 180
       }, {
         title: '操作',
@@ -160,7 +160,7 @@ export default {
     }
   },
   mounted () {
-    getTopicListType(1).then(res => {
+    getTopicListType('ARTICLE').then(res => {
       if (res.ok) {
         this.topicList = res.data
       }
