@@ -109,6 +109,7 @@ export default {
       columns: [{
         title: '标题',
         dataIndex: 'title',
+        ellipsis: true,
         scopedSlots: { customRender: 'detailAction' }
       }, {
         title: '主题',
@@ -139,7 +140,8 @@ export default {
       }, {
         title: '来源',
         dataIndex: 'sourceName',
-        width: 120
+        width: 160,
+        ellipsis: true
       }, {
         title: '创建人',
         dataIndex: 'createName',

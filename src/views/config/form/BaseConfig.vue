@@ -1,10 +1,13 @@
 <template>
-  <a-form :form="form" :label-col="{ span: 3 }" :wrapper-col="{ span: 12 }">
-    <a-form-item label="网站名称">
-      <a-input v-decorator="['webName',{rules: [{required: true,message:'请输入名称'}]}]"/>
+  <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+    <a-form-item label="Client ID">
+      <a-input v-decorator="['appKey',{rules: [{required: true, message:'请输入名称'}]}]"/>
     </a-form-item>
-    <a-form-item :wrapperCol="{offset:3}">
-      <a-button type="primary" @click="handleSubmit">保存</a-button>
+    <a-form-item label="Client secrets">
+      <a-textarea :rows="2" v-decorator="['appSecret',{rules: [{required: true, message:'请输入名称'}]}]"/>
+    </a-form-item>
+    <a-form-item :wrapperCol="{offset:4}">
+      <a-button type="primary" @click="handleSubmit('githubForm','GITHUB')">保存</a-button>
     </a-form-item>
   </a-form>
 </template>

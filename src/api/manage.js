@@ -60,6 +60,19 @@ export function delConfig (id) {
     method: 'delete'
   })
 }
+export function queryConfig (data) {
+  return request({
+    url: '/config/query',
+    method: 'post',
+    data: data
+  })
+}
+export function getConfig (type, key) {
+  return request({
+    url: '/config/' + type + '/' + key,
+    method: 'get'
+  })
+}
 export function listConfigType (type, key) {
   return request({
     url: '/config/' + type + '/' + key,

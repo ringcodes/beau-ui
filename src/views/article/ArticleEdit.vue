@@ -14,11 +14,11 @@
               <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item label="图片">
+          <a-form-item label="标题图">
             <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
           </a-form-item>
           <a-form-item label="描述">
-            <a-textarea v-model="dataFrom.description" rows="4"/>
+            <a-textarea v-model="dataFrom.description" rows="3"/>
           </a-form-item>
           <a-form-item label="源地址">
             <a-input v-model="dataFrom.sourceUrl"/>
@@ -45,7 +45,9 @@
           <a-form-item label="SEO描述">
             <a-textarea v-model="dataFrom.seoDesc" rows="2"/>
           </a-form-item>
-          <a-button type="primary" @click="save">保存</a-button>
+          <a-form-item :wrapper-col="{ offset: 4 }">
+            <a-button type="primary" @click="save">保存</a-button>
+          </a-form-item>
         </a-form>
       </a-col>
     </a-row>
@@ -82,7 +84,7 @@ export default {
           'searchreplace visualblocks code fullscreen',
           'insertdatetime media table paste code help wordcount'
         ],
-        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+        toolbar: 'undo redo | formatselect | bold italic backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent | removeformat | help'
       }
     }
   },
@@ -187,6 +189,9 @@ export default {
    margin: 0;
  }
  .ant-form-item{
-   margin-bottom: 10px;
+   margin-bottom: 5px;
+ }
+ .ant-upload-picture-card-wrapper{
+   display: inline;
  }
 </style>

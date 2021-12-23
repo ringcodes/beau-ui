@@ -154,3 +154,9 @@ export function qushiChart (param) {
     params: param
   })
 }
+export function listLogin () {
+  return request({
+    url: '/auth/listLogin',
+    method: 'get'
+  })
+}

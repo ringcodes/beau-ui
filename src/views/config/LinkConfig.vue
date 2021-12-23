@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="table-wrapper">
+    <div class="table-operator">
+      <a-button type="primary" icon="plus" @click="add">添加</a-button>
+    </div>
     <s-table
-      size="small"
+      size="default"
       :rowKey="(record) => record.id"
       :columns="columns"
       :data="dataList"
@@ -17,7 +20,6 @@
     </s-table>
     <a-modal
       title="新增"
-      style="top: 20px;"
       :width="450"
       v-model="visible"
       @ok="handleSubmit"
@@ -50,7 +52,8 @@ export default {
       form: this.$form.createForm(this),
       queryParam: {
         configTypeEnum: 'WEB_CONFIG',
-        configKeyEnum: 'LINK'
+        configKeyEnum: 'LINK',
+        queryContent: true
       },
       addForm: {},
       columns: [

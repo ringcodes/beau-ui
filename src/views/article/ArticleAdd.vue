@@ -1,8 +1,11 @@
 <template>
   <a-card>
-    <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
-      <a-row type="flex" justify="start" align="top" :gutter="16">
-        <a-col span="10">
+    <a-row type="flex" justify="center" align="top">
+      <a-col :span="16">
+        <div id="vditor" ></div>
+      </a-col>
+      <a-col :span="8">
+        <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
           <a-form-item v-show="false">
             <a-input v-model="dataFrom.id"/>
           </a-form-item>
@@ -13,73 +16,52 @@
             label="标题">
             <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>
           </a-form-item>
-        </a-col>
-        <a-col span="6">
           <a-form-item
             label="主题">
             <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
               <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
             </a-select>
           </a-form-item>
-        </a-col>
-        <a-col span="4">
-          <a-form-item>
-            <a-button type="primary" @click="save">保存</a-button>
-            <a-button type="info" @click="moreSet" style="margin-left: 8px;">更多</a-button>
+          <a-form-item
+            label="图片">
+            <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
           </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
-    <a-row type="flex" justify="center" align="top">
-      <a-col span="24">
-        <div id="vditor" ></div>
+          <a-form-item
+            label="描述">
+            <a-textarea v-model="dataFrom.description" rows="4"/>
+          </a-form-item>
+          <a-form-item
+            label="源地址">
+            <a-input v-model="dataFrom.sourceUrl"/>
+          </a-form-item>
+          <a-form-item label="标签">
+            <a-checkbox-group v-model="dataFrom.tagList" class="mt-checkbox-g">
+              <template v-for="(item,index) in tagList">
+                <a-checkbox :value="item.id" :key="index" class="mt-checkbox">
+                  {{ item.name }}
+                </a-checkbox>
+              </template>
+            </a-checkbox-group>
+            <a-button type="link" @click="()=>{this.dataFrom.tagList=[]}">清除</a-button>
+          </a-form-item>
+          <a-form-item label="状态">
+            <a-radio-group v-model="dataFrom.publishStatus">
+              <a-radio value="PUBLISH">草稿</a-radio>
+              <a-radio value="PUBLISHED">已发布</a-radio>
+            </a-radio-group>
+          </a-form-item>
+          <a-form-item label="SEO关键字">
+            <a-textarea v-model="dataFrom.seoKeys" rows="2"/>
+          </a-form-item>
+          <a-form-item label="SEO描述">
+            <a-textarea v-model="dataFrom.seoDesc" rows="2"/>
+          </a-form-item>
+          <a-form-item :wrapperCol="{offset: 4}">
+            <a-button type="primary" @click="save">保存</a-button>
+          </a-form-item>
+        </a-form>
       </a-col>
     </a-row>
-    <a-drawer
-      title="更多设置"
-      placement="right"
-      :closable="false"
-      :visible="visible"
-      width="600"
-      @close="onClose"
-    >
-      <a-form :form="form" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
-        <a-form-item
-          label="图片">
-          <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
-        </a-form-item>
-        <a-form-item
-          label="描述">
-          <a-textarea v-model="dataFrom.description" rows="2"/>
-        </a-form-item>
-        <a-form-item
-          label="源地址">
-          <a-input v-model="dataFrom.sourceUrl"/>
-        </a-form-item>
-        <a-form-item label="标签">
-          <a-checkbox-group v-model="dataFrom.tagList" class="mt-checkbox-g">
-            <template v-for="(item,index) in tagList">
-              <a-checkbox :value="item.id" :key="index" class="mt-checkbox">
-                {{ item.name }}
-              </a-checkbox>
-            </template>
-          </a-checkbox-group>
-          <a-button type="link" @click="()=>{this.dataFrom.tagList=[]}">清除</a-button>
-        </a-form-item>
-        <a-form-item label="状态">
-          <a-radio-group v-model="dataFrom.publishStatus">
-            <a-radio value="PUBLISH">草稿</a-radio>
-            <a-radio value="PUBLISHED">已发布</a-radio>
-          </a-radio-group>
-        </a-form-item>
-        <a-form-item label="SEO关键字">
-          <a-textarea v-model="dataFrom.seoKeys" rows="2"/>
-        </a-form-item>
-        <a-form-item label="SEO描述">
-          <a-textarea v-model="dataFrom.seoDesc" rows="2"/>
-        </a-form-item>
-      </a-form>
-    </a-drawer>
   </a-card>
 </template>
 
@@ -147,7 +129,7 @@ export default {
       this.editor = new Vditor('vditor', {
         width: '100%',
         value: content,
-        minHeight: 600,
+        minHeight: 700,
         placeholder: '此处为话题内容……',
         theme: 'classic',
         counter: {
@@ -155,7 +137,7 @@ export default {
           type: 'markdown'
         },
         outline: {
-          enable: true
+          enable: false
         },
         preview: {
           delay: 0,
@@ -296,14 +278,27 @@ export default {
   text-align: center;
   display: inline-block;
  }
+ .mt-checkbox{
+   min-width: 120px;
+ }
  .mt-checkbox-g{
     display: flex;
     flex-direction: row;
     align-content: flex-start;
     flex-wrap: wrap;
  }
+</style>
+<style>
+.vditor .vditor-toolbar{
+   padding-left: 0px !important;
+ }
  .ant-checkbox-wrapper + .ant-checkbox-wrapper{
    margin: 0;
  }
-</style>
+ .ant-form-item{
+   margin-bottom: 5px;
+ }
+ .ant-upload-picture-card-wrapper{
+   display: inline;
+ }
 </style>
