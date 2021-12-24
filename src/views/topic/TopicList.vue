@@ -68,14 +68,13 @@
           </a-radio-group>
         </a-form-item>
         <a-form-item label="位置">
-          <a-radio-group v-decorator="['topicPosition', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]">
-            <a-radio :value="item.value" v-for="(item,idx) in posList" :key="idx">{{ item.desc }}</a-radio>
-            <a-radio :value="2">软件</a-radio>
+          <a-radio-group v-decorator="['topicPosition', { initialValue:1, rules: [{ required: true, message: '请选择类型' }] }]" @change="changePos">
+            <a-radio :value="item.name" v-for="(item,idx) in posList" :key="idx">{{ item.desc }}</a-radio>
           </a-radio-group>
         </a-form-item>
-        <a-form-item
-          label="图片">
+        <a-form-item label="图片">
           <s-upload ref="imgUpload" @change="handleChange" :source="2"/>
+          <span>{{ topicPositionTips }}</span>
           <a-input v-decorator="['topicPic']" placeholder="手动输入图片地址"/>
         </a-form-item>
       </a-form>
@@ -104,6 +103,7 @@ export default {
         source: 1,
         code: ''
       },
+      topicPositionTips: '',
       posList: [],
       title: '新增',
       columns: [
@@ -205,6 +205,13 @@ export default {
           'topicPic': data.data.fileName
         })
       }
+    },
+    changePos (val) {
+      this.posList.map(it => {
+        if (it.name === val.target.value) {
+          this.topicPositionTips = it.value
+        }
+      })
     }
   }
 }

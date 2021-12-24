@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div class="mb-10">
+      <a-alert
+        description="回调地址统一配置成：域名+/auth/{source}; {source}取值：github, git_ee, ding_ding"
+        type="warning"
+      />
+    </div>
     <a-row :gutter="16" class="mt-b20">
       <a-col :span="12">
         <a-card title="github登录配置">

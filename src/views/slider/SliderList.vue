@@ -44,7 +44,7 @@
     <a-modal
       :title="title"
       style="top: 20px;"
-      :width="600"
+      :width="650"
       v-model="visible"
       @ok="handleOk"
     >
@@ -62,18 +62,19 @@
         </a-form-item>
         <a-form-item
           label="位置">
-          <a-select v-decorator="['sliderType', { rules: [{ required: true, message: '请选择类型' }] }]" >
-            <a-select-option v-for="item in positionList" :value="item.value" :key="item.name">{{ item.desc }}</a-select-option>
-          </a-select>
+          <a-radio-group v-decorator="['sliderType', { rules: [{ required: true, message: '请选择类型' }] }]" @change="changePos">
+            <a-radio :value="item.name" v-for="(item,idx) in positionList" :key="idx">{{ item.desc }}</a-radio>
+          </a-radio-group>
         </a-form-item>
         <a-form-item
-          label="地址">
+          label="跳转地址">
           <a-input
             v-decorator="['target', { rules: [{ required: true, message: '请输入地址' }] }]"/>
         </a-form-item>
         <a-form-item
           label="图片">
           <s-upload ref="imgUpload" @change="handleChange" :code="uploadData.code" :source="4"/>
+          <span>{{ tips }}</span>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -104,6 +105,7 @@ export default {
         code: ''
       },
       positionList: [],
+      tips: '',
       title: '新增',
       columns: [
         {
@@ -121,7 +123,7 @@ export default {
           scopedSlots: { customRender: 'target' }
         }, {
           title: '位置',
-          dataIndex: 'positionName',
+          dataIndex: 'sliderType.desc',
           width: 120
         }, {
           title: '状态',
@@ -225,6 +227,13 @@ export default {
           this.$message.info('保存成功')
           this.visible = false
           this.showLoadingMore()
+        }
+      })
+    },
+    changePos (val) {
+      this.positionList.map(it => {
+        if (it.name === val.target.value) {
+          this.tips = it.value
         }
       })
     }

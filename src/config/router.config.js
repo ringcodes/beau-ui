@@ -119,11 +119,6 @@ export const asyncRouterMap = [
         component: () => import('@/views/config/LinkConfig'),
         meta: { title: '网站配置', keepAlive: true, icon: 'setting' }
       }, {
-        path: '/ossConfig',
-        name: 'OssConfig',
-        component: () => import('@/views/config/OssConfig'),
-        meta: { title: '文件存储配置', keepAlive: true, icon: 'setting' }
-      }, {
         path: '/loginConfig',
         name: 'LoginConfig',
         component: () => import('@/views/config/LoginConfig'),
