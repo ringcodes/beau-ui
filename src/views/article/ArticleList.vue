@@ -35,8 +35,8 @@
       <a-row :gutter="16" class="query-driver">
         <a-col :md="6" :sm="24">
           <a-form-item label="标记">
-            <a-select v-model="queryParam.flagType" placeholder="请选择标记">
-              <a-select-option value="">全部</a-select-option>
+            <a-select v-model="queryParam.articleFlagEnum" placeholder="请选择标记">
+              <a-select-option :value="null">全部</a-select-option>
               <a-select-option v-for="(item, key) in flagTypeList" :value="key" :key="key">{{ item }}</a-select-option>
             </a-select>
           </a-form-item>
@@ -139,9 +139,21 @@ export default {
         }
       }, {
         title: '来源',
-        dataIndex: 'sourceName',
+        dataIndex: 'sourceType',
         width: 160,
-        ellipsis: true
+        ellipsis: true,
+        customRender: (it, row) => {
+          if (it === 1) {
+            return '原创'
+          } else {
+            return <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>{ row.sourceName }</span>
+              </template>
+              <span>转载 <a-icon type="info-circle" /></span>
+            </a-tooltip>
+          }
+        }
       }, {
         title: '创建人',
         dataIndex: 'createName',

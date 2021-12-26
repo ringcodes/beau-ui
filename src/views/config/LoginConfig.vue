@@ -10,6 +10,9 @@
       <a-col :span="12">
         <a-card title="github登录配置">
           <a-form :form="forms.githubForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+            <a-form-item v-show="false">
+              <a-input v-decorator="['configMd5']"/>
+            </a-form-item>
             <a-form-item label="Client ID">
               <a-input v-decorator="['appKey',{rules: [{required: true, message:'请输入名称'}]}]"/>
             </a-form-item>
@@ -25,6 +28,9 @@
       <a-col :span="12">
         <a-card title="gitee登录配置">
           <a-form :form="forms.giteeForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 20 }">
+            <a-form-item v-show="false">
+              <a-input v-decorator="['configMd5']"/>
+            </a-form-item>
             <a-form-item label="Client ID">
               <a-input v-decorator="['appKey',{rules: [{required: true, message:'请输入名称'}]}]"/>
             </a-form-item>
@@ -42,6 +48,9 @@
       <a-col :span="12">
         <a-card title="钉钉登录配置">
           <a-form :form="forms.dingForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 18 }">
+            <a-form-item v-show="false">
+              <a-input v-decorator="['configMd5']"/>
+            </a-form-item>
             <a-form-item label="AppKey">
               <a-input v-decorator="['appKey',{rules: [{required: true, message:'请输入AppKey'}]}]"/>
             </a-form-item>
@@ -79,7 +88,8 @@ export default {
             configName: '登录配置',
             configType: 'LOGIN',
             configKey: key,
-            configContent: JSON.stringify(values)
+            configContent: JSON.stringify(values),
+            configMd5: values.configMd5
           }).then(() => {
             this.$message.info('保存成功')
           })
@@ -95,14 +105,15 @@ export default {
       console.log(res)
       this.$nextTick(() => {
         res.data.map(it => {
+          const data = { configMd5: it.configMd5, ...JSON.parse(it.configContent) }
           if (it.configKey === 'GIT_EE') {
-            this.forms.giteeForm.setFieldsValue(JSON.parse(it.configContent))
+            this.forms.giteeForm.setFieldsValue(data)
           }
           if (it.configKey === 'DING_DING') {
-            this.forms.dingForm.setFieldsValue(JSON.parse(it.configContent))
+            this.forms.dingForm.setFieldsValue(data)
           }
           if (it.configKey === 'GITHUB') {
-            this.forms.githubForm.setFieldsValue(JSON.parse(it.configContent))
+            this.forms.githubForm.setFieldsValue(data)
           }
         })
       })

@@ -17,10 +17,11 @@
           <a-input v-decorator="['id']"/>
         </a-form-item>
         <a-form-item label="标题">
-          <a-input v-decorator="['title']"/>
+          <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>
         </a-form-item>
         <a-form-item label="图片">
-          <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
+          <ImgUpload ref="imgUpload" @change="handleChange" source="ARTICLE"/>
+          <a-input v-decorator="['titlePic']"/>
         </a-form-item>
         <a-form-item label="源地址">
           <a-input v-decorator="['sourceUrl']"/>
@@ -81,7 +82,7 @@ export default {
   methods: {
     setArticle () {
       this.visible = true
-      getTopicListType(1).then(res => {
+      getTopicListType('ARTICLE').then(res => {
         if (res.ok) {
           this.topicList = res.data
         }
@@ -96,8 +97,15 @@ export default {
           'tagList': this.record.articleLabelVos.map(it => it.id),
           'title': this.record.title,
           'sourceUrl': this.record.sourceUrl,
-          'description': this.record.description
+          'description': this.record.description,
+          'titlePic': this.record.titlePic
         })
+        this.$refs.imgUpload.setImg([{
+          uid: '-1',
+          name: this.record.titlePic,
+          status: 'done',
+          url: this.record.titlePicView
+        }])
       })
     },
     handleEdit () {
@@ -145,7 +153,9 @@ export default {
       }
       const data = file.response
       if (data.ok) {
-        this.dataFrom.titlePic = data.data.fileName
+        this.form.setFieldsValue({
+          'titlePic': data.data.fileName
+        })
       }
     }
   },

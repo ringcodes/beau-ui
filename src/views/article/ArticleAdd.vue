@@ -12,26 +12,21 @@
           <a-form-item v-show="false">
             <a-input v-model="dataFrom.content"/>
           </a-form-item>
-          <a-form-item
-            label="标题">
+          <a-form-item label="标题">
             <a-input v-decorator="['title',{rules: [{required: true,message:'请输入标题'}]}]"/>
           </a-form-item>
-          <a-form-item
-            label="主题">
+          <a-form-item label="主题">
             <a-select v-decorator="['topicId',{rules: [{required: true,message:'请选择主题'}]}]">
               <a-select-option v-for="(item) in topicList" :value="item.id" :key="item.id">{{ item.topicName }}</a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item
-            label="图片">
-            <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
+          <a-form-item label="图片">
+            <ImgUpload ref="imgUpload" @change="handleChange" source="ARTICLE"/>
           </a-form-item>
-          <a-form-item
-            label="描述">
+          <a-form-item label="描述">
             <a-textarea v-model="dataFrom.description" rows="4"/>
           </a-form-item>
-          <a-form-item
-            label="源地址">
+          <a-form-item label="源地址">
             <a-input v-model="dataFrom.sourceUrl"/>
           </a-form-item>
           <a-form-item label="标签">
@@ -99,7 +94,7 @@ export default {
     },
     save () {
       this.dataFrom.content = this.editor.getValue()
-      this.dataFrom.articleType = 2
+      this.dataFrom.articleType = 'MARKDOWN'
       this.form.validateFields((err, values) => {
         if (!err) {
           saveArticle({

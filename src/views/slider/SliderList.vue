@@ -52,29 +52,25 @@
         <a-form-item v-show="false">
           <a-input v-decorator="['id']"/>
         </a-form-item>
-        <a-form-item v-show="false">
-          <a-input v-decorator="['pic']"/>
-        </a-form-item>
-        <a-form-item
-          label="名称">
+        <a-form-item label="名称">
           <a-input
             v-decorator="['title', { rules: [{ required: true, message: '请输入名称' }] }]"/>
         </a-form-item>
-        <a-form-item
-          label="位置">
+        <a-form-item label="位置">
           <a-radio-group v-decorator="['sliderType', { rules: [{ required: true, message: '请选择类型' }] }]" @change="changePos">
             <a-radio :value="item.name" v-for="(item,idx) in positionList" :key="idx">{{ item.desc }}</a-radio>
           </a-radio-group>
         </a-form-item>
-        <a-form-item
-          label="跳转地址">
-          <a-input
-            v-decorator="['target', { rules: [{ required: true, message: '请输入地址' }] }]"/>
+        <a-form-item label="跳转地址">
+          <a-input v-decorator="['target', { rules: [{ required: true, message: '请输入地址' }] }]"/>
         </a-form-item>
-        <a-form-item
-          label="图片">
-          <s-upload ref="imgUpload" @change="handleChange" :code="uploadData.code" :source="4"/>
-          <span>{{ tips }}</span>
+        <a-form-item label="图片" v-show="sliderType != 'NAV_TUI'">
+          <s-upload ref="imgUpload" @change="handleChange" :code="uploadData.code" source="SLIDER"/>
+          <span style="vertical-align: top;">{{ tips }}</span>
+          <a-input v-decorator="['pic']"/>
+        </a-form-item>
+        <a-form-item label="图片" v-show="sliderType === 'NAV_TUI'">
+          <a-input v-decorator="['pic', { rules: [{ required: true, message: '请输入地址' }] }]"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -105,6 +101,7 @@ export default {
         code: ''
       },
       positionList: [],
+      sliderType: 0,
       tips: '',
       title: '新增',
       columns: [
@@ -234,6 +231,7 @@ export default {
       this.positionList.map(it => {
         if (it.name === val.target.value) {
           this.tips = it.value
+          this.sliderType = it.name
         }
       })
     }

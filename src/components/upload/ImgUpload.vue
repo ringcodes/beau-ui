@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display: inline-block;">
     <a-upload
       name="file"
       :action="action"
@@ -46,7 +46,7 @@ export default {
       default: ''
     },
     source: {
-      type: [String, Number],
+      type: String,
       required: true
     },
     fileMax: {

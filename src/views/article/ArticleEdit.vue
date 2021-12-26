@@ -15,7 +15,7 @@
             </a-select>
           </a-form-item>
           <a-form-item label="标题图">
-            <ImgUpload ref="imgUpload" @change="handleChange" :source="2"/>
+            <ImgUpload ref="imgUpload" @change="handleChange" source="ARTICLE"/>
           </a-form-item>
           <a-form-item label="描述">
             <a-textarea v-model="dataFrom.description" rows="3"/>
@@ -100,7 +100,7 @@ export default {
     },
     save () {
       this.dataFrom.content = this.contentModel
-      this.dataFrom.articleType = 1
+      this.dataFrom.articleType = 'HTML'
       this.form.validateFields((err, values) => {
         if (!err) {
           saveArticle({
@@ -145,11 +145,12 @@ export default {
         this.$nextTick(() => {
           this.contentModel = res.content
           this.$refs.tinymce.setContent(res.content)
-          console.log(this.contentModel)
-          this.form.setFieldsValue({
-            'title': res.title,
-            'topicId': res.topicId
-          })
+          this.$refs.imgUpload.setImg([{
+            uid: '-1',
+            name: this.record.titlePic,
+            status: 'done',
+            url: this.record.titlePicView
+          }])
         })
         this.dataFrom = {
           content: res.content,

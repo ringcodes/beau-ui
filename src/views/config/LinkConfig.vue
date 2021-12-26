@@ -4,8 +4,7 @@
       <a-button type="primary" icon="plus" @click="add">添加</a-button>
     </div>
     <s-table
-      size="default"
-      :rowKey="(record) => record.id"
+      :rowKey="(record) => record.configMd5"
       :columns="columns"
       :data="dataList"
       ref="table"
@@ -58,9 +57,6 @@ export default {
       addForm: {},
       columns: [
         {
-          title: 'ID',
-          dataIndex: 'id'
-        }, {
           title: '标题',
           dataIndex: 'configName'
         }, {
@@ -104,7 +100,8 @@ export default {
         configType: 'WEB_CONFIG',
         configKey: 'LINK',
         configName: this.addForm.configName,
-        configContent: this.addForm.configContent
+        configContent: this.addForm.configContent,
+        configMd5: this.addForm.configMd5
       }
       saveConfig(values).then(res => {
         this.$message.info('保存成功')

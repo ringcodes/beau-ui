@@ -36,7 +36,19 @@ export function listTopicPos (id) {
     method: 'get'
   })
 }
-
+export function topicSort (param) {
+  return request({
+    url: '/topic/topicSort',
+    method: 'post',
+    data: param
+  })
+}
+export function listTopicType () {
+  return request({
+    url: '/topic/listTopicType',
+    method: 'get'
+  })
+}
 export function getArticleList (parameter) {
   return request({
     url: '/article/list',

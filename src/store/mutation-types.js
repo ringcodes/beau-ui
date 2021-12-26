@@ -21,7 +21,8 @@ export const PRIVILEGE_TYPE = {
 }
 
 export const FLAG_TYPE = {
-  1: '置顶',
-  2: '推荐',
-  3: '热门'
+  'TOP': '置顶',
+  'TUI': '推荐',
+  'HOT': '热门',
+  'INDEX': '首页推荐'
 }
