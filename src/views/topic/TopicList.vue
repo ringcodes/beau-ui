@@ -40,6 +40,8 @@
         <div class="topic-img" v-if="item.topicPicView">
           <img :src="item.topicPicView" alt="">
         </div>
+        <div class="topic-img" style="background: #eee;" v-else>
+        </div>
         <div class="topic-title">
           <div class="topic-title-name">
             <div>{{ item.topicName }}</div>
