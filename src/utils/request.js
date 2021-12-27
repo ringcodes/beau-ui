@@ -9,14 +9,11 @@ import {
 
 const baseUrl = () => {
   const { promiseBaseUrl } = document.querySelector('html').dataset
-  console.log(promiseBaseUrl)
   if (promiseBaseUrl.indexOf('http') === 0) {
-    console.log('a', promiseBaseUrl)
     return promiseBaseUrl
   }
   return process.env.VUE_APP_API_BASE_URL
 }
-console.log(baseUrl())
 // 创建 axios 实例
 const request = axios.create({
   baseURL: baseUrl(), // api base_url
