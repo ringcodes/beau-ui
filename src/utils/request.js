@@ -9,7 +9,7 @@ import {
 
 const baseUrl = () => {
   const { promiseBaseUrl } = document.querySelector('html').dataset
-  if (promiseBaseUrl.indexOf('http') === 0) {
+  if (promiseBaseUrl && promiseBaseUrl.indexOf('http') === 0) {
     return promiseBaseUrl
   }
   return process.env.VUE_APP_API_BASE_URL
