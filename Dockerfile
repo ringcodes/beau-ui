@@ -1,4 +1,4 @@
-FROM lsl200817-docker.pkg.coding.net/beaueau/base/node-nginx:1.0
+FROM lsl200817-docker.pkg.coding.net/beau/base/node-nginx:1.0
 MAINTAINER xx
 WORKDIR /opt/app
 COPY ./dist /opt/app/dist/
