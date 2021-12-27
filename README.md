@@ -20,14 +20,23 @@ Beau是一款基于java开发的轻量级的个人博客、建站、企业文章
 * 项目结构清晰，安装部署简单
 * 支持首页静态化，首屏秒开
 
+## 系统截图(部分)
+![](https://gitee.com/lsl52640/files/raw/master/%E5%B7%A5%E4%BD%9C%E5%8F%B0.jpg)
+![](https://gitee.com/lsl52640/files/raw/master/%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86.jpg)
+![](https://gitee.com/lsl52640/files/raw/master/%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86.jpg)
+![](https://gitee.com/lsl52640/files/raw/master/%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE.jpg)
+
 ## 安装教程
 Docker安装管理后台UI  
+   [查看最新的镜像版本号](https://lsl200817.coding.net/public-artifacts/beau/common/beau-admin-ui/version/11439833/list)  
    ``` 
-   docker pull lsl200817-docker.pkg.coding.net/beau/common/alpine-jre8:1.0  
+   docker pull lsl200817-docker.pkg.coding.net/beau/common/beau-admin-ui:12
    ```
+   其中API_BASE_URL为API接口地址，需修改成你的域名
    ```
-   docker run -d -e ENV=prod lsl:latest
+   docker run -d -p8000:80 -e API_BASE_URL=https://www.gz640.cn lsl200817-docker.pkg.coding.net/beau/common/beau-admin-ui:12
    ```
+   可访问 http://locahost:8000
 ## 二次开发 
    本地安装好nodejs环境  
    git clone  https://gitee.com/ringcode/beau-ui.git

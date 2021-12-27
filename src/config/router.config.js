@@ -117,7 +117,7 @@ export const asyncRouterMap = [
         path: '/linkConfig',
         name: 'LinkConfig',
         component: () => import('@/views/config/LinkConfig'),
-        meta: { title: '网站配置', keepAlive: true, icon: 'setting' }
+        meta: { title: '友情链接', keepAlive: true, icon: 'setting' }
       }, {
         path: '/loginConfig',
         name: 'LoginConfig',
