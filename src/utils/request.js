@@ -12,7 +12,7 @@ const baseUrl = () => {
   if (promiseBaseUrl && promiseBaseUrl.indexOf('http') === 0) {
     return promiseBaseUrl
   }
-  return process.env.VUE_APP_API_BASE_URL
+  return process.env.VUE_APP_BASE_API
 }
 // 创建 axios 实例
 const request = axios.create({
