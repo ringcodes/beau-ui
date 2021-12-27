@@ -7,14 +7,24 @@ import {
   ACCESS_TOKEN
 } from '@/store/mutation-types'
 
+const baseUrl = () => {
+  const { promiseBaseUrl } = document.querySelector('html').dataset
+  console.log(promiseBaseUrl)
+  if (promiseBaseUrl.indexOf('http') === 0) {
+    console.log('a', promiseBaseUrl)
+    return promiseBaseUrl
+  }
+  return process.env.VUE_APP_API_BASE_URL
+}
+console.log(baseUrl())
 // 创建 axios 实例
 const request = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // api base_url
+  baseURL: baseUrl(), // api base_url
   timeout: 6000 // 请求超时时间
 })
 
 const err = (error) => {
-  console.log(error.config)
+  console.log(error)
   if (error.response) {
     const data = error.response.data
     if (error.response.status === 403) {
