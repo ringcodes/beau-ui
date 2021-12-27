@@ -30,7 +30,7 @@ Beau是一款基于java开发的轻量级的个人博客、建站、企业文章
 Docker安装管理后台UI  
    [查看最新的镜像版本号](https://lsl200817.coding.net/public-artifacts/beau/common/beau-admin-ui/version/11439833/list)  
    ``` 
-   docker pull lsl200817-docker.pkg.coding.net/beau/common/beau-admin-ui:12
+   docker pull lsl200817-docker.pkg.coding.net/beau/common/beau-admin-ui:13
    ```
    其中API_BASE_URL为API接口地址，需修改成你的域名
    ```
