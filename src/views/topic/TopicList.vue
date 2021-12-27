@@ -48,17 +48,17 @@
             <div><a-tag color="pink">{{ item.topicType.desc }}</a-tag></div>
           </div>
           <div class="topic-title-item">
-            <span>位置: </span><span>{{ item.topicPosition.desc }}</span>
+            <span>{{ item.topicPosition.desc }}</span>
           </div>
           <div>
-            <span>时间: </span><span>{{ item.updateTime }}</span>
+            <span style="font-size: 13px;">{{ item.updateTime }}</span>
           </div>
-        </div>
-        <div class="topic-tag">
-          <span class="btn-list" @click="handleSort(item,idx,true)"><a-icon type="arrow-left" /></span>
-          <span class="btn-list" @click="handleSort(item,idx,false)"><a-icon type="arrow-right" /></span>
-          <span class="btn-list" @click="editTopic(item)"><a-icon type="edit" /></span>
-          <span class="btn-list" @click="handleDel(item)"><a-icon type="delete" class="btn-red"/></span>
+          <div class="topic-tag">
+            <span class="btn-list" @click="handleSort(item,idx,true)"><a-icon type="arrow-left" /></span>
+            <span class="btn-list" @click="handleSort(item,idx,false)"><a-icon type="arrow-right" /></span>
+            <span class="btn-list" @click="editTopic(item)"><a-icon type="edit" /></span>
+            <span class="btn-list" @click="handleDel(item)"><a-icon type="delete" class="btn-red"/></span>
+          </div>
         </div>
       </div>
     </div>
@@ -298,9 +298,8 @@ export default {
     }
   }
   .topic-tag{
-    position: absolute;
-    top: 0;
-    right: 0;
+    padding-top: 5px;
+    text-align: right;
     .btn-list{
       padding: 2px 5px;
       margin-right: 2px;
