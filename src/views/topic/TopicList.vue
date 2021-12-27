@@ -241,11 +241,14 @@ export default {
         this.$message.error('不能往前排序了')
         return
       }
+      if (sort + 1 === this.data.list.length && !pre) {
+        this.$message.error('不能往前排序了')
+        return
+      }
       topicSort({
         id: item.id,
         preId: pre ? this.data.list[sort - 1].id : 0,
         postId: pre ? 0 : this.data.list[sort + 1].id,
-        sort: sort + 1,
         pre: pre
       }).then(res => {
         console.log(res)
